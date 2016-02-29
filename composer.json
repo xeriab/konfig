@@ -1,0 +1,48 @@
+{
+    "name": "kodeburner/konfig",
+    "description": "Yet another simple configuration file loader library.",
+    "version": "0.1.0-alpha-1",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "configuration",
+        "config",
+        "json",
+        "yaml",
+        "yml",
+        "toml",
+        "ini",
+        "xml"
+    ],
+    "authors": [{
+        "name": "Xeriab Nabil",
+        "email": "kodeburner@gmail.com",
+        "role": "Developer"
+    }],
+    "suggest": {
+        "mustangostang/spyc": "0.5.1",
+        "piwik/ini": "1.0.6",
+        "yosymfony/toml": "0.3.3"
+    },
+    "require": {
+        "php": ">5.4",
+        "yosymfony/toml": "0.3.3",
+        "mustangostang/spyc": "0.5.1",
+        "piwik/ini": "1.0.6"
+    },
+    "require-dev": {
+        "scrutinizer/ocular": "~1.1",
+        "squizlabs/php_codesniffer": "~2.2",
+        "phpunit/phpunit": "4.3.*@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Exen\\Konfig\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Exen\\Konfig\\Test\\": "tests/"
+        }
+    }
+}
