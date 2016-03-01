@@ -1,10 +1,10 @@
 <?php
 
-namespace Exen\Konfig\KonfigFileParser;
+namespace Exen\Konfig\FileParser;
 
 use Exen\Konfig\Exception\ParseException;
 
-class Json implements IKonfigFileParser
+class Json implements FileParserInterface
 {
     /**
      * {@inheritDoc}
@@ -44,4 +44,4 @@ class Json implements IKonfigFileParser
     }
 }
 
-#: END OF ./KonfigFileParser/Json.php FILE
+#: END OF ./FileParser/Json.php FILE

@@ -14,12 +14,12 @@ class Konfig extends AbstractKonfig
      * @var array
      */
     private $_supportedFileParsers = [
-        'Exen\Konfig\KonfigFileParser\Ini',
-        'Exen\Konfig\KonfigFileParser\Json',
-        'Exen\Konfig\KonfigFileParser\Php',
-        'Exen\Konfig\KonfigFileParser\Toml',
-        'Exen\Konfig\KonfigFileParser\Xml',
-        'Exen\Konfig\KonfigFileParser\Yaml',
+        'Exen\Konfig\FileParser\Ini',
+        'Exen\Konfig\FileParser\Json',
+        'Exen\Konfig\FileParser\Php',
+        'Exen\Konfig\FileParser\Toml',
+        'Exen\Konfig\FileParser\Xml',
+        'Exen\Konfig\FileParser\Yaml',
     ];
 
     /**
@@ -36,8 +36,7 @@ class Konfig extends AbstractKonfig
 
         foreach ($paths as $path) {
             // Get file information
-            $info = pathinfo($path);
-            $ext = isset($info['extension']) ? $info['extension'] : '';
+            $ext = pathinfo($path, PATHINFO_EXTENSION);
             $parser = $this->getParser($ext);
 
             // Try and load file
@@ -62,7 +61,7 @@ class Konfig extends AbstractKonfig
      * Gets a parser for a given file extension
      *
      * @param  string $ext
-     * @return Konfig\KonfigFileParser\IKonfigFileParser
+     * @return Konfig\FileParser\FileParserInterface
      * @throws UnsupportedFormatException If `$path` is an unsupported file format
      */
     private function getParser($ext = null)
@@ -74,9 +73,9 @@ class Konfig extends AbstractKonfig
 
             $tempParser = new $fileParser;
 
-            if (in_array($ext, $tempParser->getSupportedFileExtensions($ext))) {
+            if (in_array($ext, $tempParser->getSupportedFileExtensions($ext), true)) {
                 $parser = $tempParser;
-                continue;
+                break;
             }
         }
 
@@ -135,7 +134,7 @@ class Konfig extends AbstractKonfig
             $paths = @glob($path . '/*.{yaml,json,ini,xml,toml,yml,php,inc,php5,conf,cfg}', GLOB_BRACE);
 
             if (empty($paths)) {
-                throw new EmptyDirectoryException('Configuration directory: [' . $path . '] is empty');
+                throw new EmptyDirectoryException("Configuration directory: [$path] is empty");
             }
 
             return $paths;
@@ -143,7 +142,7 @@ class Konfig extends AbstractKonfig
 
         // If `$path` is not a file, throw an exception
         if (!file_exists($path)) {
-            throw new FileNotFoundException('Configuration file: [' . $path . '] cannot be found');
+            throw new FileNotFoundException("Configuration file: [$path] cannot be found");
         }
 
         return [$path];

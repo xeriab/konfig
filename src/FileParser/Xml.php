@@ -1,10 +1,10 @@
 <?php
 
-namespace Exen\Konfig\KonfigFileParser;
+namespace Exen\Konfig\FileParser;
 
 use Exen\Konfig\Exception\ParseException;
 
-class Xml implements IKonfigFileParser
+class Xml implements FileParserInterface
 {
     /**
      * {@inheritDoc}
@@ -46,4 +46,4 @@ class Xml implements IKonfigFileParser
     }
 }
 
-#: END OF ./KonfigFileParser/Xml.php FILE
+#: END OF ./FileParser/Xml.php FILE

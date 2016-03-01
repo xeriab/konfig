@@ -1,11 +1,11 @@
 <?php
 
-namespace Exen\Konfig\KonfigFileParser;
+namespace Exen\Konfig\FileParser;
 
 use Exen\Konfig\Exception\ParseException;
 use Yosymfony\Toml\Toml as TomlLib;
 
-class Toml implements IKonfigFileParser
+class Toml implements FileParserInterface
 {
     /**
      * {@inheritDoc}
@@ -38,4 +38,4 @@ class Toml implements IKonfigFileParser
     }
 }
 
-#: END OF ./KonfigFileParser/Toml.php FILE
+#: END OF ./FileParser/Toml.php FILE

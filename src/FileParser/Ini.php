@@ -1,11 +1,11 @@
 <?php
 
-namespace Exen\Konfig\KonfigFileParser;
+namespace Exen\Konfig\FileParser;
 
 use Exen\Konfig\Exception\ParseException;
 use Piwik\Ini\INIReader as IniReader;
 
-class Ini implements IKonfigFileParser
+class Ini implements FileParserInterface
 {
     /**
      * {@inheritDoc}
@@ -36,4 +36,4 @@ class Ini implements IKonfigFileParser
     }
 }
 
-#: END OF ./KonfigFileParser/Ini.php FILE
+#: END OF ./FileParser/Ini.php FILE
