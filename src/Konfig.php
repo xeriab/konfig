@@ -134,7 +134,7 @@ class Konfig extends AbstractKonfig
             $paths = @glob($path . '/*.{yaml,json,ini,xml,toml,yml,php,inc,php5,conf,cfg}', GLOB_BRACE);
 
             if (empty($paths)) {
-                throw new EmptyDirectoryException('Configuration directory: [' . $path . '] is empty');
+                throw new EmptyDirectoryException("Configuration directory: [$path] is empty");
             }
 
             return $paths;
@@ -142,7 +142,7 @@ class Konfig extends AbstractKonfig
 
         // If `$path` is not a file, throw an exception
         if (!file_exists($path)) {
-            throw new FileNotFoundException('Configuration file: [' . $path . '] cannot be found');
+            throw new FileNotFoundException("Configuration file: [$path] cannot be found");
         }
 
         return [$path];
