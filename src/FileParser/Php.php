@@ -1,6 +1,6 @@
 <?php
 
-namespace Exen\Konfig\KonfigFileParser;
+namespace Exen\Konfig\FileParser;
 
 use Exen\Konfig\Exception\ParseException;
 use Exen\Konfig\Exception\UnsupportedFileFormatException;
@@ -8,7 +8,7 @@ use Exen\Konfig\Exception\UnsupportedFileFormatException;
 //
 define('_KONFIG_FILE_', true);
 
-class Php implements IKonfigFileParser
+class Php implements FileParserInterface
 {
     /**
      * {@inheritDoc}
@@ -53,4 +53,4 @@ class Php implements IKonfigFileParser
     }
 }
 
-#: END OF ./KonfigFileParser/Php.php FILE
+#: END OF ./FileParser/Php.php FILE

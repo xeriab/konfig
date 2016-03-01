@@ -1,8 +1,8 @@
 <?php
 
-namespace Exen\Konfig\KonfigFileParser;
+namespace Exen\Konfig\FileParser;
 
-interface IKonfigFileParser
+interface FileParserInterface
 {
     /**
      * Parses a file from `$path` and gets its contents as an array
@@ -21,4 +21,4 @@ interface IKonfigFileParser
     public function getSupportedFileExtensions();
 }
 
-#: END OF ./KonfigFileParser/IKonfigFileParser.php FILE
+#: END OF ./FileParser/FileParserInterface.php FILE

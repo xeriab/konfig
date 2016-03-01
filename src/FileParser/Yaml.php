@@ -1,10 +1,10 @@
 <?php
 
-namespace Exen\Konfig\KonfigFileParser;
+namespace Exen\Konfig\FileParser;
 
 use Exen\Konfig\Exception\ParseException;
 
-class Yaml implements IKonfigFileParser
+class Yaml implements FileParserInterface
 {
     /**
      * {@inheritDoc}
@@ -46,4 +46,4 @@ class Yaml implements IKonfigFileParser
     }
 }
 
-#: END OF ./KonfigFileParser/Yaml.php FILE
+#: END OF ./FileParser/Yaml.php FILE

@@ -14,12 +14,12 @@ class Konfig extends AbstractKonfig
      * @var array
      */
     private $_supportedFileParsers = [
-        'Exen\Konfig\KonfigFileParser\Ini',
-        'Exen\Konfig\KonfigFileParser\Json',
-        'Exen\Konfig\KonfigFileParser\Php',
-        'Exen\Konfig\KonfigFileParser\Toml',
-        'Exen\Konfig\KonfigFileParser\Xml',
-        'Exen\Konfig\KonfigFileParser\Yaml',
+        'Exen\Konfig\FileParser\Ini',
+        'Exen\Konfig\FileParser\Json',
+        'Exen\Konfig\FileParser\Php',
+        'Exen\Konfig\FileParser\Toml',
+        'Exen\Konfig\FileParser\Xml',
+        'Exen\Konfig\FileParser\Yaml',
     ];
 
     /**
@@ -61,7 +61,7 @@ class Konfig extends AbstractKonfig
      * Gets a parser for a given file extension
      *
      * @param  string $ext
-     * @return Konfig\KonfigFileParser\IKonfigFileParser
+     * @return Konfig\FileParser\FileParserInterface
      * @throws UnsupportedFormatException If `$path` is an unsupported file format
      */
     private function getParser($ext = null)
