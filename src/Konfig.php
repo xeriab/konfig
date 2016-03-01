@@ -36,8 +36,7 @@ class Konfig extends AbstractKonfig
 
         foreach ($paths as $path) {
             // Get file information
-            $info = pathinfo($path);
-            $ext = isset($info['extension']) ? $info['extension'] : '';
+            $ext = pathinfo($path, PATHINFO_EXTENSION);
             $parser = $this->getParser($ext);
 
             // Try and load file
