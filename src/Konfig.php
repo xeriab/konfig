@@ -75,7 +75,7 @@ class Konfig extends AbstractKonfig
 
             if (in_array($ext, $tempParser->getSupportedFileExtensions($ext), true)) {
                 $parser = $tempParser;
-                continue;
+                break;
             }
         }
 
