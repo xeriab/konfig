@@ -12,7 +12,8 @@
         "yml",
         "toml",
         "ini",
-        "xml"
+        "xml",
+        "neon"
     ],
     "authors": [{
         "name": "Xeriab Nabil",
@@ -22,12 +23,14 @@
     "suggest": {
         "mustangostang/spyc": "0.5.1",
         "piwik/ini": "1.0.6",
-        "yosymfony/toml": "0.3.3"
+        "yosymfony/toml": "0.3.3",
+        "nette/neon": "2.3.4"
     },
     "require": {
         "php": ">5.4",
         "yosymfony/toml": "0.3.3",
         "mustangostang/spyc": "0.5.1",
+        "nette/neon": "2.3.4",
         "piwik/ini": "1.0.6"
     },
     "require-dev": {
