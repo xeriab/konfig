@@ -1,6 +1,6 @@
 <?php
 
-defined('_KONFIG_FILE_') or exit('Access is denied!');
+defined('EXEN_KONFIG_FILE') or exit('Access is denied!');
 
 return [
     'Key' => 'Value',

@@ -2,6 +2,7 @@
 
 namespace Exen\Konfig\FileParser;
 
+use Exception;
 use Exen\Konfig\Exception\ParseException;
 use Yosymfony\Toml\Toml as TomlLib;
 
