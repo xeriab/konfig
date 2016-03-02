@@ -4,7 +4,7 @@ namespace Exen\Konfig;
 
 use Exen\Konfig\Exception\EmptyDirectoryException;
 use Exen\Konfig\Exception\FileNotFoundException;
-use Exen\Konfig\Exception\UnsupportedFormatException;
+use Exen\Konfig\Exception\UnsupportedFileFormatException;
 
 class Konfig extends AbstractKonfig
 {
@@ -16,6 +16,7 @@ class Konfig extends AbstractKonfig
     private $_supportedFileParsers = [
         'Exen\Konfig\FileParser\Ini',
         'Exen\Konfig\FileParser\Json',
+        'Exen\Konfig\FileParser\Neon',
         'Exen\Konfig\FileParser\Php',
         'Exen\Konfig\FileParser\Toml',
         'Exen\Konfig\FileParser\Xml',
@@ -41,6 +42,8 @@ class Konfig extends AbstractKonfig
 
             // Try and load file
             $this->items = array_replace_recursive($this->items, $parser->parse($path));
+
+            $this->loadedFiles[] = $path;
         } // END foreach
 
         parent::__construct($this->items);
@@ -62,7 +65,7 @@ class Konfig extends AbstractKonfig
      *
      * @param  string $ext
      * @return Konfig\FileParser\FileParserInterface
-     * @throws UnsupportedFormatException If `$path` is an unsupported file format
+     * @throws UnsupportedFileFormatException If `$path` is an unsupported file format
      */
     private function getParser($ext = null)
     {
@@ -79,7 +82,7 @@ class Konfig extends AbstractKonfig
 
         // If none exist, then throw an exception
         if (is_null($parser)) {
-            throw new UnsupportedFormatException('Unsupported configuration format');
+            throw new UnsupportedFileFormatException('Unsupported configuration format');
         }
 
         return $parser;
@@ -131,9 +134,9 @@ class Konfig extends AbstractKonfig
 
         // If `$path` is a directory
         if (is_dir($path)) {
-            // $paths = @glob($path . '/*.*');
             #: TODO: Hmmm, I need to end up with something more efficient
-            $paths = @glob($path . '/*.{yaml,json,ini,xml,toml,yml,php,inc,php5,conf,cfg}', GLOB_BRACE);
+            // $paths = @glob($path . '/*.{yaml,json,ini,xml,toml,yml,php,inc,php5,conf,cfg}', GLOB_BRACE);
+            $paths = @glob($path . '/*.*');
 
             if (empty($paths)) {
                 throw new EmptyDirectoryException("Configuration directory: [$path] is empty");
@@ -148,6 +151,11 @@ class Konfig extends AbstractKonfig
         }
 
         return [$path];
+    }
+
+    public function __toString()
+    {
+        return 'Konfig Object';
     }
 }
 
