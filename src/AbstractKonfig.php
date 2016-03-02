@@ -5,12 +5,6 @@ namespace Exen\Konfig;
 use ArrayAccess;
 use Iterator;
 
-/**
- * Constant to prevent loading Konfig's PHP
- * configuration files from outside Konfig.
- */
-define('EXEN_KONFIG_FILE', true);
-
 abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
 {
     /**
