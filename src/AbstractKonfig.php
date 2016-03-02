@@ -53,7 +53,6 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      */
     protected function getDefaults()
     {
-        //return array();
         return [];
     }
 
@@ -62,6 +61,35 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     public function getAll()
     {
         return $this->data;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function has($key)
+    {
+        // Check if already cached
+        if (isset($this->cache[$key])) {
+            return true;
+        }
+
+        $segments = explode('.', $key);
+        $root = $this->data;
+
+        // nested case
+        foreach ($segments as $segment) {
+            if (array_key_exists($segment, $root)) {
+                $root = $root[$segment];
+                continue;
+            } else {
+                return false;
+            }
+        }
+
+        // Set cache for the given key
+        $this->cache[$key] = $root;
+
+        return true;
     }
 
     /**
@@ -158,6 +186,68 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     public function offsetUnset($offset)
     {
         $this->set($offset, null);
+    }
+
+    #: Iterator Methods
+
+    /**
+     * Tests whether the iterator's current index is valid
+     *
+     * @return bool True if the current index is valid; false otherwise
+     */
+    public function valid()
+    {
+        return (is_array($this->data) ? key($this->data) !== null : false);
+    }
+
+    /**
+     * Returns the data array index referenced by its internal cursor
+     *
+     * @return mixed The index referenced by the data array's internal cursor.
+     * If the array is empty or undefined or there is no element at the cursor,
+     * the function returns null
+     */
+    public function key()
+    {
+        return (is_array($this->data) ? key($this->data) : null);
+    }
+
+    /**
+     * Returns the data array element referenced by its internal cursor
+     *
+     * @return mixed The element referenced by the data array's internal cursor.
+     * If the array is empty or there is no element at the cursor,
+     * the function returns false. If the array is undefined, the function
+     * returns null
+     */
+    public function current()
+    {
+        return (is_array($this->data) ? current($this->data) : null);
+    }
+
+    /**
+     * Moves the data array's internal cursor forward one element
+     *
+     * @return mixed The element referenced by the data array's internal cursor
+     * after the move is completed. If there are no more elements in the
+     * array after the move, the function returns false. If the data array
+     * is undefined, the function returns null
+     */
+    public function next()
+    {
+        return (is_array($this->data) ? next($this->data) : null);
+    }
+
+    /**
+     * Moves the data array's internal cursor to the first element
+     *
+     * @return mixed The element referenced by the data array's internal cursor
+     * after the move is completed. If the data array is empty, the function
+     * returns false. If the data array is undefined, the function returns null
+     */
+    public function rewind()
+    {
+        return (is_array($this->data) ? reset($this->data) : null);
     }
 }
 

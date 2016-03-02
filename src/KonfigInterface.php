@@ -30,6 +30,16 @@ interface KonfigInterface
      * @return array | object
      */
     public function getAll();
+
+    /**
+     * Checking if configuration values exist, using
+     * either simple or nested keys.
+     *
+     * @param string $key The key to check for
+     *
+     * @return array
+     */
+    public function has($key);
 }
 
 #: END OF ./KonfigInterface.php FILE
