@@ -131,7 +131,7 @@ class MyKonfig extends AbstractKonfig
             ),
             'application' => array(
                 'name'   => 'configuration',
-                'secret' => 's3cr3t'
+                'secret' => 'secretValue'
             )
         );
     }
