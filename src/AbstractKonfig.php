@@ -2,8 +2,24 @@
 
 namespace Exen\Konfig;
 
-abstract class AbstractKonfig implements \ArrayAccess, IKonfig
+use ArrayAccess;
+use Iterator;
+
+/**
+ * Constant to prevent loading Konfig's PHP
+ * configuration files from outside Konfig.
+ */
+define('EXEN_KONFIG_FILE', true);
+
+abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
 {
+    /**
+     * Stores loaded configuration files
+     *
+     * @var array $loadedFiles Array of loaded configuration files
+     */
+    protected $loadedFiles = [];
+
     /**
      * Stores the configuration data
      *
@@ -41,7 +57,7 @@ abstract class AbstractKonfig implements \ArrayAccess, IKonfig
         return [];
     }
 
-    #: IKonfig Methods
+    #: KonfigInterface Methods
 
     public function getAll()
     {
