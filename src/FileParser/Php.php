@@ -5,9 +5,6 @@ namespace Exen\Konfig\FileParser;
 use Exen\Konfig\Exception\ParseException;
 use Exen\Konfig\Exception\UnsupportedFileFormatException;
 
-//
-define('_KONFIG_FILE_', true);
-
 class Php implements FileParserInterface
 {
     /**
