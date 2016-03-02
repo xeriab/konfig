@@ -32,7 +32,7 @@ class Konfig extends AbstractKonfig
     {
         $paths = $this->getValidPath($path);
 
-        $this->data = [];
+        $this->items = [];
 
         foreach ($paths as $path) {
             // Get file information
@@ -40,10 +40,10 @@ class Konfig extends AbstractKonfig
             $parser = $this->getParser($ext);
 
             // Try and load file
-            $this->data = array_replace_recursive($this->data, $parser->parse($path));
+            $this->items = array_replace_recursive($this->items, $parser->parse($path));
         } // END foreach
 
-        parent::__construct($this->data);
+        parent::__construct($this->items);
     }
 
     /**
@@ -69,8 +69,6 @@ class Konfig extends AbstractKonfig
         $parser = null;
 
         foreach ($this->_supportedFileParsers as $fileParser) {
-            // require_once 'FileParser/' . $fileParser . '.php';
-
             $tempParser = new $fileParser;
 
             if (in_array($ext, $tempParser->getSupportedFileExtensions($ext), true)) {
@@ -97,7 +95,10 @@ class Konfig extends AbstractKonfig
      */
     private function getValidPath($path = null)
     {
+        #: Get path from Array
+
         // If `$path` is an array
+        // The below code is to get the path from a given $path array
         if (is_array($path)) {
             $paths = [];
 
@@ -131,6 +132,7 @@ class Konfig extends AbstractKonfig
         // If `$path` is a directory
         if (is_dir($path)) {
             // $paths = @glob($path . '/*.*');
+            #: TODO: Hmmm, I need to end up with something more efficient
             $paths = @glob($path . '/*.{yaml,json,ini,xml,toml,yml,php,inc,php5,conf,cfg}', GLOB_BRACE);
 
             if (empty($paths)) {

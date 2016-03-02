@@ -15,14 +15,14 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     protected $loadedFiles = [];
 
     /**
-     * Stores the configuration data
+     * Stores the configuration items
      *
      * @var array | null
      */
-    protected $data = null;
+    protected $items = null;
 
     /**
-     * Caches the configuration data
+     * Caches the configuration items
      *
      * @var array
      */
@@ -31,11 +31,11 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     /**
      * Constructor method and sets default options, if any
      *
-     * @param array $data
+     * @param array $items
      */
-    public function __construct($data)
+    public function __construct($items)
     {
-        $this->data = array_merge($this->getDefaults(), $data);
+        $this->items = array_merge($this->getDefaults(), $items);
     }
 
     /**
@@ -54,7 +54,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
 
     public function getAll()
     {
-        return $this->data;
+        return $this->items;
     }
 
     /**
@@ -67,13 +67,13 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
             return true;
         }
 
-        $segments = explode('.', $key);
-        $root = $this->data;
+        $chunks = explode('.', $key);
+        $root = $this->items;
 
         // nested case
-        foreach ($segments as $segment) {
-            if (array_key_exists($segment, $root)) {
-                $root = $root[$segment];
+        foreach ($chunks as $chunk) {
+            if (array_key_exists($chunk, $root)) {
+                $root = $root[$chunk];
                 continue;
             } else {
                 return false;
@@ -91,27 +91,11 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      */
     public function get($key, $default = null)
     {
-        // Check if already cached
-        if (isset($this->cache[$key])) {
+        if ($this->has($key)) {
             return $this->cache[$key];
         }
 
-        $segments = explode('.', $key);
-        $root = $this->data;
-
-        // nested case
-        foreach ($segments as $part) {
-            if (isset($root[$part])) {
-                $root = $root[$part];
-                continue;
-            } else {
-                $root = $default;
-                break;
-            }
-        }
-
-        // whatever we have is what we needed
-        return ($this->cache[$key] = $root);
+        return $default;
     }
 
     /**
@@ -119,16 +103,38 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      */
     public function set($key, $value)
     {
-        $segments = explode('.', $key);
-        $root = &$this->data;
+        $chunks = explode('.', $key);
+        $root = &$this->items;
+        $cacheKey = '';
 
         // Look for the key, creating nested keys if needed
-        while ($part = array_shift($segments)) {
-            if (!isset($root[$part]) && count($segments)) {
-                $root[$part] = array();
+        while ($part = array_shift($chunks)) {
+            if ($cacheKey != '') {
+                $cacheKey .= '.';
+            }
+
+            $cacheKey .= $part;
+
+            if (!isset($root[$part]) && count($chunks)) {
+                $root[$part] = [];
             }
 
             $root = &$root[$part];
+
+            // Unset all old nested cache
+
+            if (isset($this->cache[$cacheKey])) {
+                unset($this->cache[$cacheKey]);
+            }
+
+            // Unset all old nested cache in case of array
+            if (count($chunks) == 0) {
+                foreach ($this->cache as $cacheLocalKey => $cacheValue) {
+                    if (substr($cacheLocalKey, 0, strlen($cacheKey)) === $cacheKey) {
+                        unset($this->cache[$cacheLocalKey]);
+                    }
+                }
+            }
         }
 
         // Assign value at target node
@@ -156,7 +162,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      */
     public function offsetExists($offset)
     {
-        return !is_null($this->get($offset));
+        return $this->has($offset);
     }
 
     /**
@@ -191,57 +197,57 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      */
     public function valid()
     {
-        return (is_array($this->data) ? key($this->data) !== null : false);
+        return (is_array($this->items) ? key($this->items) !== null : false);
     }
 
     /**
-     * Returns the data array index referenced by its internal cursor
+     * Returns the items array index referenced by its internal cursor
      *
-     * @return mixed The index referenced by the data array's internal cursor.
+     * @return mixed The index referenced by the items array's internal cursor.
      * If the array is empty or undefined or there is no element at the cursor,
      * the function returns null
      */
     public function key()
     {
-        return (is_array($this->data) ? key($this->data) : null);
+        return (is_array($this->items) ? key($this->items) : null);
     }
 
     /**
-     * Returns the data array element referenced by its internal cursor
+     * Returns the items array element referenced by its internal cursor
      *
-     * @return mixed The element referenced by the data array's internal cursor.
+     * @return mixed The element referenced by the items array's internal cursor.
      * If the array is empty or there is no element at the cursor,
      * the function returns false. If the array is undefined, the function
      * returns null
      */
     public function current()
     {
-        return (is_array($this->data) ? current($this->data) : null);
+        return (is_array($this->items) ? current($this->items) : null);
     }
 
     /**
-     * Moves the data array's internal cursor forward one element
+     * Moves the items array's internal cursor forward one element
      *
-     * @return mixed The element referenced by the data array's internal cursor
+     * @return mixed The element referenced by the items array's internal cursor
      * after the move is completed. If there are no more elements in the
-     * array after the move, the function returns false. If the data array
+     * array after the move, the function returns false. If the items array
      * is undefined, the function returns null
      */
     public function next()
     {
-        return (is_array($this->data) ? next($this->data) : null);
+        return (is_array($this->items) ? next($this->items) : null);
     }
 
     /**
-     * Moves the data array's internal cursor to the first element
+     * Moves the items array's internal cursor to the first element
      *
-     * @return mixed The element referenced by the data array's internal cursor
-     * after the move is completed. If the data array is empty, the function
-     * returns false. If the data array is undefined, the function returns null
+     * @return mixed The element referenced by the items array's internal cursor
+     * after the move is completed. If the items array is empty, the function
+     * returns false. If the items array is undefined, the function returns null
      */
     public function rewind()
     {
-        return (is_array($this->data) ? reset($this->data) : null);
+        return (is_array($this->items) ? reset($this->items) : null);
     }
 }
 
