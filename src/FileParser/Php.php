@@ -47,7 +47,7 @@ class Php implements FileParserInterface
      */
     public function getSupportedFileExtensions()
     {
-        return ['php', 'inc', 'php5'];
+        return ['php', 'inc'];
     }
 }
 
