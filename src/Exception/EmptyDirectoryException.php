@@ -2,7 +2,7 @@
 
 namespace Exen\Konfig\Exception;
 
-use Exception;
+use Exen\Konfig\Exception;
 
 class EmptyDirectoryException extends Exception
 {
