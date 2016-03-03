@@ -261,11 +261,6 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     {
         return (is_array($this->configData) ? reset($this->configData) : null);
     }
-
-    public function __toString()
-    {
-        return 'AbstractKonfig Object';
-    }
 }
 
 #: END OF ./AbstractKonfig.php FILE

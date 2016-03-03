@@ -9,11 +9,11 @@ use Exen\Konfig\Exception\UnsupportedFileFormatException;
 final class Konfig extends AbstractKonfig
 {
     /**
-     * All file formats supported by Konfig
+     * All configuration file formats supported by Konfig
      *
      * @var array
      */
-    private $_supportedFileParsers = [
+    protected $configFileParsers = [
         'Exen\Konfig\FileParser\Ini',
         'Exen\Konfig\FileParser\Json',
         'Exen\Konfig\FileParser\Neon',
@@ -31,6 +31,10 @@ final class Konfig extends AbstractKonfig
      */
     public function __construct($path = null)
     {
+        // if (!isset($path)) {
+        //     return;
+        // }
+
         $paths = $this->getValidPath($path);
 
         $this->configData = [];
@@ -81,7 +85,7 @@ final class Konfig extends AbstractKonfig
     {
         $parser = null;
 
-        foreach ($this->_supportedFileParsers as $fileParser) {
+        foreach ($this->configFileParsers as $fileParser) {
             $tempParser = new $fileParser;
 
             if (in_array($ext, $tempParser->getSupportedFileExtensions($ext), true)) {
@@ -156,8 +160,13 @@ final class Konfig extends AbstractKonfig
         }
 
         // If `$path` is not a file, throw an exception
-        if (!file_exists($path)) {
+        if (!file_exists($path) and isset($path)) {
             throw new FileNotFoundException("Configuration file: [$path] cannot be found");
+        }
+
+        // If `$path` is not set
+        if (!isset($path)) {
+            return;
         }
 
         return [$path];
@@ -165,7 +174,7 @@ final class Konfig extends AbstractKonfig
 
     public function __toString()
     {
-        return 'Konfig Object';
+        return 'Konfig';
     }
 }
 
