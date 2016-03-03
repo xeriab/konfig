@@ -6,7 +6,7 @@ use Exen\Konfig\Exception\EmptyDirectoryException;
 use Exen\Konfig\Exception\FileNotFoundException;
 use Exen\Konfig\Exception\UnsupportedFileFormatException;
 
-class Konfig extends AbstractKonfig
+final class Konfig extends AbstractKonfig
 {
     /**
      * All file formats supported by Konfig
@@ -26,14 +26,14 @@ class Konfig extends AbstractKonfig
     /**
      * Loads a supported configuration file format.
      *
-     * @param  string | array $path
+     * @param  string|array|mixed $path String file | configuration array | Konfig instance
      * @throws EmptyDirectoryException If `$path` is an empty directory
      */
     public function __construct($path = null)
     {
         $paths = $this->getValidPath($path);
 
-        $this->items = [];
+        $this->configData = [];
 
         foreach ($paths as $path) {
             // Get file information
@@ -41,23 +41,33 @@ class Konfig extends AbstractKonfig
             $parser = $this->getParser($ext);
 
             // Try and load file
-            $this->items = array_replace_recursive($this->items, $parser->parse($path));
+            $this->configData = array_replace_recursive($this->configData, $parser->parse($path));
 
-            $this->loadedFiles[] = $path;
+            self::$loadedFiles[$path] = true;
         } // END foreach
 
-        parent::__construct($this->items);
+        parent::__construct($this->configData);
     }
 
     /**
      * Static method for loading a Konfig instance.
      *
-     * @param  string | array $path
+     * @param  string|array|mixed $path string file | configuration array | Konfig instance
      * @return Konfig
      */
     public static function load($path = null)
     {
         return new static($path);
+    }
+
+    /**
+     * Static method for getting loaded Konfig files.
+     *
+     * @return array
+     */
+    public static function loaded()
+    {
+        return parent::$loadedFiles;
     }
 
     /**
