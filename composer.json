@@ -1,7 +1,7 @@
 {
     "name": "kodeburner/konfig",
     "description": "Yet another simple configuration file loader library.",
-    "version": "0.1.0-alpha-1",
+    "version": "0.1.0-alpha-4",
     "license": "MIT",
     "type": "library",
     "keywords": [
@@ -18,22 +18,27 @@
     "authors": [{
         "name": "Xeriab Nabil",
         "email": "kodeburner@gmail.com",
-        "role": "Developer"
+        "role": "Developer",
+        "homepage": "https://twitter.com/xeriab"
     }],
+    "support": {
+        "issues": "https://github.com/xeriab/konfig/issues",
+        "source": "https://github.com/xeriab/konfig"
+    },
     "suggest": {
-        "mustangostang/spyc": "0.5.1",
-        "piwik/ini": "1.0.6",
-        "yosymfony/toml": "0.3.3",
-        "nette/neon": "2.3.4"
+        "yosymfony/toml": "Required to use and support TOML",
+        "mustangostang/spyc": "Required to use and support YAML",
+        "nette/neon": "Required to use and support the NEON notation",
+        "piwik/ini": "Required to use and support INI"
     },
     "require": {
-        "php": ">5.4",
+        "php": ">5.4"
+    },
+    "require-dev": {
         "yosymfony/toml": "0.3.3",
         "mustangostang/spyc": "0.5.1",
         "nette/neon": "2.3.4",
-        "piwik/ini": "1.0.6"
-    },
-    "require-dev": {
+        "piwik/ini": "1.0.6",
         "scrutinizer/ocular": "~1.1",
         "squizlabs/php_codesniffer": "~2.2",
         "phpunit/phpunit": "4.3.*@dev",
