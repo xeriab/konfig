@@ -19,7 +19,7 @@ class Php implements FileParserInterface
     {
         // Require the file, if it throws an exception, rethrow it
         try {
-            $temp = require_once $path;
+            $temp = require $path;
         } catch (Exception $ex) {
             throw new ParseException(
                 [
