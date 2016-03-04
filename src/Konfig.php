@@ -18,6 +18,13 @@ use Exen\Konfig\Exception\UnsupportedFileFormatException;
 final class Konfig extends AbstractKonfig
 {
     /**
+     * Stores loaded configuration files
+     *
+     * @var array $loadedFiles Array of loaded configuration files
+     */
+    static $loadedFiles = [];
+
+    /**
      * All configuration file formats supported by Konfig
      *
      * @var array
@@ -80,7 +87,7 @@ final class Konfig extends AbstractKonfig
      */
     public static function loaded()
     {
-        return parent::$loadedFiles;
+        return self::$loadedFiles;
     }
 
     /**

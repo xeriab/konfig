@@ -18,13 +18,6 @@ use Iterator;
 abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
 {
     /**
-     * Stores loaded configuration files
-     *
-     * @var array $loadedFiles Array of loaded configuration files
-     */
-    static $loadedFiles = [];
-
-    /**
      * Stores the configuration items
      *
      * @var array | null

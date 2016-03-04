@@ -2,10 +2,12 @@
 
 test.php
 tool.bat
-
-vendor
 composer.lock
 composer.bak.json
+
+README.html
+
+vendor
 build
 node_modules
 
