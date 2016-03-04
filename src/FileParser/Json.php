@@ -13,7 +13,7 @@ namespace Exen\Konfig\FileParser;
 
 use Exen\Konfig\Exception\ParseException;
 
-class Json implements FileParserInterface
+class Json extends AbstractFileParser
 {
     /**
      * {@inheritDoc}

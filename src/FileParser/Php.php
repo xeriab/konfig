@@ -15,7 +15,7 @@ use Exception;
 use Exen\Konfig\Exception\ParseException;
 use Exen\Konfig\Exception\UnsupportedFileFormatException;
 
-class Php implements FileParserInterface
+class Php extends AbstractFileParser
 {
     /**
      * {@inheritDoc}

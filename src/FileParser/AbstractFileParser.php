@@ -8,17 +8,18 @@
  * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
  * @link    https://xeriab.github.io/projects/konfig
  */
-
 namespace Exen\Konfig\FileParser;
 
-class AbstractFileParser implements FileParserInterface
+use Exen\Konfig\FileParser;
+
+abstract class AbstractFileParser implements FileParser
 {
     /**
      * Configuration file
      *
      * @var string
      */
-    protected $file = null;
+    protected $file;
 
     /**
      * The configuration variables
@@ -26,30 +27,6 @@ class AbstractFileParser implements FileParserInterface
      * @var array
      */
     protected $vars = [];
-
-    /**
-     * Sets up the file to be parsed and variables
-     *
-     * @param string $file Config file name
-     * @param array $vars Variables to parse in the file
-     * @return void
-     */
-    /*public function __construct($file = null, $vars = [])
-    {
-    $this->file = $file;
-
-    $this->vars = [] + $vars;
-    }*/
-
-    public function parse($file)
-    {
-        // Nothing to put here!
-    }
-
-    public function getSupportedFileExtensions()
-    {
-        // Nothing to put here!
-    }
 
     #: Protected Methods
 
@@ -109,6 +86,16 @@ class AbstractFileParser implements FileParserInterface
             }
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    abstract public function parse($file);
+
+    /**
+     * {@inheritdoc}
+     */
+    abstract public function getSupportedFileExtensions();
 }
 
 #: END OF ./src/FileParser/AbstractFileParser.php FILE

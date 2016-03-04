@@ -14,7 +14,7 @@ namespace Exen\Konfig\FileParser;
 use Exception;
 use Exen\Konfig\Exception\ParseException;
 
-class Yaml implements FileParserInterface
+class Yaml extends AbstractFileParser
 {
     /**
      * {@inheritDoc}

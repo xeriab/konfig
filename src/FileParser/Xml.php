@@ -13,7 +13,7 @@ namespace Exen\Konfig\FileParser;
 
 use Exen\Konfig\Exception\ParseException;
 
-class Xml implements FileParserInterface
+class Xml extends AbstractFileParser
 {
     /**
      * {@inheritDoc}

@@ -8,13 +8,12 @@
  * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
  * @link    https://xeriab.github.io/projects/konfig
  */
-
 namespace Exen\Konfig\FileParser;
 
 use Exen\Konfig\Exception\ParseException;
 use Piwik\Ini\INIReader as IniReader;
 
-class Ini implements FileParserInterface
+class Ini extends AbstractFileParser
 {
     /**
      * {@inheritDoc}

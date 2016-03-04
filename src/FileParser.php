@@ -9,9 +9,9 @@
  * @link    https://xeriab.github.io/projects/konfig
  */
 
-namespace Exen\Konfig\FileParser;
+namespace Exen\Konfig;
 
-interface FileParserInterface
+interface FileParser
 {
     /**
      * Parses a file from `$path` and gets its contents as an array
@@ -29,5 +29,3 @@ interface FileParserInterface
      */
     public function getSupportedFileExtensions();
 }
-
-#: END OF ./src/FileParser/FileParserInterface.php FILE
