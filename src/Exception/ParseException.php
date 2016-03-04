@@ -1,4 +1,13 @@
 <?php
+/**
+ * Konfig
+ *
+ * Yet another simple configuration file loader library.
+ *
+ * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link    https://xeriab.github.io/projects/konfig
+ */
 
 namespace Exen\Konfig\Exception;
 
@@ -19,4 +28,4 @@ class ParseException extends ErrorException
     }
 }
 
-#: END OF ./Exception/ParseException.php FILE
+#: END OF ./src/Exception/ParseException.php FILE

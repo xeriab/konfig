@@ -1,4 +1,13 @@
 <?php
+/**
+ * Konfig
+ *
+ * Yet another simple configuration file loader library.
+ *
+ * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link    https://xeriab.github.io/projects/konfig
+ */
 
 namespace Exen\Konfig\FileParser;
 
@@ -51,4 +60,4 @@ class Php implements FileParserInterface
     }
 }
 
-#: END OF ./FileParser/Php.php FILE
+#: END OF ./src/FileParser/Php.php FILE

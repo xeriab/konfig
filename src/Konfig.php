@@ -1,4 +1,13 @@
 <?php
+/**
+ * Konfig
+ *
+ * Yet another simple configuration file loader library.
+ *
+ * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link    https://xeriab.github.io/projects/konfig
+ */
 
 namespace Exen\Konfig;
 
@@ -178,4 +187,4 @@ final class Konfig extends AbstractKonfig
     }
 }
 
-#: END OF ./Konfig.php FILE
+#: END OF ./src/Konfig.php FILE

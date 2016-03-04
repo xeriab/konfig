@@ -1,4 +1,13 @@
 <?php
+/**
+ * Konfig
+ *
+ * Yet another simple configuration file loader library.
+ *
+ * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link    https://xeriab.github.io/projects/konfig
+ */
 
 namespace Exen\Konfig\FileParser;
 
@@ -139,4 +148,4 @@ class AbstractFileParser implements FileParserInterface
     abstract protected function exportFormat($contents);
 }
 
-#: END OF ./FileParser/AbstractFileParser.php FILE
+#: END OF ./src/FileParser/AbstractFileParser.php FILE

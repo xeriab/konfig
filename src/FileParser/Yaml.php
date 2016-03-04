@@ -1,4 +1,13 @@
 <?php
+/**
+ * Konfig
+ *
+ * Yet another simple configuration file loader library.
+ *
+ * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link    https://xeriab.github.io/projects/konfig
+ */
 
 namespace Exen\Konfig\FileParser;
 
@@ -17,11 +26,12 @@ class Yaml implements FileParserInterface
     {
         try
         {
-            $nativYaml = (function_exists('yaml_parse_file'));
+            // Check for native YAML PHP extension
+            $nYaml = extension_loaded('yaml');
             $content = @file_get_contents($path);
             $data = null;
 
-            if (!$nativYaml) {
+            if (!$nYaml) {
                 $data = spyc_load_file($path);
             } else {
                 $data = yaml_parse_file($path);
@@ -47,4 +57,4 @@ class Yaml implements FileParserInterface
     }
 }
 
-#: END OF ./FileParser/Yaml.php FILE
+#: END OF ./src/FileParser/Yaml.php FILE
