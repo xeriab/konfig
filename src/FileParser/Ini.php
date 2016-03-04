@@ -28,7 +28,7 @@ class Ini implements FileParserInterface
         $iniReader = new IniReader();
         $data = $iniReader->readFile($path);
 
-        if (!$data) {
+        if (empty($data)) {
             $error = error_get_last();
             throw new ParseException($error);
         }

@@ -13,7 +13,7 @@ namespace Exen\Konfig\FileParser;
 
 use Exception;
 use Exen\Konfig\Exception\ParseException;
-use Nette\Neon\Neon;
+use Nette\Neon\Neon as NeonLib;
 
 class Neon implements FileParserInterface
 {
@@ -27,7 +27,7 @@ class Neon implements FileParserInterface
     {
         try {
             $content = @file_get_contents($path);
-            $data = Neon::decode($content);
+            $data = NeonLib::decode($content);
         } catch (Exception $ex) {
             throw new ParseException(
                 array(

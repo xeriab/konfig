@@ -28,7 +28,6 @@ class Yaml implements FileParserInterface
         {
             // Check for native YAML PHP extension
             $nYaml = extension_loaded('yaml');
-            $content = @file_get_contents($path);
             $data = null;
 
             if (!$nYaml) {

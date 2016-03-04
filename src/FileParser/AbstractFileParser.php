@@ -109,20 +109,20 @@ class AbstractFileParser implements FileParserInterface
      */
     protected function prepVars(&$array)
     {
-        static $replacements = false;
+        static $replace = false;
 
-        if ($replacements === false) {
+        if ($replace === false) {
             foreach ($this->vars as $x => $v) {
-                $replacements['#^('.preg_quote($v).'){1}(.*)?#'] = "%".$x."%$2";
+                $replace['#^('.preg_quote($v).'){1}(.*)?#'] = '%'. $x .'%$2';
             }
         }
 
         foreach ($array as $x => $value) {
             if (is_string($value)) {
                 $array[$x] = preg_replace(
-                    array_keys($replacements),
-                    array_values($replacements), $
-                    value
+                    array_keys($replace),
+                    array_values($replace),
+                    $value
                 );
             } elseif (is_array($value)) {
                 $this->prepVars($array[$x]);
