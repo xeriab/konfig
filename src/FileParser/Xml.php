@@ -1,4 +1,13 @@
 <?php
+/**
+ * Konfig
+ *
+ * Yet another simple configuration file loader library.
+ *
+ * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link    https://xeriab.github.io/projects/konfig
+ */
 
 namespace Exen\Konfig\FileParser;
 
@@ -14,25 +23,25 @@ class Xml implements FileParserInterface
      */
     public function parse($path)
     {
-        @libxml_use_internal_errors(true);
+        libxml_use_internal_errors(false);
 
-        $data = @simplexml_load_file($path, null, LIBXML_NOERROR);
+        $data = simplexml_load_file($path, null, LIBXML_NOERROR);
 
         if ($data === false) {
             $errors = libxml_get_errors();
             $latestError = array_pop($errors);
-            $error = array(
+            $error = [
                 'message' => $latestError->message,
                 'type' => $latestError->level,
                 'code' => $latestError->code,
                 'file' => $latestError->file,
                 'line' => $latestError->line,
-            );
+            ];
 
             throw new ParseException($error);
         }
 
-        $data = @json_decode(@json_encode($data), true);
+        $data = json_decode(@json_encode($data), true);
 
         return $data;
     }
@@ -46,4 +55,4 @@ class Xml implements FileParserInterface
     }
 }
 
-#: END OF ./FileParser/Xml.php FILE
+#: END OF ./src/FileParser/Xml.php FILE

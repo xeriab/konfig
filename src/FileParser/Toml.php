@@ -1,7 +1,17 @@
 <?php
+/**
+ * Konfig
+ *
+ * Yet another simple configuration file loader library.
+ *
+ * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link    https://xeriab.github.io/projects/konfig
+ */
 
 namespace Exen\Konfig\FileParser;
 
+use Exception;
 use Exen\Konfig\Exception\ParseException;
 use Yosymfony\Toml\Toml as TomlLib;
 
@@ -38,4 +48,4 @@ class Toml implements FileParserInterface
     }
 }
 
-#: END OF ./FileParser/Toml.php FILE
+#: END OF ./src/FileParser/Toml.php FILE

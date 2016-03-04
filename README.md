@@ -1,11 +1,11 @@
 # Konfig
 
-Konfig is a simple configuration file loader library that supports INI, JSON, PHP, TOML, XML
+Konfig is a simple configuration file loader library that supports INI, JSON, NEON, PHP, TOML, XML
 and YML files.
 
 ## Requirements
 
-Konfig requires PHP 5.4+, and suggests using [Yosymfony Toml Parser](https://github.com/yosymfony/Toml), [Piwik INI Parser](https://github.com/piwik/component-ini) and [Spyc YAML Library](https://github.com/mustangostang/spyc/).
+Konfig requires PHP 5.4+, and suggests using [Yosymfony Toml Parser](https://github.com/yosymfony/Toml), [Piwik INI Parser](https://github.com/piwik/component-ini), [Nette NEON](https://github.com/nette/neon) and [Spyc YAML Library](https://github.com/mustangostang/spyc/).
 
 ## Installation
 
@@ -131,7 +131,7 @@ class MyKonfig extends AbstractKonfig
             ),
             'application' => array(
                 'name'   => 'configuration',
-                'secret' => 's3cr3t'
+                'secret' => 'secretValue'
             )
         );
     }

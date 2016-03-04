@@ -1,21 +1,38 @@
 <?php
+/**
+ * Konfig
+ *
+ * Yet another simple configuration file loader library.
+ *
+ * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link    https://xeriab.github.io/projects/konfig
+ */
 
 namespace Exen\Konfig;
 
 use Exen\Konfig\Exception\EmptyDirectoryException;
 use Exen\Konfig\Exception\FileNotFoundException;
-use Exen\Konfig\Exception\UnsupportedFormatException;
+use Exen\Konfig\Exception\UnsupportedFileFormatException;
 
-class Konfig extends AbstractKonfig
+final class Konfig extends AbstractKonfig
 {
     /**
-     * All file formats supported by Konfig
+     * Stores loaded configuration files
+     *
+     * @var array $loadedFiles Array of loaded configuration files
+     */
+    static $loadedFiles = [];
+
+    /**
+     * All configuration file formats supported by Konfig
      *
      * @var array
      */
-    private $_supportedFileParsers = [
+    protected $configFileParsers = [
         'Exen\Konfig\FileParser\Ini',
         'Exen\Konfig\FileParser\Json',
+        'Exen\Konfig\FileParser\Neon',
         'Exen\Konfig\FileParser\Php',
         'Exen\Konfig\FileParser\Toml',
         'Exen\Konfig\FileParser\Xml',
@@ -25,14 +42,18 @@ class Konfig extends AbstractKonfig
     /**
      * Loads a supported configuration file format.
      *
-     * @param  string | array $path
+     * @param  string|array|mixed $path String file | configuration array | Konfig instance
      * @throws EmptyDirectoryException If `$path` is an empty directory
      */
     public function __construct($path = null)
     {
+        // if (!isset($path)) {
+        //     return;
+        // }
+
         $paths = $this->getValidPath($path);
 
-        $this->data = [];
+        $this->configData = [];
 
         foreach ($paths as $path) {
             // Get file information
@@ -40,16 +61,18 @@ class Konfig extends AbstractKonfig
             $parser = $this->getParser($ext);
 
             // Try and load file
-            $this->data = array_replace_recursive($this->data, $parser->parse($path));
+            $this->configData = array_replace_recursive($this->configData, $parser->parse($path));
+
+            self::$loadedFiles[$path] = true;
         } // END foreach
 
-        parent::__construct($this->data);
+        parent::__construct($this->configData);
     }
 
     /**
      * Static method for loading a Konfig instance.
      *
-     * @param  string | array $path
+     * @param  string|array|mixed $path string file | configuration array | Konfig instance
      * @return Konfig
      */
     public static function load($path = null)
@@ -58,19 +81,27 @@ class Konfig extends AbstractKonfig
     }
 
     /**
+     * Static method for getting loaded Konfig files.
+     *
+     * @return array
+     */
+    public static function loaded()
+    {
+        return self::$loadedFiles;
+    }
+
+    /**
      * Gets a parser for a given file extension
      *
      * @param  string $ext
      * @return Konfig\FileParser\FileParserInterface
-     * @throws UnsupportedFormatException If `$path` is an unsupported file format
+     * @throws UnsupportedFileFormatException If `$path` is an unsupported file format
      */
     private function getParser($ext = null)
     {
         $parser = null;
 
-        foreach ($this->_supportedFileParsers as $fileParser) {
-            // require_once 'FileParser/' . $fileParser . '.php';
-
+        foreach ($this->configFileParsers as $fileParser) {
             $tempParser = new $fileParser;
 
             if (in_array($ext, $tempParser->getSupportedFileExtensions($ext), true)) {
@@ -81,7 +112,7 @@ class Konfig extends AbstractKonfig
 
         // If none exist, then throw an exception
         if (is_null($parser)) {
-            throw new UnsupportedFormatException('Unsupported configuration format');
+            throw new UnsupportedFileFormatException('Unsupported configuration format');
         }
 
         return $parser;
@@ -97,7 +128,10 @@ class Konfig extends AbstractKonfig
      */
     private function getValidPath($path = null)
     {
+        #: Get path from Array
+
         // If `$path` is an array
+        // The below code is to get the path from a given $path array
         if (is_array($path)) {
             $paths = [];
 
@@ -130,8 +164,9 @@ class Konfig extends AbstractKonfig
 
         // If `$path` is a directory
         if (is_dir($path)) {
-            // $paths = @glob($path . '/*.*');
-            $paths = @glob($path . '/*.{yaml,json,ini,xml,toml,yml,php,inc,php5,conf,cfg}', GLOB_BRACE);
+            #: TODO: Hmmm, I need to end up with something more efficient
+            // $paths = @glob($path . '/*.{yaml,json,ini,xml,toml,yml,php,inc,php5,conf,cfg}', GLOB_BRACE);
+            $paths = @glob($path . '/*.*');
 
             if (empty($paths)) {
                 throw new EmptyDirectoryException("Configuration directory: [$path] is empty");
@@ -141,12 +176,22 @@ class Konfig extends AbstractKonfig
         }
 
         // If `$path` is not a file, throw an exception
-        if (!file_exists($path)) {
+        if (!file_exists($path) and isset($path)) {
             throw new FileNotFoundException("Configuration file: [$path] cannot be found");
+        }
+
+        // If `$path` is not set
+        if (!isset($path)) {
+            return;
         }
 
         return [$path];
     }
+
+    public function __toString()
+    {
+        return 'Konfig';
+    }
 }
 
-#: END OF ./Konfig.php FILE
+#: END OF ./src/Konfig.php FILE

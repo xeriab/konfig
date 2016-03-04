@@ -1,12 +1,19 @@
 <?php
+/**
+ * Konfig
+ *
+ * Yet another simple configuration file loader library.
+ *
+ * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link    https://xeriab.github.io/projects/konfig
+ */
 
 namespace Exen\Konfig\FileParser;
 
+use Exception;
 use Exen\Konfig\Exception\ParseException;
 use Exen\Konfig\Exception\UnsupportedFileFormatException;
-
-//
-define('_KONFIG_FILE_', true);
 
 class Php implements FileParserInterface
 {
@@ -21,7 +28,7 @@ class Php implements FileParserInterface
     {
         // Require the file, if it throws an exception, rethrow it
         try {
-            $temp = require_once $path;
+            $temp = require $path;
         } catch (Exception $ex) {
             throw new ParseException(
                 [
@@ -49,8 +56,8 @@ class Php implements FileParserInterface
      */
     public function getSupportedFileExtensions()
     {
-        return ['php', 'inc', 'php5'];
+        return ['php', 'inc'];
     }
 }
 
-#: END OF ./FileParser/Php.php FILE
+#: END OF ./src/FileParser/Php.php FILE

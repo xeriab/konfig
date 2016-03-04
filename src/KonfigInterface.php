@@ -1,8 +1,17 @@
 <?php
+/**
+ * Konfig
+ *
+ * Yet another simple configuration file loader library.
+ *
+ * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link    https://xeriab.github.io/projects/konfig
+ */
 
 namespace Exen\Konfig;
 
-interface IKonfig
+interface KonfigInterface
 {
     /**
      * Function for setting configuration values
@@ -30,6 +39,16 @@ interface IKonfig
      * @return array | object
      */
     public function getAll();
+
+    /**
+     * Checking if configuration values exist, using
+     * either simple or nested keys.
+     *
+     * @param string $key The key to check for
+     *
+     * @return array
+     */
+    public function has($key);
 }
 
-#: END OF ./IKonfig.php FILE
+#: END OF ./src/KonfigInterface.php FILE

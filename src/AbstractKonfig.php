@@ -1,31 +1,55 @@
 <?php
+/**
+ * Konfig
+ *
+ * Yet another simple configuration file loader library.
+ *
+ * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link    https://xeriab.github.io/projects/konfig
+ */
 
 namespace Exen\Konfig;
 
-abstract class AbstractKonfig implements \ArrayAccess, IKonfig
+use ArrayAccess;
+use Exen\Konfig\Utils;
+use Iterator;
+
+abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
 {
     /**
-     * Stores the configuration data
+     * Stores the configuration items
      *
      * @var array | null
      */
-    protected $data = null;
+    protected $configData = null;
 
     /**
-     * Caches the configuration data
+     * Caches the configuration configData
      *
      * @var array
      */
-    protected $cache = [];
+    protected $configCache = [];
+
+    /**
+     * @var array $itemCache the dot-notated item cache
+     */
+    static $itemCache = [];
+
+    /**
+     * @var string $defaultCheckValue Random value used as a not-found check in get()
+     */
+    static $defaultCheckValue;
 
     /**
      * Constructor method and sets default options, if any
      *
-     * @param array $data
+     * @param array $configData
      */
-    public function __construct($data)
+    public function __construct($configData)
     {
-        $this->data = array_merge($this->getDefaults(), $data);
+        // $this->configData = array_merge($this->getDefaults(), $configData);
+        $this->configData = Utils::arrMerge($this->getDefaults(), $configData);
     }
 
     /**
@@ -37,15 +61,43 @@ abstract class AbstractKonfig implements \ArrayAccess, IKonfig
      */
     protected function getDefaults()
     {
-        //return array();
         return [];
     }
 
-    #: IKonfig Methods
+    #: KonfigInterface Methods
 
     public function getAll()
     {
-        return $this->data;
+        return $this->configData;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function has($key)
+    {
+        // Check if already cached
+        if (isset($this->configCache[$key])) {
+            return true;
+        }
+
+        $chunks = explode('.', $key);
+        $root = $this->configData;
+
+        // nested case
+        foreach ($chunks as $chunk) {
+            if (array_key_exists($chunk, $root)) {
+                $root = $root[$chunk];
+                continue;
+            } else {
+                return false;
+            }
+        }
+
+        // Set cache for the given key
+        $this->configCache[$key] = $root;
+
+        return true;
     }
 
     /**
@@ -53,27 +105,11 @@ abstract class AbstractKonfig implements \ArrayAccess, IKonfig
      */
     public function get($key, $default = null)
     {
-        // Check if already cached
-        if (isset($this->cache[$key])) {
-            return $this->cache[$key];
+        if ($this->has($key)) {
+            return $this->configCache[$key];
         }
 
-        $segments = explode('.', $key);
-        $root = $this->data;
-
-        // nested case
-        foreach ($segments as $part) {
-            if (isset($root[$part])) {
-                $root = $root[$part];
-                continue;
-            } else {
-                $root = $default;
-                break;
-            }
-        }
-
-        // whatever we have is what we needed
-        return ($this->cache[$key] = $root);
+        return $default;
     }
 
     /**
@@ -81,20 +117,42 @@ abstract class AbstractKonfig implements \ArrayAccess, IKonfig
      */
     public function set($key, $value)
     {
-        $segments = explode('.', $key);
-        $root = &$this->data;
+        $chunks = explode('.', $key);
+        $root = &$this->configData;
+        $cacheKey = '';
 
         // Look for the key, creating nested keys if needed
-        while ($part = array_shift($segments)) {
-            if (!isset($root[$part]) && count($segments)) {
-                $root[$part] = array();
+        while ($part = array_shift($chunks)) {
+            if ($cacheKey != '') {
+                $cacheKey .= '.';
+            }
+
+            $cacheKey .= $part;
+
+            if (!isset($root[$part]) && count($chunks)) {
+                $root[$part] = [];
             }
 
             $root = &$root[$part];
+
+            // Unset all old nested cache
+
+            if (isset($this->configCache[$cacheKey])) {
+                unset($this->configCache[$cacheKey]);
+            }
+
+            // Unset all old nested cache in case of array
+            if (count($chunks) == 0) {
+                foreach ($this->configCache as $cacheLocalKey => $cacheValue) {
+                    if (substr($cacheLocalKey, 0, strlen($cacheKey)) === $cacheKey) {
+                        unset($this->configCache[$cacheLocalKey]);
+                    }
+                }
+            }
         }
 
         // Assign value at target node
-        $this->cache[$key] = $root = $value;
+        $this->configCache[$key] = $root = $value;
     }
 
     #: ArrayAccess Methods
@@ -118,7 +176,7 @@ abstract class AbstractKonfig implements \ArrayAccess, IKonfig
      */
     public function offsetExists($offset)
     {
-        return !is_null($this->get($offset));
+        return $this->has($offset);
     }
 
     /**
@@ -143,6 +201,68 @@ abstract class AbstractKonfig implements \ArrayAccess, IKonfig
     {
         $this->set($offset, null);
     }
+
+    #: Iterator Methods
+
+    /**
+     * Tests whether the iterator's current index is valid
+     *
+     * @return bool True if the current index is valid; false otherwise
+     */
+    public function valid()
+    {
+        return (is_array($this->configData) ? key($this->configData) !== null : false);
+    }
+
+    /**
+     * Returns the configData array index referenced by its internal cursor
+     *
+     * @return mixed The index referenced by the configData array's internal cursor.
+     * If the array is empty or undefined or there is no element at the cursor,
+     * the function returns null
+     */
+    public function key()
+    {
+        return (is_array($this->configData) ? key($this->configData) : null);
+    }
+
+    /**
+     * Returns the configData array element referenced by its internal cursor
+     *
+     * @return mixed The element referenced by the configData array's internal cursor.
+     * If the array is empty or there is no element at the cursor,
+     * the function returns false. If the array is undefined, the function
+     * returns null
+     */
+    public function current()
+    {
+        return (is_array($this->configData) ? current($this->configData) : null);
+    }
+
+    /**
+     * Moves the configData array's internal cursor forward one element
+     *
+     * @return mixed The element referenced by the configData array's internal cursor
+     * after the move is completed. If there are no more elements in the
+     * array after the move, the function returns false. If the configData array
+     * is undefined, the function returns null
+     */
+    public function next()
+    {
+        return (is_array($this->configData) ? next($this->configData) : null);
+    }
+
+    /**
+     * Moves the configData array's internal cursor to the first element
+     *
+     * @return mixed The element referenced by the configData array's internal cursor
+     * after the move is completed. If the configData array is empty, the function
+     * returns false. If the configData array is undefined, the function returns null
+     */
+    public function rewind()
+    {
+        return (is_array($this->configData) ? reset($this->configData) : null);
+    }
 }
 
-#: END OF ./AbstractKonfig.php FILE
+#: END OF ./src/AbstractKonfig.php FILE

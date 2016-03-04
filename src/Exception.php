@@ -9,13 +9,11 @@
  * @link    https://xeriab.github.io/projects/konfig
  */
 
-namespace Exen\Konfig\Exception;
+namespace Exen\Konfig;
 
-use Exen\Konfig\Exception;
-
-class EmptyDirectoryException extends Exception
+class Exception extends \Exception
 {
     // Nothing to put here!
 }
 
-#: END OF ./src/Exception/EmptyDirectoryException.php FILE
+#: END OF ./src/ErrorException.php FILE

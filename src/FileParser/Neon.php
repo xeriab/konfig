@@ -13,34 +13,27 @@ namespace Exen\Konfig\FileParser;
 
 use Exception;
 use Exen\Konfig\Exception\ParseException;
+use Nette\Neon\Neon as NeonLib;
 
-class Yaml implements FileParserInterface
+class Neon implements FileParserInterface
 {
     /**
      * {@inheritDoc}
-     * Loads a YAML/YML file as an array
+     * Loads a NEON file as an array
      *
-     * @throws ParseException If there is an error parsing YAML/YML file
+     * @throws ParseException If there is an error parsing NEON file
      */
     public function parse($path)
     {
-        try
-        {
-            // Check for native YAML PHP extension
-            $nYaml = extension_loaded('yaml');
-            $data = null;
-
-            if (!$nYaml) {
-                $data = spyc_load_file($path);
-            } else {
-                $data = yaml_parse_file($path);
-            }
+        try {
+            $content = @file_get_contents($path);
+            $data = NeonLib::decode($content);
         } catch (Exception $ex) {
             throw new ParseException(
-                [
-                    'message' => 'Error parsing YAML file',
+                array(
+                    'message' => 'Error parsing NEON file',
                     'exception' => $ex,
-                ]
+                )
             );
         }
 
@@ -52,8 +45,8 @@ class Yaml implements FileParserInterface
      */
     public function getSupportedFileExtensions()
     {
-        return ['yaml', 'yml'];
+        return ['neon'];
     }
 }
 
-#: END OF ./src/FileParser/Yaml.php FILE
+#: END OF ./src/FileParser/Neon.php FILE
