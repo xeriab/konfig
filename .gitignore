@@ -1,10 +1,11 @@
 #
 
 test.php
-DevFunctions.php
+tool.bat
 
 vendor
 composer.lock
+composer.bak.json
 build
 node_modules
 

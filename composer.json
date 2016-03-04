@@ -1,7 +1,7 @@
 {
     "name": "kodeburner/konfig",
     "description": "Yet another simple configuration file loader library.",
-    "version": "0.1.0-alpha-4",
+    "version": "0.1.0-dev",
     "license": "MIT",
     "type": "library",
     "keywords": [
@@ -39,10 +39,10 @@
         "mustangostang/spyc": "0.5.1",
         "nette/neon": "2.3.4",
         "piwik/ini": "1.0.6",
-        "scrutinizer/ocular": "~1.1",
-        "squizlabs/php_codesniffer": "~2.2",
         "phpunit/phpunit": "4.3.*@dev",
-        "phpdocumentor/phpdocumentor": "^2.8.5"
+        "phpdocumentor/phpdocumentor": "^2.8.5",
+        "scrutinizer/ocular": "~1.1",
+        "squizlabs/php_codesniffer": "~2.2"
     },
     "autoload": {
         "psr-4": {
@@ -53,5 +53,7 @@
         "psr-4": {
             "Exen\\Konfig\\Test\\": "tests/"
         }
-    }
+    },
+    "config": {},
+    "scripts": {}
 }
