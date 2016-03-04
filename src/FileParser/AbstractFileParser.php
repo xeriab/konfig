@@ -34,36 +34,16 @@ class AbstractFileParser implements FileParserInterface
      * @param array $vars Variables to parse in the file
      * @return void
      */
-    public function __construct($file = null, $vars = [])
+    /*public function __construct($file = null, $vars = [])
     {
-        $this->file = $file;
+    $this->file = $file;
 
-        $this->vars = [] + $vars;
-    }
-
-    public function load($overwrite = false, $cache = true)
-    {
-        // Nothing to put here!
-    }
+    $this->vars = [] + $vars;
+    }*/
 
     public function parse($file)
     {
         // Nothing to put here!
-    }
-
-    public function save($contents)
-    {
-        // Nothing to put here!
-    }
-
-    /**
-     * Gets the default group name.
-     *
-     * @return string
-     */
-    public function group()
-    {
-        return $this->file;
     }
 
     public function getSupportedFileExtensions()
@@ -80,10 +60,10 @@ class AbstractFileParser implements FileParserInterface
      * param bool $multiple Whether to load multiple files or not
      * @return array
      */
-    protected function findFile($cache = true)
+    /*protected function findFile($cache = true)
     {
-        // Nothing to put here!
-    }
+    // Nothing to put here!
+    }*/
 
     /**
      * Parses a string using all of the previously set variables.
@@ -113,7 +93,7 @@ class AbstractFileParser implements FileParserInterface
 
         if ($replace === false) {
             foreach ($this->vars as $x => $v) {
-                $replace['#^('.preg_quote($v).'){1}(.*)?#'] = '%'. $x .'%$2';
+                $replace['#^(' . preg_quote($v) . '){1}(.*)?#'] = '%' . $x . '%$2';
             }
         }
 
@@ -129,23 +109,6 @@ class AbstractFileParser implements FileParserInterface
             }
         }
     }
-
-    #: Abstract Methods
-
-    /**
-     * Must be implemented by child class.
-     * Gets called for each file to load.
-     */
-    abstract protected function loadFile($file);
-
-    /**
-     * Must be impletmented by child class.
-     * Gets called when saving a configuration file.
-     *
-     * @param array $contents  config array to save
-     * @return string formatted output
-     */
-    abstract protected function exportFormat($contents);
 }
 
 #: END OF ./src/FileParser/AbstractFileParser.php FILE

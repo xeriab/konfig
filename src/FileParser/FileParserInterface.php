@@ -23,15 +23,6 @@ interface FileParserInterface
     public function parse($path);
 
     /**
-     * Gets the default group name.
-     *
-     * @return string
-     */
-    // public function group();
-
-    // public function load($overwrite = false);
-
-    /**
      * Returns an array of allowed file extensions for this parser
      *
      * @return array
