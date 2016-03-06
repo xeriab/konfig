@@ -15,7 +15,7 @@ use Exception;
 use Exen\Konfig\Exception\ParseException;
 use Nette\Neon\Neon as NeonLib;
 
-class Neon implements FileParserInterface
+class Neon extends AbstractFileParser
 {
     /**
      * {@inheritDoc}

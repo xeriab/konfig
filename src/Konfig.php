@@ -11,12 +11,19 @@
 
 namespace Exen\Konfig;
 
+use SplStack;
 use Exen\Konfig\Exception\EmptyDirectoryException;
 use Exen\Konfig\Exception\FileNotFoundException;
 use Exen\Konfig\Exception\UnsupportedFileFormatException;
 
 final class Konfig extends AbstractKonfig
 {
+    /**
+     * @var SplStack
+     * @since 0.1
+     */
+    protected $fileParsers;
+
     /**
      * Stores loaded configuration files
      *
@@ -25,32 +32,17 @@ final class Konfig extends AbstractKonfig
     static $loadedFiles = [];
 
     /**
-     * All configuration file formats supported by Konfig
-     *
-     * @var array
-     */
-    protected $configFileParsers = [
-        'Exen\Konfig\FileParser\Ini',
-        'Exen\Konfig\FileParser\Json',
-        'Exen\Konfig\FileParser\Neon',
-        'Exen\Konfig\FileParser\Php',
-        'Exen\Konfig\FileParser\Toml',
-        'Exen\Konfig\FileParser\Xml',
-        'Exen\Konfig\FileParser\Yaml',
-    ];
-
-    /**
      * Loads a supported configuration file format.
      *
      * @param  string|array|mixed $path String file | configuration array | Konfig instance
      * @throws EmptyDirectoryException If `$path` is an empty directory
      */
-    public function __construct($path = null)
+    public function __construct($path, array $parsers = [])
     {
+        $this->setFileParsers($parsers);
         // if (!isset($path)) {
         //     return;
         // }
-
         $paths = $this->getValidPath($path);
 
         $this->configData = [];
@@ -91,21 +83,63 @@ final class Konfig extends AbstractKonfig
     }
 
     /**
+     * @return FileParser[]
+     * @since 0.1
+     */
+    public function getFileParsers()
+    {
+        return $this->fileParsers;
+    }
+
+    /**
+     * @return void
+     * @since 0.1
+     */
+    protected function addFileParser(FileParser $fileParser)
+    {
+        $this->fileParsers[] = $fileParser;
+    }
+
+    /**
+     * @return void
+     * @since 0.1
+     */
+    protected function setFileParsers(array $fileParsers = [])
+    {
+        if (empty($fileParsers)) {
+            $fileParsers = [
+                new FileParser\Json(),
+                new FileParser\Yaml(),
+            ];
+        }
+
+        $this->fileParsers = new SplStack();
+
+        foreach ($fileParsers as $fileParser) {
+            $this->addFileParser($fileParser);
+        }
+    }
+
+    /**
      * Gets a parser for a given file extension
      *
      * @param  string $ext
-     * @return Konfig\FileParser\FileParserInterface
+     * @return Konfig\FileParser
      * @throws UnsupportedFileFormatException If `$path` is an unsupported file format
      */
-    private function getParser($ext = null)
+    private function getParser($ext)
     {
         $parser = null;
 
-        foreach ($this->configFileParsers as $fileParser) {
-            $tempParser = new $fileParser;
+        if (empty($ext)) {
+            // @TODO: Throw an exception.
+        }
 
-            if (in_array($ext, $tempParser->getSupportedFileExtensions($ext), true)) {
-                $parser = $tempParser;
+        $fileParsers = $this->getFileParsers();
+
+        foreach ($fileParsers as $fileParser) {
+            if (in_array($ext, $fileParser->getSupportedFileExtensions(), true)) {
+                $parser = $fileParser;
                 break;
             }
         }
@@ -116,7 +150,7 @@ final class Konfig extends AbstractKonfig
         }
 
         return $parser;
-    } // END OF getParser METHOD
+    }
 
     /**
      * Checks `$path` to see if it is either an array, a directory, or a file

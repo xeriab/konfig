@@ -15,7 +15,7 @@ use Exception;
 use Exen\Konfig\Exception\ParseException;
 use Yosymfony\Toml\Toml as TomlLib;
 
-class Toml implements FileParserInterface
+class Toml extends AbstractFileParser
 {
     /**
      * {@inheritDoc}
