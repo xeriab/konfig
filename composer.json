@@ -31,7 +31,7 @@
         "nette/neon": "Required to use and support the NEON notation"
     },
     "require": {
-        "php": ">5.4",
+        "php": ">=5.4.0",
         "yosymfony/toml": "0.3.3",
         "mustangostang/spyc": "0.5.1",
         "nette/neon": "2.3.4"
@@ -40,7 +40,7 @@
         "yosymfony/toml": "0.3.3",
         "mustangostang/spyc": "0.5.1",
         "nette/neon": "2.3.4",
-        "phpunit/phpunit": "4.3.*@dev",
+        "phpunit/phpunit": "~4.0",
         "phpdocumentor/phpdocumentor": "^2.8.5",
         "scrutinizer/ocular": "~1.1",
         "squizlabs/php_codesniffer": "~2.2"
