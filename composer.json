@@ -32,7 +32,11 @@
         "piwik/ini": "Required to use and support INI"
     },
     "require": {
-        "php": ">5.4"
+        "php": ">5.4",
+        "yosymfony/toml": "0.3.3",
+        "mustangostang/spyc": "0.5.1",
+        "piwik/ini": "1.0.6",
+        "nette/neon": "2.3.4"
     },
     "require-dev": {
         "yosymfony/toml": "0.3.3",
