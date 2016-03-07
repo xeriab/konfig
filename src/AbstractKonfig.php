@@ -10,33 +10,27 @@
  */
 namespace Exen\Konfig;
 
-use Iterator;
 use ArrayAccess;
 use Exen\Konfig\Utils;
+use Iterator;
 
 abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
 {
     /**
      * Stores the configuration items
      *
-     * @var array | null
+     * @var array|null
      * @since 0.1
      */
-    protected $configData = null;
+    protected $data = null;
 
     /**
-     * Caches the configuration configData
+     * Caches the configuration data
      *
      * @var array
      * @since 0.1
      */
-    protected $configCache = [];
-
-    /**
-     * @var array $itemCache the dot-notated item cache
-     * @since 0.1
-     */
-    static $itemCache = [];
+    protected $cache = [];
 
     /**
      * @var string $defaultCheckValue Random value used as a not-found check in get()
@@ -47,13 +41,13 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     /**
      * Constructor method and sets default options, if any
      *
-     * @param array $configData
+     * @param array $input
      * @since 0.1
      */
-    public function __construct($configData)
+    public function __construct($input)
     {
-        // $this->configData = array_merge($this->getDefaults(), $configData);
-        $this->configData = Utils::arrMerge($this->getDefaults(), $configData);
+        // $this->data = array_merge($this->getDefaults(), $input);
+        $this->data = Utils::arrayMerge($this->getDefaults(), $input);
     }
 
     /**
@@ -71,9 +65,9 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
 
     #: KonfigInterface Methods
 
-    public function getAll()
+    public function all()
     {
-        return $this->configData;
+        return $this->data;
     }
 
     /**
@@ -82,14 +76,14 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     public function has($key)
     {
         // Check if already cached
-        if (isset($this->configCache[$key])) {
+        if (isset($this->cache[$key])) {
             return true;
         }
 
         $chunks = explode('.', $key);
-        $root = $this->configData;
+        $root   = $this->data;
 
-        // nested case
+        // Nested case
         foreach ($chunks as $chunk) {
             if (array_key_exists($chunk, $root)) {
                 $root = $root[$chunk];
@@ -100,7 +94,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
         }
 
         // Set cache for the given key
-        $this->configCache[$key] = $root;
+        $this->cache[$key] = $root;
 
         return true;
     }
@@ -111,7 +105,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     public function get($key, $default = null)
     {
         if ($this->has($key)) {
-            return $this->configCache[$key];
+            return $this->cache[$key];
         }
 
         return $default;
@@ -122,8 +116,8 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      */
     public function set($key, $value)
     {
-        $chunks = explode('.', $key);
-        $root = &$this->configData;
+        $chunks   = explode('.', $key);
+        $root     = &$this->data;
         $cacheKey = '';
 
         // Look for the key, creating nested keys if needed
@@ -141,23 +135,34 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
             $root = &$root[$part];
 
             // Unset all old nested cache
-
-            if (isset($this->configCache[$cacheKey])) {
-                unset($this->configCache[$cacheKey]);
+            if (isset($this->cache[$cacheKey])) {
+                unset($this->cache[$cacheKey]);
             }
 
             // Unset all old nested cache in case of array
             if (count($chunks) == 0) {
-                foreach ($this->configCache as $cacheLocalKey => $cacheValue) {
+                foreach ($this->cache as $cacheLocalKey => $cacheValue) {
                     if (substr($cacheLocalKey, 0, strlen($cacheKey)) === $cacheKey) {
-                        unset($this->configCache[$cacheLocalKey]);
+                        unset($this->cache[$cacheLocalKey]);
                     }
                 }
             }
         }
 
         // Assign value at target node
-        $this->configCache[$key] = $root = $value;
+        $this->cache[$key] = $root = $value;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function delete($key)
+    {
+        if (isset($this->cache[$key])) {
+            unset($this->cache[$key]);
+        }
+
+        return Utils::arrDelete($this->data, $key);
     }
 
     #: ArrayAccess Methods
@@ -221,26 +226,26 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      */
     public function valid()
     {
-        return (is_array($this->configData) ? key($this->configData) !== null : false);
+        return (is_array($this->data) ? key($this->data) !== null : false);
     }
 
     /**
-     * Returns the configData array index referenced by its internal cursor
+     * Returns the data array index referenced by its internal cursor
      *
-     * @return mixed The index referenced by the configData array's internal cursor.
+     * @return mixed The index referenced by the data array's internal cursor.
      * If the array is empty or undefined or there is no element at the cursor,
      * the function returns null
      * @since 0.1
      */
     public function key()
     {
-        return (is_array($this->configData) ? key($this->configData) : null);
+        return (is_array($this->data) ? key($this->data) : null);
     }
 
     /**
-     * Returns the configData array element referenced by its internal cursor
+     * Returns the data array element referenced by its internal cursor
      *
-     * @return mixed The element referenced by the configData array's internal cursor.
+     * @return mixed The element referenced by the data array's internal cursor.
      * If the array is empty or there is no element at the cursor,
      * the function returns false. If the array is undefined, the function
      * returns null
@@ -248,34 +253,34 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      */
     public function current()
     {
-        return (is_array($this->configData) ? current($this->configData) : null);
+        return (is_array($this->data) ? current($this->data) : null);
     }
 
     /**
-     * Moves the configData array's internal cursor forward one element
+     * Moves the data array's internal cursor forward one element
      *
-     * @return mixed The element referenced by the configData array's internal cursor
+     * @return mixed The element referenced by the data array's internal cursor
      * after the move is completed. If there are no more elements in the
-     * array after the move, the function returns false. If the configData array
+     * array after the move, the function returns false. If the data array
      * is undefined, the function returns null
      * @since 0.1
      */
     public function next()
     {
-        return (is_array($this->configData) ? next($this->configData) : null);
+        return (is_array($this->data) ? next($this->data) : null);
     }
 
     /**
-     * Moves the configData array's internal cursor to the first element
+     * Moves the data array's internal cursor to the first element
      *
-     * @return mixed The element referenced by the configData array's internal cursor
-     * after the move is completed. If the configData array is empty, the function
-     * returns false. If the configData array is undefined, the function returns null
+     * @return mixed The element referenced by the data array's internal cursor
+     * after the move is completed. If the data array is empty, the function
+     * returns false. If the data array is undefined, the function returns null
      * @since 0.1
      */
     public function rewind()
     {
-        return (is_array($this->configData) ? reset($this->configData) : null);
+        return (is_array($this->data) ? reset($this->data) : null);
     }
 }
 

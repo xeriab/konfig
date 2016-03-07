@@ -36,10 +36,10 @@ interface KonfigInterface
     /**
      * Getting all configuration values.
      *
-     * @return array | object
+     * @return array|object
      * @since 0.1
      */
-    public function getAll();
+    public function all();
 
     /**
      * Checking if configuration values exist, using
@@ -50,6 +50,15 @@ interface KonfigInterface
      * @since 0.1
      */
     public function has($key);
+
+    /**
+     * Deletes configuration item (key & value)
+     *
+     * @param string $key The key to delete
+     * @return array
+     * @since 0.2
+     */
+    public function delete($key);
 }
 
 #: END OF ./src/KonfigInterface.php FILE

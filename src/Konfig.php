@@ -10,6 +10,7 @@
  */
 namespace Exen\Konfig;
 
+use Exception;
 use Exen\Konfig\Exception\EmptyDirectoryException;
 use Exen\Konfig\Exception\FileNotFoundException;
 use Exen\Konfig\Exception\UnsupportedFileFormatException;
@@ -39,25 +40,23 @@ final class Konfig extends AbstractKonfig
     public function __construct($path, array $parsers = [])
     {
         $this->setFileParsers($parsers);
-        // if (!isset($path)) {
-        //     return;
-        // }
+
         $paths = $this->getValidPath($path);
 
-        $this->configData = [];
+        $this->data = [];
 
         foreach ($paths as $path) {
             // Get file information
-            $ext = pathinfo($path, PATHINFO_EXTENSION);
+            $ext    = pathinfo($path, PATHINFO_EXTENSION);
             $parser = $this->getParser($ext);
 
             // Try and load file
-            $this->configData = array_replace_recursive($this->configData, $parser->parse($path));
+            $this->data = array_replace_recursive($this->data, $parser->parse($path));
 
             self::$loadedFiles[$path] = true;
         }
 
-        parent::__construct($this->configData);
+        parent::__construct($this->data);
     }
 
     /**
@@ -79,6 +78,16 @@ final class Konfig extends AbstractKonfig
     public static function loaded()
     {
         return self::$loadedFiles;
+    }
+
+    /**
+     * Static method for getting all Konfig keys.
+     *
+     * @return array
+     */
+    public static function keys()
+    {
+        // @TODO: Fix this soon
     }
 
     /**
@@ -157,54 +166,61 @@ final class Konfig extends AbstractKonfig
     }
 
     /**
+     * Gets an array of paths
+     *
+     * @param array $path
+     * @return array
+     * @throws FileNotFoundException If a file is not found in `$path`
+     */
+    private function pathFromArray($path)
+    {
+        $paths = [];
+
+        foreach ($path as $unverifiedPath) {
+            try {
+                // Check if `$unverifiedPath` is optional
+                // If it exists, then it's added to the list
+                // If it doesn't, it throws an exception which we catch
+                if ($unverifiedPath[0] !== '?') {
+                    $paths = array_merge($paths, $this->getValidPath($unverifiedPath));
+                    continue;
+                }
+
+                $optionalPath = ltrim($unverifiedPath, '?');
+
+                $paths = array_merge($paths, $this->getValidPath($optionalPath));
+            } catch (FileNotFoundException $e) {
+                // If `$unverifiedPath` is optional, then skip it
+                if ($unverifiedPath[0] === '?') {
+                    continue;
+                }
+
+                // Otherwise rethrow the exception
+                throw $e;
+            }
+        }
+
+        return $paths;
+    }
+
+    /**
      * Checks `$path` to see if it is either an array, a directory, or a file
      *
-     * @param  string | array $path
+     * @param  string|array $path
      * @return array
      * @throws EmptyDirectoryException If `$path` is an empty directory
      * @throws FileNotFoundException If a file is not found at `$path`
      */
     private function getValidPath($path = null)
     {
-        #: Get path from Array
-
-        // If `$path` is an array
-        // The below code is to get the path from a given $path array
+        // If `$path` is array
         if (is_array($path)) {
-            $paths = [];
-
-            foreach ($path as $unverifiedPath) {
-                try {
-                    // Check if `$unverifiedPath` is optional
-                    // If it exists, then it's added to the list
-                    // If it doesn't, it throws an exception which we catch
-                    if ($unverifiedPath[0] !== '?') {
-                        $paths = array_merge($paths, $this->getValidPath($unverifiedPath));
-                        continue;
-                    }
-
-                    $optionalPath = ltrim($unverifiedPath, '?');
-
-                    $paths = array_merge($paths, $this->getValidPath($optionalPath));
-                } catch (FileNotFoundException $e) {
-                    // If `$unverifiedPath` is optional, then skip it
-                    if ($unverifiedPath[0] === '?') {
-                        continue;
-                    }
-
-                    // Otherwise rethrow the exception
-                    throw $e;
-                }
-            }
-
-            return $paths;
+            return $this->pathFromArray($path);
         }
 
         // If `$path` is a directory
         if (is_dir($path)) {
-            #: TODO: Hmmm, I need to end up with something more efficient
-            // $paths = @glob($path . '/*.{yaml,json,ini,xml,toml,yml,php,inc,php5,conf,cfg}', GLOB_BRACE);
-            $paths = @glob($path . '/*.*');
+            $paths = glob($path . '/*.*');
 
             if (empty($paths)) {
                 throw new EmptyDirectoryException("Configuration directory: [$path] is empty");
@@ -214,13 +230,8 @@ final class Konfig extends AbstractKonfig
         }
 
         // If `$path` is not a file, throw an exception
-        if (!file_exists($path) and isset($path)) {
+        if (!file_exists($path)) {
             throw new FileNotFoundException("Configuration file: [$path] cannot be found");
-        }
-
-        // If `$path` is not set
-        if (!isset($path)) {
-            return;
         }
 
         return [$path];

@@ -28,15 +28,15 @@ class Utils
     }
 
     /**
-     * Takes a value and checks if it is a Closure or not, if it is it
+     * Takes a value and checks if it's a Closure or not, if it's a Closure it
      * will return the result of the closure, if not, it will simply return the
      * value.
      *
-     * @param mixed $var The value to arrGet
+     * @param mixed $var The value to get
      * @return mixed
      * @since 0.1
      */
-    public static function value($var = null)
+    public static function checkValue($var = null)
     {
         return ($var instanceof \Closure) ? $var() : $var;
     }
@@ -51,7 +51,7 @@ class Utils
      * @return mixed
      * @since 0.1
      */
-    public static function arrGet($array, $key, $default = null)
+    public static function arrayGet($array, $key, $default = null)
     {
         if (!is_array($array) and !$array instanceof ArrayAccess) {
             throw new InvalidArgumentException('First parameter must be an array or ArrayAccess object.');
@@ -65,7 +65,7 @@ class Utils
             $return = [];
 
             foreach ($key as $k) {
-                $return[$k] = static::arrGet($array, $k, $default);
+                $return[$k] = static::arrayGet($array, $k, $default);
             }
 
             return $return;
@@ -74,7 +74,7 @@ class Utils
         foreach (explode('.', $key) as $key_part) {
             if (($array instanceof ArrayAccess and isset($array[$key_part])) === false) {
                 if (!is_array($array) or !array_key_exists($key_part, $array)) {
-                    return static::value($default);
+                    return static::checkValue($default);
                 }
             }
 
@@ -93,7 +93,7 @@ class Utils
      * @return void
      * @since 0.1
      */
-    public static function arrSet(&$array, $key, $value = null)
+    public static function arraySet(&$array, $key, $value = null)
     {
         if (is_null($key)) {
             $array = $value;
@@ -102,7 +102,7 @@ class Utils
 
         if (is_array($key)) {
             foreach ($key as $k => $v) {
-                static::arrSet($array, $k, $v);
+                static::arraySet($array, $k, $v);
             }
         } else {
             $keys = explode('.', $key);
@@ -133,18 +133,18 @@ class Utils
      * @return array
      * @since 0.1
      */
-    public static function arrMerge()
+    public static function arrayMerge()
     {
-        $array = func_get_arg(0);
+        $array  = func_get_arg(0);
         $arrays = array_slice(func_get_args(), 1);
 
         if (!is_array($array)) {
-            throw new InvalidArgumentException('Exen\Konfig\Utils::arrMerge() - all arguments must be arrays.');
+            throw new InvalidArgumentException('Exen\Konfig\Utils::arrayMerge() - all arguments must be arrays.');
         }
 
         foreach ($arrays as $arr) {
             if (!is_array($arr)) {
-                throw new InvalidArgumentException('Exen\Konfig\Utils::arrMerge() - all arguments must be arrays.');
+                throw new InvalidArgumentException('Exen\Konfig\Utils::arrayMerge() - all arguments must be arrays.');
             }
 
             foreach ($arr as $k => $v) {
@@ -152,7 +152,7 @@ class Utils
                 if (is_int($k)) {
                     array_key_exists($k, $array) ? array_push($array, $v) : $array[$k] = $v;
                 } elseif (is_array($v) and array_key_exists($k, $array) and is_array($array[$k])) {
-                    $array[$k] = static::arrMerge($array[$k], $v);
+                    $array[$k] = static::arrayMerge($array[$k], $v);
                 } else {
                     $array[$k] = $v;
                 }
@@ -170,7 +170,7 @@ class Utils
      * @return mixed
      * @since 0.1
      */
-    public static function arrDelete(&$array, $key)
+    public static function arrayDelete(&$array, $key)
     {
         if (is_null($key)) {
             return false;
@@ -180,7 +180,7 @@ class Utils
             $return = [];
 
             foreach ($key as $k) {
-                $return[$k] = static::arrDelete($array, $k);
+                $return[$k] = static::arrayDelete($array, $k);
             }
 
             return $return;
@@ -196,12 +196,38 @@ class Utils
 
         if (!empty($key_parts)) {
             $key = implode('.', $key_parts);
-            return static::arrDelete($array[$this_key], $key);
+            return static::arrayDelete($array[$this_key], $key);
         } else {
             unset($array[$this_key]);
         }
 
         return true;
+    }
+
+    /**
+     * Get array keys recursively
+     *
+     * @param array $array The search array
+     * @param int $maxDepth The search maximum depth
+     * @param int $depth The search depth
+     * @param array $arrayKeys The array keys
+     * @return array
+     * @since 0.1
+     */
+    public static function arrayKeys($array, $maxDepth = INF, $depth = 0, $arrayKeys = [])
+    {
+        if ($depth < $maxDepth) {
+            $depth++;
+            $keys = array_keys($array);
+
+            foreach ($keys as $key) {
+                if (is_array($array[$key])) {
+                    $arrayKeys[$key] = arrayKeys($array[$key], $maxDepth, $depth);
+                }
+            }
+        }
+
+        return $array;
     }
 }
 
