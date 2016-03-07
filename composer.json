@@ -1,6 +1,6 @@
 {
     "name": "kodeburner/konfig",
-    "description": "Yet another simple configuration file loader library.",
+    "description": "Yet another simple configuration loader library.",
     "version": "0.1.0-dev",
     "license": "MIT",
     "type": "library",

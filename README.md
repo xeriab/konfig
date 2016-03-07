@@ -1,6 +1,13 @@
 # Konfig
 
-Konfig is a simple configuration file loader library that supports INI, JSON, NEON, PHP, TOML, XML
+[![Latest version][ico-version]][link-packagist]
+[![Software License][ico-license]][link-license]
+[![Build Status][ico-travis]][link-travis]
+[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
+[![Quality Score][ico-code-quality]][link-code-quality]
+[![Total Downloads][ico-downloads]][link-downloads]
+
+Konfig is a simple configuration loader library that supports INI, JSON, NEON, PHP, TOML, XML
 and YML files.
 
 ## Requirements
@@ -165,6 +172,25 @@ If you discover any security related issues, please email [kodeburner@gmail.com]
 - [Xeriab Nabil](https://github.com/xeriab)
 
 
+## Contributors
+
+- [Nashwan Doaqan](https://github.com/nash-ye)
+
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+[ico-version]: https://img.shields.io/packagist/v/kodeburner/konfig.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/xeriab/konfig/master.svg?style=flat-square
+[ico-scrutinizer]: https://scrutinizer-ci.com/g/xeriab/konfig/badges/coverage.png?b=master
+[ico-code-quality]: https://scrutinizer-ci.com/g/xeriab/konfig/badges/quality-score.png?b=master
+[ico-downloads]: https://img.shields.io/packagist/dt/kodeburner/konfig.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/kodeburner/konfig
+[link-license]: http://xeriab.mit-license.org
+[link-travis]: https://travis-ci.org/xeriab/konfig
+[link-scrutinizer]: https://scrutinizer-ci.com/g/xeriab/konfig/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/xeriab/konfig
+[link-downloads]: https://packagist.org/packages/kodeburner/konfig
