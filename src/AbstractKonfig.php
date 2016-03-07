@@ -8,12 +8,11 @@
  * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
  * @link    https://xeriab.github.io/projects/konfig
  */
-
 namespace Exen\Konfig;
 
+use Iterator;
 use ArrayAccess;
 use Exen\Konfig\Utils;
-use Iterator;
 
 abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
 {
@@ -21,6 +20,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      * Stores the configuration items
      *
      * @var array | null
+     * @since 0.1
      */
     protected $configData = null;
 
@@ -28,16 +28,19 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      * Caches the configuration configData
      *
      * @var array
+     * @since 0.1
      */
     protected $configCache = [];
 
     /**
      * @var array $itemCache the dot-notated item cache
+     * @since 0.1
      */
     static $itemCache = [];
 
     /**
      * @var string $defaultCheckValue Random value used as a not-found check in get()
+     * @since 0.1
      */
     static $defaultCheckValue;
 
@@ -45,6 +48,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      * Constructor method and sets default options, if any
      *
      * @param array $configData
+     * @since 0.1
      */
     public function __construct($configData)
     {
@@ -56,8 +60,9 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      * Override this method in your own subclass to provide an array of default
      * options and values
      *
-     * @return array
      * @codeCoverageIgnore
+     * @return array
+     * @since 0.1
      */
     protected function getDefaults()
     {
@@ -162,6 +167,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      *
      * @param  string $offset
      * @return mixed
+     * @since 0.1
      */
     public function offsetGet($offset)
     {
@@ -173,6 +179,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      *
      * @param  string $offset
      * @return bool
+     * @since 0.1
      */
     public function offsetExists($offset)
     {
@@ -185,6 +192,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      * @param string $offset
      * @param mixed $value
      * @return void
+     * @since 0.1
      */
     public function offsetSet($offset, $value)
     {
@@ -196,6 +204,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      *
      * @param  string $offset
      * @return void
+     * @since 0.1
      */
     public function offsetUnset($offset)
     {
@@ -208,6 +217,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      * Tests whether the iterator's current index is valid
      *
      * @return bool True if the current index is valid; false otherwise
+     * @since 0.1
      */
     public function valid()
     {
@@ -220,6 +230,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      * @return mixed The index referenced by the configData array's internal cursor.
      * If the array is empty or undefined or there is no element at the cursor,
      * the function returns null
+     * @since 0.1
      */
     public function key()
     {
@@ -233,6 +244,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      * If the array is empty or there is no element at the cursor,
      * the function returns false. If the array is undefined, the function
      * returns null
+     * @since 0.1
      */
     public function current()
     {
@@ -246,6 +258,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      * after the move is completed. If there are no more elements in the
      * array after the move, the function returns false. If the configData array
      * is undefined, the function returns null
+     * @since 0.1
      */
     public function next()
     {
@@ -258,6 +271,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      * @return mixed The element referenced by the configData array's internal cursor
      * after the move is completed. If the configData array is empty, the function
      * returns false. If the configData array is undefined, the function returns null
+     * @since 0.1
      */
     public function rewind()
     {

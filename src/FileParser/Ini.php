@@ -20,6 +20,7 @@ class Ini extends AbstractFileParser
      * Parses an INI file as an array
      *
      * @throws ParseException If there is an error parsing INI file
+     * @since 0.1
      */
     public function parse($path)
     {
@@ -37,6 +38,7 @@ class Ini extends AbstractFileParser
 
     /**
      * {@inheritDoc}
+     * @since 0.1
      */
     public function getSupportedFileExtensions()
     {

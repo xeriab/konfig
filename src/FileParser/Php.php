@@ -23,6 +23,7 @@ class Php extends AbstractFileParser
      *
      * @throws ParseException If the PHP file throws an exception
      * @throws UnsupportedFormatException If the PHP file does not return an array
+     * @since 0.1
      */
     public function parse($path)
     {
@@ -53,6 +54,7 @@ class Php extends AbstractFileParser
 
     /**
      * {@inheritDoc}
+     * @since 0.1
      */
     public function getSupportedFileExtensions()
     {

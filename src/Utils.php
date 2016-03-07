@@ -8,7 +8,6 @@
  * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
  * @link    https://xeriab.github.io/projects/konfig
  */
-
 namespace Exen\Konfig;
 
 use ArrayAccess;
@@ -21,6 +20,7 @@ class Utils
      *
      * @param string The path to the file
      * @return mixed The results of the include
+     * @since 0.1
      */
     public static function load($file = null)
     {
@@ -34,6 +34,7 @@ class Utils
      *
      * @param mixed $var The value to arrGet
      * @return mixed
+     * @since 0.1
      */
     public static function value($var = null)
     {
@@ -48,6 +49,7 @@ class Utils
      * @param mixed $key The dot-notated key or array of keys
      * @param string $default The default value
      * @return mixed
+     * @since 0.1
      */
     public static function arrGet($array, $key, $default = null)
     {
@@ -89,6 +91,7 @@ class Utils
      * @param mixed $key The dot-notated key to set or array of keys
      * @param mixed $value The value
      * @return void
+     * @since 0.1
      */
     public static function arrSet(&$array, $key, $value = null)
     {
@@ -126,8 +129,9 @@ class Utils
      *   value added using array_push()
      *
      * @param array multiple variables all of which must be arrays
-     * @return array
      * @throws InvalidArgumentException
+     * @return array
+     * @since 0.1
      */
     public static function arrMerge()
     {
@@ -164,6 +168,7 @@ class Utils
      * @param array $array The search array
      * @param mixed $key The dot-notated key or array of keys
      * @return mixed
+     * @since 0.1
      */
     public static function arrDelete(&$array, $key)
     {

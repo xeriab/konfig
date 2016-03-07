@@ -8,7 +8,6 @@
  * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
  * @link    https://xeriab.github.io/projects/konfig
  */
-
 namespace Exen\Konfig;
 
 class ErrorException extends \ErrorException

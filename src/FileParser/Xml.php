@@ -20,6 +20,7 @@ class Xml extends AbstractFileParser
      * Loads a XML file as an array
      *
      * @throws ParseException If there is an error parsing XML file
+     * @since 0.1
      */
     public function parse($path)
     {

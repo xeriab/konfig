@@ -8,7 +8,6 @@
  * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
  * @link    https://xeriab.github.io/projects/konfig
  */
-
 namespace Exen\Konfig;
 
 interface KonfigInterface
@@ -30,6 +29,7 @@ interface KonfigInterface
      * @param string $key
      * @param mixed $default
      * @return mixed
+     * @since 0.1
      */
     public function get($key, $default = null);
 
@@ -37,6 +37,7 @@ interface KonfigInterface
      * Getting all configuration values.
      *
      * @return array | object
+     * @since 0.1
      */
     public function getAll();
 
@@ -45,8 +46,8 @@ interface KonfigInterface
      * either simple or nested keys.
      *
      * @param string $key The key to check for
-     *
      * @return array
+     * @since 0.1
      */
     public function has($key);
 }

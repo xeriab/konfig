@@ -20,6 +20,7 @@ class Json extends AbstractFileParser
      * Loads a JSON file as an array
      *
      * @throws ParseException If there is an error parsing JSON file
+     * @since 0.1
      */
     public function parse($path)
     {

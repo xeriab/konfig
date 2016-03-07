@@ -8,10 +8,8 @@
  * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
  * @link    https://xeriab.github.io/projects/konfig
  */
-
 namespace Exen\Konfig;
 
-use SplStack;
 use Exen\Konfig\Exception\EmptyDirectoryException;
 use Exen\Konfig\Exception\FileNotFoundException;
 use Exen\Konfig\Exception\UnsupportedFileFormatException;
@@ -19,7 +17,7 @@ use Exen\Konfig\Exception\UnsupportedFileFormatException;
 final class Konfig extends AbstractKonfig
 {
     /**
-     * @var SplStack
+     * @var FileParser[] $fileParsers Array of file parsers objects
      * @since 0.1
      */
     protected $fileParsers;
@@ -28,8 +26,9 @@ final class Konfig extends AbstractKonfig
      * Stores loaded configuration files
      *
      * @var array $loadedFiles Array of loaded configuration files
+     * @since 0.1
      */
-    static $loadedFiles = [];
+    protected static $loadedFiles = [];
 
     /**
      * Loads a supported configuration file format.
@@ -56,7 +55,7 @@ final class Konfig extends AbstractKonfig
             $this->configData = array_replace_recursive($this->configData, $parser->parse($path));
 
             self::$loadedFiles[$path] = true;
-        } // END foreach
+        }
 
         parent::__construct($this->configData);
     }
@@ -108,12 +107,17 @@ final class Konfig extends AbstractKonfig
     {
         if (empty($fileParsers)) {
             $fileParsers = [
+                new FileParser\Xml(),
+                new FileParser\Ini(),
                 new FileParser\Json(),
                 new FileParser\Yaml(),
+                new FileParser\Neon(),
+                new FileParser\Toml(),
+                new FileParser\Php(),
             ];
         }
 
-        $this->fileParsers = new SplStack();
+        $this->fileParsers = [];
 
         foreach ($fileParsers as $fileParser) {
             $this->addFileParser($fileParser);
@@ -222,6 +226,10 @@ final class Konfig extends AbstractKonfig
         return [$path];
     }
 
+    /**
+     * @return string
+     * @since 0.1
+     */
     public function __toString()
     {
         return 'Konfig';

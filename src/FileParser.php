@@ -8,7 +8,6 @@
  * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
  * @link    https://xeriab.github.io/projects/konfig
  */
-
 namespace Exen\Konfig;
 
 interface FileParser
@@ -19,6 +18,7 @@ interface FileParser
      * @param string $path Path to parse
      *
      * @return array
+     * @since 0.1
      */
     public function parse($path);
 
@@ -26,6 +26,7 @@ interface FileParser
      * Returns an array of allowed file extensions for this parser
      *
      * @return array
+     * @since 0.1
      */
     public function getSupportedFileExtensions();
 }

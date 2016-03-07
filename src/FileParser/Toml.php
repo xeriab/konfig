@@ -8,7 +8,6 @@
  * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
  * @link    https://xeriab.github.io/projects/konfig
  */
-
 namespace Exen\Konfig\FileParser;
 
 use Exception;
@@ -22,6 +21,7 @@ class Toml extends AbstractFileParser
      * Loads a TOML file as an array
      *
      * @throws ParseException If there is an error parsing TOML file
+     * @since 0.1
      */
     public function parse($path)
     {

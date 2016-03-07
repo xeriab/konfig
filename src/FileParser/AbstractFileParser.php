@@ -18,6 +18,7 @@ abstract class AbstractFileParser implements FileParser
      * Configuration file
      *
      * @var string
+     * @since 0.1
      */
     protected $file;
 
@@ -25,6 +26,7 @@ abstract class AbstractFileParser implements FileParser
      * The configuration variables
      *
      * @var array
+     * @since 0.1
      */
     protected $vars = [];
 
@@ -48,6 +50,7 @@ abstract class AbstractFileParser implements FileParser
      *
      * @param string $string String to parse
      * @return string
+     * @since 0.1
      */
     protected function parseVars($string)
     {
@@ -63,6 +66,7 @@ abstract class AbstractFileParser implements FileParser
      *
      * @param array $array Array to be prepped
      * @return array Prepped array
+     * @since 0.1
      */
     protected function prepVars(&$array)
     {
