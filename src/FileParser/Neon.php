@@ -8,12 +8,11 @@
  * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
  * @link    https://xeriab.github.io/projects/konfig
  */
-
 namespace Exen\Konfig\FileParser;
 
 use Exception;
-use Exen\Konfig\Exception\ParseException;
 use Nette\Neon\Neon as NeonLib;
+use Exen\Konfig\Exception\ParseException;
 
 class Neon extends AbstractFileParser
 {
@@ -32,7 +31,7 @@ class Neon extends AbstractFileParser
         } catch (Exception $ex) {
             throw new ParseException(
                 array(
-                    'message' => 'Error parsing NEON file',
+                    'message'   => 'Error parsing NEON file',
                     'exception' => $ex,
                 )
             );

@@ -45,12 +45,12 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Exen\Konfig\FileParser\Json::getSupportedExtensions()
+     * @covers Exen\Konfig\FileParser\Json::getSupportedFileExtensions()
      */
-    public function testGetSupportedExtensions()
+    public function testGetSupportedFileExtensions()
     {
         $expected = array('json');
-        $actual = $this->json->getSupportedExtensions();
+        $actual = $this->json->getSupportedFileExtensions();
         $this->assertEquals($expected, $actual);
     }
 

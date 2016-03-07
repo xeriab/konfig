@@ -10,8 +10,8 @@
  */
 namespace Exen\Konfig\FileParser;
 
-use Exen\Konfig\Exception\ParseException;
 use Piwik\Ini\INIReader as IniReader;
+use Exen\Konfig\Exception\ParseException;
 
 class Ini extends AbstractFileParser
 {

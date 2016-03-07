@@ -24,13 +24,9 @@ class Yaml extends AbstractFileParser
      */
     public function parse($path)
     {
-        try
-        {
-            // Check for native YAML PHP extension
-            $nYaml = extension_loaded('yaml');
+        try {
             $data = null;
-
-            if (!$nYaml) {
+            if (! extension_loaded('yaml')) {
                 $data = spyc_load_file($path);
             } else {
                 $data = yaml_parse_file($path);
@@ -38,7 +34,7 @@ class Yaml extends AbstractFileParser
         } catch (Exception $ex) {
             throw new ParseException(
                 [
-                    'message' => 'Error parsing YAML file',
+                    'message'   => 'Error parsing YAML file',
                     'exception' => $ex,
                 ]
             );

@@ -8,7 +8,6 @@
  * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
  * @link    https://xeriab.github.io/projects/konfig
  */
-
 namespace Exen\Konfig\FileParser;
 
 use Exception;
@@ -33,7 +32,7 @@ class Php extends AbstractFileParser
         } catch (Exception $ex) {
             throw new ParseException(
                 [
-                    'message' => 'PHP file threw an exception',
+                    'message'   => 'PHP file threw an exception',
                     'exception' => $ex,
                 ]
             );
@@ -45,7 +44,7 @@ class Php extends AbstractFileParser
         }
 
         // Check for array, if its anything else, throw an exception
-        if (!$temp || !is_array($temp)) {
+        if (! $temp || ! is_array($temp)) {
             throw new UnsupportedFileFormatException('PHP file does not return an array');
         }
 

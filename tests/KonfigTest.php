@@ -210,7 +210,7 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
         $konfig = new Konfig(__DIR__ . '/mocks/' . 'pass/empty.yaml');
 
         $expected = [];
-        $actual = $konfig->all();
+        $actual = $konfig->getAll();
 
         $this->assertEquals($expected, $actual);
     }

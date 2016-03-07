@@ -8,7 +8,6 @@
  * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
  * @link    https://xeriab.github.io/projects/konfig
  */
-
 namespace Exen\Konfig\FileParser;
 
 use Exen\Konfig\Exception\ParseException;
@@ -24,7 +23,7 @@ class Json extends AbstractFileParser
      */
     public function parse($path)
     {
-        $data = @json_decode(@file_get_contents($path), true);
+        $data = json_decode(file_get_contents($path), true);
 
         if (function_exists('json_last_error_msg')) {
             $error_message = json_last_error_msg();
@@ -33,13 +32,11 @@ class Json extends AbstractFileParser
         }
 
         if (json_last_error() !== JSON_ERROR_NONE) {
-            $error = [
+            throw new ParseException([
                 'message' => $error_message,
-                'type' => json_last_error(),
-                'file' => $path,
-            ];
-
-            throw new ParseException($error);
+                'type'    => json_last_error(),
+                'file'    => $path,
+            ]);
         }
 
         return $data;
