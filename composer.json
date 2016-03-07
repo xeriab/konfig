@@ -28,21 +28,18 @@
     "suggest": {
         "yosymfony/toml": "Required to use and support TOML",
         "mustangostang/spyc": "Required to use and support YAML",
-        "nette/neon": "Required to use and support the NEON notation",
-        "piwik/ini": "Required to use and support INI"
+        "nette/neon": "Required to use and support the NEON notation"
     },
     "require": {
         "php": ">5.4",
         "yosymfony/toml": "0.3.3",
         "mustangostang/spyc": "0.5.1",
-        "piwik/ini": "1.0.6",
         "nette/neon": "2.3.4"
     },
     "require-dev": {
         "yosymfony/toml": "0.3.3",
         "mustangostang/spyc": "0.5.1",
         "nette/neon": "2.3.4",
-        "piwik/ini": "1.0.6",
         "phpunit/phpunit": "4.3.*@dev",
         "phpdocumentor/phpdocumentor": "^2.8.5",
         "scrutinizer/ocular": "~1.1",

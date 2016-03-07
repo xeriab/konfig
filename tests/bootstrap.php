@@ -70,6 +70,6 @@ if (!defined('KONFIG_TEST_FILES')) {
 
 #:---
 
-// require_once ROOT_DIR . 'vendor' . DS . 'autoload.php';
+require_once ROOT_DIR . 'vendor' . DS . 'autoload.php';
 
 #: END OF ./tests/bootstrap.php FILE

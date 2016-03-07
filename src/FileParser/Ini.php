@@ -11,7 +11,6 @@
 namespace Exen\Konfig\FileParser;
 
 use Exen\Konfig\Exception\ParseException;
-use Piwik\Ini\INIReader as IniReader;
 
 class Ini extends AbstractFileParser
 {
@@ -24,8 +23,7 @@ class Ini extends AbstractFileParser
      */
     public function parse($path)
     {
-        $iniReader = new IniReader();
-        $data      = $iniReader->readFile($path);
+        $data = @parse_ini_file($path, true);
 
         if (empty($data)) {
             $error = error_get_last();
