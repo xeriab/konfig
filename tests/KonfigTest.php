@@ -220,7 +220,7 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      * @covers Exen\Konfig\Konfig::get()
      * @dataProvider specialConfigProvider()
      */
-    public function testGetReturnsArrayMergedArray($config)
+    public function testGetReturnsArrayMergedArray($konfig)
     {
         $this->assertCount(4, $konfig->get('servers'));
     }
