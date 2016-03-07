@@ -46,7 +46,7 @@ interface KonfigInterface
      * either simple or nested keys.
      *
      * @param string $key The key to check for
-     * @return array
+     * @return boolean
      * @since 0.1
      */
     public function has($key);
