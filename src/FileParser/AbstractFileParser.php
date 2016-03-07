@@ -33,18 +33,6 @@ abstract class AbstractFileParser implements FileParser
     #: Protected Methods
 
     /**
-     * Finds the given config files
-     *
-     * @param bool $cache
-     * param bool $multiple Whether to load multiple files or not
-     * @return array
-     */
-    /*protected function findFile($cache = true)
-    {
-    // Nothing to put here!
-    }*/
-
-    /**
      * Parses a string using all of the previously set variables.
      * Allows you to use something like %ENV% in non-PHP files.
      *

@@ -11,8 +11,8 @@
 namespace Exen\Konfig\FileParser;
 
 use Exception;
-use Yosymfony\Toml\Toml as TomlLib;
 use Exen\Konfig\Exception\ParseException;
+use Yosymfony\Toml\Toml as TomlLib;
 
 class Toml extends AbstractFileParser
 {

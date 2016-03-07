@@ -11,8 +11,8 @@
 namespace Exen\Konfig\FileParser;
 
 use Exception;
-use Nette\Neon\Neon as NeonLib;
 use Exen\Konfig\Exception\ParseException;
+use Nette\Neon\Neon as NeonLib;
 
 class Neon extends AbstractFileParser
 {
@@ -27,7 +27,7 @@ class Neon extends AbstractFileParser
     {
         try {
             $content = @file_get_contents($path);
-            $data = NeonLib::decode($content);
+            $data    = NeonLib::decode($content);
         } catch (Exception $ex) {
             throw new ParseException(
                 array(
