@@ -275,7 +275,7 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Exen\Konfig\AbstractKonfig::all()
      */
-    public function testGetAll()
+    public function testAll()
     {
         $all = array(
             'host'    => 'localhost',
