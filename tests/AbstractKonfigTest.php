@@ -67,15 +67,15 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultOptionsSetOnInstantiation()
     {
-        $this->konfig = new SimpleKonfig(
+        $konfig = new SimpleKonfig(
             array(
                 'host' => 'localhost',
                 'port' => 80,
             )
         );
 
-        $this->assertEquals('localhost', $this->konfig->get('host'));
-        $this->assertEquals(80, $this->konfig->get('port'));
+        $this->assertEquals('localhost', $konfig->get('host'));
+        $this->assertEquals(80, $konfig->get('port'));
     }
 
     /**
@@ -471,9 +471,9 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
 
         $idxConfig = 0;
 
-        foreach ($this->konfig as $this->konfigKey => $this->konfigValue) {
-            $this->assertEquals($expectedKeys[$idxConfig], $this->konfigKey);
-            $this->assertEquals($expectedValues[$idxConfig], $this->konfigValue);
+        foreach ($this->konfig as $konfigKey => $konfigValue) {
+            $this->assertEquals($expectedKeys[$idxConfig], $konfigKey);
+            $this->assertEquals($expectedValues[$idxConfig], $konfigValue);
             $idxConfig++;
         }
     }

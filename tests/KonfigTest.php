@@ -52,7 +52,7 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadWithUnsupportedFormat()
     {
-        $this->konfig = Konfig::load(__DIR__ . '/mocks/' . 'fail/error.lib');
+        $konfig = Konfig::load(__DIR__ . '/mocks/' . 'fail/error.lib');
         // $this->markTestIncomplete('Not yet implemented');
     }
 
@@ -64,7 +64,7 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithUnsupportedFormat()
     {
-        $this->konfig = new Konfig(__DIR__ . '/mocks/' . 'fail/error.lib');
+        $konfig = new Konfig(__DIR__ . '/mocks/' . 'fail/error.lib');
     }
 
     /**
@@ -76,7 +76,7 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithInvalidPath()
     {
-        $this->konfig = new Konfig('justAdumbAssText');
+        $konfig = new Konfig('justAdumbAssText');
     }
 
     /**
@@ -87,7 +87,7 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithEmptyDirectory()
     {
-        $this->konfig = new Konfig(__DIR__ . '/mocks/' . 'empty');
+        $konfig = new Konfig(__DIR__ . '/mocks/' . 'empty');
     }
 
     /**
@@ -97,11 +97,11 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithArray()
     {
-        $paths        = [__DIR__ . '/mocks/' . 'pass/config.xml', __DIR__ . '/mocks/' . 'pass/config2.json'];
-        $this->konfig = new Konfig($paths);
+        $paths  = [__DIR__ . '/mocks/' . 'pass/config.xml', __DIR__ . '/mocks/' . 'pass/config2.json'];
+        $konfig = new Konfig($paths);
 
         $expected = 'localhost';
-        $actual   = $this->konfig->get('host');
+        $actual   = $konfig->get('host');
 
         $this->assertEquals($expected, $actual);
     }
@@ -114,11 +114,11 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithArrayWithNonexistentFile()
     {
-        $paths        = [__DIR__ . '/mocks/' . 'pass/config.xml', __DIR__ . '/mocks/' . 'pass/config3.json'];
-        $this->konfig = new Konfig($paths);
+        $paths  = [__DIR__ . '/mocks/' . 'pass/config.xml', __DIR__ . '/mocks/' . 'pass/config3.json'];
+        $konfig = new Konfig($paths);
 
         $expected = 'localhost';
-        $actual   = $this->konfig->get('host');
+        $actual   = $konfig->get('host');
 
         $this->assertEquals($expected, $actual);
     }
@@ -130,11 +130,11 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithArrayWithOptionalFile()
     {
-        $paths        = [__DIR__ . '/mocks/' . 'pass/config.xml', '?' . __DIR__ . '/mocks/' . 'pass/config2.json'];
-        $this->konfig = new Konfig($paths);
+        $paths  = [__DIR__ . '/mocks/' . 'pass/config.xml', '?' . __DIR__ . '/mocks/' . 'pass/config2.json'];
+        $konfig = new Konfig($paths);
 
         $expected = 'localhost';
-        $actual   = $this->konfig->get('host');
+        $actual   = $konfig->get('host');
 
         $this->assertEquals($expected, $actual);
     }
@@ -146,11 +146,11 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithArrayWithOptionalNonexistentFile()
     {
-        $paths        = [__DIR__ . '/mocks/' . 'pass/config.xml', '?' . __DIR__ . '/mocks/' . 'pass/config3.json'];
-        $this->konfig = new Konfig($paths);
+        $paths  = [__DIR__ . '/mocks/' . 'pass/config.xml', '?' . __DIR__ . '/mocks/' . 'pass/config3.json'];
+        $konfig = new Konfig($paths);
 
         $expected = 'localhost';
-        $actual   = $this->konfig->get('host');
+        $actual   = $konfig->get('host');
 
         $this->assertEquals($expected, $actual);
     }
@@ -162,10 +162,10 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithDirectory()
     {
-        $this->konfig = new Konfig(__DIR__ . '/mocks/' . 'dir');
+        $konfig = new Konfig(__DIR__ . '/mocks/' . 'dir');
 
         $expected = 'localhost';
-        $actual   = $this->konfig->get('host');
+        $actual   = $konfig->get('host');
 
         $this->assertEquals($expected, $actual);
     }
@@ -177,10 +177,10 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithYml()
     {
-        $this->konfig = new Konfig(__DIR__ . '/mocks/' . 'pass/config.yml');
+        $konfig = new Konfig(__DIR__ . '/mocks/' . 'pass/config.yml');
 
         $expected = 'localhost';
-        $actual   = $this->konfig->get('host');
+        $actual   = $konfig->get('host');
 
         $this->assertEquals($expected, $actual);
     }
@@ -192,10 +192,10 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithYmlDist()
     {
-        $this->konfig = new Konfig(__DIR__ . '/mocks/' . 'pass/config.yml.dist');
+        $konfig = new Konfig(__DIR__ . '/mocks/' . 'pass/config.yml.dist');
 
         $expected = 'localhost';
-        $actual   = $this->konfig->get('host');
+        $actual   = $konfig->get('host');
 
         $this->assertEquals($expected, $actual);
     }
@@ -207,10 +207,10 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithEmptyYml()
     {
-        $this->konfig = new Konfig(__DIR__ . '/mocks/' . 'pass/empty.yaml');
+        $konfig = new Konfig(__DIR__ . '/mocks/' . 'pass/empty.yaml');
 
         $expected = [];
-        $actual   = $this->konfig->all();
+        $actual   = $konfig->all();
 
         $this->assertEquals($expected, $actual);
     }
@@ -220,9 +220,9 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      * @covers Exen\Konfig\Konfig::get()
      * @dataProvider specialConfigProvider()
      */
-    public function testGetReturnsArrayMergedArrayConfig()
+    public function testGetReturnsArrayMergedArray($config)
     {
-        $this->assertCount(4, $this->konfig->get('servers'));
+        $this->assertCount(4, $konfig->get('servers'));
     }
 
     /**
