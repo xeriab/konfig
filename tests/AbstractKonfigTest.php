@@ -35,19 +35,19 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
     {
         $this->konfig = new SimpleKonfig(
             array(
-                'host' => 'localhost',
-                'port' => 80,
+                'host'    => 'localhost',
+                'port'    => 80,
                 'servers' => array(
                     'host1',
                     'host2',
                     'host3',
                 ),
-                'app' => array(
-                    'name' => 'konfig',
-                    'secret' => 'secret',
+                'app'     => array(
+                    'name'    => 'konfig',
+                    'secret'  => 'secret',
                     'runtime' => null,
                 ),
-                'user' => null,
+                'user'    => null,
             )
         );
     }
@@ -273,26 +273,26 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Exen\Konfig\AbstractKonfig::getAll()
+     * @covers Exen\Konfig\AbstractKonfig::all()
      */
     public function testGetAll()
     {
         $all = array(
-            'host' => 'localhost',
-            'port' => 80,
+            'host'    => 'localhost',
+            'port'    => 80,
             'servers' => array(
                 'host1',
                 'host2',
                 'host3',
             ),
-            'app' => array(
-                'name' => 'konfig',
-                'secret' => 'secret',
+            'app'     => array(
+                'name'    => 'konfig',
+                'secret'  => 'secret',
                 'runtime' => null,
             ),
-            'user' => null,
+            'user'    => null,
         );
-        $this->assertEquals($all, $this->konfig->getAll());
+        $this->assertEquals($all, $this->konfig->all());
     }
 
     /**
@@ -456,14 +456,14 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
     public function testIterator()
     {
         /* Create numerically indexed copies of the test config */
-        $expectedKeys = array('host', 'port', 'servers', 'app', 'user');
+        $expectedKeys   = array('host', 'port', 'servers', 'app', 'user');
         $expectedValues = array(
             'localhost',
             80,
             array('host1', 'host2', 'host3'),
             array(
-                'name' => 'konfig',
-                'secret' => 'secret',
+                'name'    => 'konfig',
+                'secret'  => 'secret',
                 'runtime' => null,
             ),
             null,

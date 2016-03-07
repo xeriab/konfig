@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmlKonfig>
     <Key>Value</Key>
+    <KeyOne>Value One</KeyOne>
 </xmlKonfig>
-<!-- END OF DefaultConfig.xml FILE -->
+<!-- END OF test.xml FILE -->
