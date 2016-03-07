@@ -39,24 +39,6 @@ class Ini extends AbstractFileParser
      * {@inheritDoc}
      * @since 0.1
      */
-    public function load($overwrite = false, $cache = true)
-    {
-        // Nothing to put here
-    }
-
-    /**
-     * {@inheritDoc}
-     * @since 0.1
-     */
-    public function group()
-    {
-        // Nothing to put here
-    }
-
-    /**
-     * {@inheritDoc}
-     * @since 0.1
-     */
     public function getSupportedFileExtensions()
     {
         return ['ini', 'cfg', 'conf'];
