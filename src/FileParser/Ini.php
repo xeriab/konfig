@@ -39,7 +39,7 @@ class Ini extends AbstractFileParser
      */
     public function getSupportedFileExtensions()
     {
-        return ['ini', 'cfg', 'conf'];
+        return ['ini'];
     }
 }
 
