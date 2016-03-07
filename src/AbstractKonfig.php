@@ -162,7 +162,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
             unset($this->cache[$key]);
         }
 
-        return Utils::arrDelete($this->data, $key);
+        return Utils::arrayDelete($this->data, $key);
     }
 
     #: ArrayAccess Methods

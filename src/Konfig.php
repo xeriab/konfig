@@ -10,7 +10,6 @@
  */
 namespace Exen\Konfig;
 
-use Exception;
 use Exen\Konfig\Exception\EmptyDirectoryException;
 use Exen\Konfig\Exception\FileNotFoundException;
 use Exen\Konfig\Exception\UnsupportedFileFormatException;
