@@ -12,6 +12,7 @@ namespace Exen\Konfig\FileParser;
 
 use Exception;
 use Exen\Konfig\Exception\ParseException;
+use Symfony\Component\Yaml\Yaml as YamlParser;
 
 class Yaml extends AbstractFileParser
 {
@@ -29,7 +30,7 @@ class Yaml extends AbstractFileParser
 
             // Check if the PHP native's YAML extension is exist
             if (!extension_loaded('yaml')) {
-                $data = spyc_load_file($path);
+                $data = YamlParser::parse(file_get_contents($path));
             } else {
                 $data = yaml_parse_file($path);
             }

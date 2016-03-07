@@ -27,14 +27,11 @@
     },
     "suggest": {
         "yosymfony/toml": "Required to use and support TOML",
-        "mustangostang/spyc": "Required to use and support YAML",
+        "symfony/yaml": "Required to use and support YAML",
         "nette/neon": "Required to use and support the NEON notation"
     },
     "require": {
-        "php": ">=5.4.0",
-        "yosymfony/toml": "0.3.3",
-        "mustangostang/spyc": "0.5.1",
-        "nette/neon": "2.3.4"
+        "php": ">=5.4.0"
     },
     "require-dev": {
         "yosymfony/toml": "0.3.3",

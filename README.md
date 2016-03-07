@@ -12,7 +12,7 @@ and YML files.
 
 ## Requirements
 
-Konfig requires PHP 5.4+, and suggests using [Yosymfony Toml Parser](https://github.com/yosymfony/Toml), [Nette NEON](https://github.com/nette/neon) and [Spyc YAML Library](https://github.com/mustangostang/spyc/).
+Konfig requires PHP 5.4+, and suggests using [Yosymfony Toml Parser](https://github.com/yosymfony/Toml), [Nette NEON](https://github.com/nette/neon) and [Symfony YAML](https://github.com/symfony/Yaml).
 
 ## Installation
 
