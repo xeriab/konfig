@@ -34,21 +34,21 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->konfig = new SimpleKonfig(
-            array(
+            [
                 'host'    => 'localhost',
                 'port'    => 80,
-                'servers' => array(
+                'servers' => [
                     'host1',
                     'host2',
                     'host3',
-                ),
-                'app'     => array(
+                ],
+                'app'     => [
                     'name'    => 'konfig',
                     'secret'  => 'secret',
                     'runtime' => null,
-                ),
+                ],
                 'user'    => null,
-            )
+            ]
         );
     }
 
@@ -277,21 +277,22 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testAll()
     {
-        $all = array(
+        $all = [
             'host'    => 'localhost',
             'port'    => 80,
-            'servers' => array(
+            'servers' => [
                 'host1',
                 'host2',
                 'host3',
-            ),
-            'app'     => array(
+            ],
+            'app'     => [
                 'name'    => 'konfig',
                 'secret'  => 'secret',
                 'runtime' => null,
-            ),
+            ],
             'user'    => null,
-        );
+        ];
+
         $this->assertEquals($all, $this->konfig->all());
     }
 
@@ -456,25 +457,25 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
     public function testIterator()
     {
         /* Create numerically indexed copies of the test config */
-        $expectedKeys   = array('host', 'port', 'servers', 'app', 'user');
-        $expectedValues = array(
+        $expectedKeys   = ['host', 'port', 'servers', 'app', 'user'];
+        $expectedValues = [
             'localhost',
             80,
-            array('host1', 'host2', 'host3'),
-            array(
+            ['host1', 'host2', 'host3'],
+            [
                 'name'    => 'konfig',
                 'secret'  => 'secret',
                 'runtime' => null,
-            ),
+            ],
             null,
-        );
+        ];
 
-        $idxConfig = 0;
+        $idxKonfig = 0;
 
         foreach ($this->konfig as $konfigKey => $konfigValue) {
-            $this->assertEquals($expectedKeys[$idxConfig], $konfigKey);
-            $this->assertEquals($expectedValues[$idxConfig], $konfigValue);
-            $idxConfig++;
+            $this->assertEquals($expectedKeys[$idxKonfig], $konfigKey);
+            $this->assertEquals($expectedValues[$idxKonfig], $konfigValue);
+            $idxKonfig++;
         }
     }
 

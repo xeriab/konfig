@@ -2,7 +2,7 @@
 /**
  * Konfig
  *
- * Yet another simple configuration file loader library.
+ * Yet another simple configuration loader library.
  *
  * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
  * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
@@ -57,9 +57,9 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Exen\Konfig\FileParser\Json::parse()
      * @expectedException Exen\Konfig\Exception\ParseException
-     * @expectedExceptionMessage syntax error, unexpected $end, expecting ']'
+     * @expectedExceptionMessage Syntax error
      */
-    public function testLoadInvalidIni()
+    public function testLoadInvalidJson()
     {
         $this->json->parse(__DIR__ . '/../mocks/fail/error.json');
     }

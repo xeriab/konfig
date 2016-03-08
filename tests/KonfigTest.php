@@ -2,7 +2,7 @@
 /**
  * Konfig
  *
- * Yet another simple configuration file loader library.
+ * Yet another simple configuration loader library.
  *
  * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
  * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
