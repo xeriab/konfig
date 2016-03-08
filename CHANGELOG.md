@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.0 - 08-3-2016
+
+### New
+- Added the first major release
+
 ## 0.1.0 - 03-3-2016
 
 ### Changed
