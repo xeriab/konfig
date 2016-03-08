@@ -45,7 +45,7 @@ class Php extends AbstractFileParser
         }
 
         // Check for array, if its anything else, throw an exception
-        if (!$temp || !is_array($temp)) {
+        if (empty($temp) || !is_array($temp)) {
             throw new UnsupportedFileFormatException('PHP file does not return an array');
         }
 
