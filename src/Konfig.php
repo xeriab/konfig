@@ -2,12 +2,13 @@
 /**
  * Konfig
  *
- * Yet another simple configuration file loader library.
+ * Yet another simple configuration loader library.
  *
  * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
  * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
  * @link    https://xeriab.github.io/projects/konfig
  */
+
 namespace Exen\Konfig;
 
 use Exen\Konfig\Exception\EmptyDirectoryException;
@@ -46,11 +47,19 @@ final class Konfig extends AbstractKonfig
 
         foreach ($paths as $path) {
             // Get file information
-            $ext    = pathinfo($path, PATHINFO_EXTENSION);
+            $info = pathinfo($path);
+            // $info  = pathinfo($path, PATHINFO_EXTENSION);
+            $parts = explode('.', $info['basename']);
+            $ext   = array_pop($parts);
+
+            if ($ext === 'dist') {
+                $ext = array_pop($parts);
+            }
+
             $parser = $this->getParser($ext);
 
             // Try and load file
-            $this->data = array_replace_recursive($this->data, $parser->parse($path));
+            $this->data = array_replace_recursive($this->data, (array) $parser->parse($path));
 
             self::$loadedFiles[$path] = true;
         }

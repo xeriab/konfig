@@ -2,12 +2,13 @@
 /**
  * Konfig
  *
- * Yet another simple configuration file loader library.
+ * Yet another simple configuration loader library.
  *
  * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
  * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
  * @link    https://xeriab.github.io/projects/konfig
  */
+
 namespace Exen\Konfig;
 
 use ArrayAccess;
@@ -46,8 +47,8 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      */
     public function __construct($input)
     {
-        // $this->data = array_merge($this->getDefaults(), $input);
-        $this->data = Utils::arrayMerge($this->getDefaults(), $input);
+        $this->data = array_merge($this->getDefaults(), $input);
+        // $this->data = Utils::arrayMerge($this->getDefaults(), $input);
     }
 
     /**
