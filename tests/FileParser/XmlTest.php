@@ -11,20 +11,20 @@
 
 namespace Exen\Konfig\Test\FileParser;
 
-use Exen\Konfig\FileParser\Json;
+use Exen\Konfig\FileParser\Xml;
 
 /**
- * Tests for Exen\Konfig\FileParser\Json.
+ * Tests for Exen\Konfig\FileParser\Xml.
  *
  * @package Test
  * @subpackage FileParser
  */
-class JsonTest extends \PHPUnit_Framework_TestCase
+class XmlTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Json
+     * @var Xml
      */
-    protected $json;
+    protected $xml;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -32,7 +32,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->json = new Json();
+        $this->xml = new Xml();
     }
 
     /**
@@ -45,34 +45,34 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Exen\Konfig\FileParser\Json::getSupportedFileExtensions()
+     * @covers Exen\Konfig\FileParser\Xml::getSupportedFileExtensions()
      */
     public function testGetSupportedFileExtensions()
     {
-        $expected = ['json'];
-        $actual   = $this->json->getSupportedFileExtensions();
+        $expected = ['xml'];
+        $actual   = $this->xml->getSupportedFileExtensions();
         $this->assertEquals($expected, $actual);
     }
 
     /**
-     * @covers Exen\Konfig\FileParser\Json::parse()
+     * @covers Exen\Konfig\FileParser\Xml::parse()
      * @expectedException Exen\Konfig\Exception\ParseException
-     * @expectedExceptionMessage Syntax error
+     * @expectedExceptionMessage Opening and ending tag mismatch: name line 4
      */
-    public function testLoadInvalidJson()
+    public function testLoadInvalidXml()
     {
-        $this->json->parse(__DIR__ . '/../mocks/fail/error.json');
+        $this->xml->parse(__DIR__ . '/../mocks/fail/error.xml');
     }
 
     /**
-     * @covers Exen\Konfig\FileParser\Json::parse()
+     * @covers Exen\Konfig\FileParser\Xml::parse()
      */
-    public function testLoadIni()
+    public function testLoadXml()
     {
-        $actual = $this->json->parse(__DIR__ . '/../mocks/pass/config.json');
+        $actual = $this->xml->parse(__DIR__ . '/../mocks/pass/config.xml');
         $this->assertEquals('localhost', $actual['host']);
         $this->assertEquals('80', $actual['port']);
     }
 }
 
-#: END OF ./tests/FileParser/JsonTest.php FILE
+#: END OF ./tests/FileParser/XmlTest.php FILE

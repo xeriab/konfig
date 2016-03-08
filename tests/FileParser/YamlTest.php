@@ -11,20 +11,20 @@
 
 namespace Exen\Konfig\Test\FileParser;
 
-use Exen\Konfig\FileParser\Json;
+use Exen\Konfig\FileParser\Yaml;
 
 /**
- * Tests for Exen\Konfig\FileParser\Json.
+ * Tests for Exen\Konfig\FileParser\Yaml.
  *
  * @package Test
  * @subpackage FileParser
  */
-class JsonTest extends \PHPUnit_Framework_TestCase
+class YamlTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Json
+     * @var Yaml
      */
-    protected $json;
+    protected $yaml;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -32,7 +32,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->json = new Json();
+        $this->yaml = new Yaml();
     }
 
     /**
@@ -45,34 +45,34 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Exen\Konfig\FileParser\Json::getSupportedFileExtensions()
+     * @covers Exen\Konfig\FileParser\Yaml::getSupportedFileExtensions()
      */
     public function testGetSupportedFileExtensions()
     {
-        $expected = ['json'];
-        $actual   = $this->json->getSupportedFileExtensions();
+        $expected = ['yaml', 'yml'];
+        $actual   = $this->yaml->getSupportedFileExtensions();
         $this->assertEquals($expected, $actual);
     }
 
     /**
-     * @covers Exen\Konfig\FileParser\Json::parse()
+     * @covers Exen\Konfig\FileParser\Yaml::parse()
      * @expectedException Exen\Konfig\Exception\ParseException
-     * @expectedExceptionMessage Syntax error
+     * @expectedExceptionMessage Error parsing YAML file
      */
-    public function testLoadInvalidJson()
+    public function testLoadInvalidYaml()
     {
-        $this->json->parse(__DIR__ . '/../mocks/fail/error.json');
+        $this->yaml->parse(__DIR__ . '/../mocks/fail/error.yaml');
     }
 
     /**
-     * @covers Exen\Konfig\FileParser\Json::parse()
+     * @covers Exen\Konfig\FileParser\Yaml::parse()
      */
-    public function testLoadIni()
+    public function testLoadYaml()
     {
-        $actual = $this->json->parse(__DIR__ . '/../mocks/pass/config.json');
+        $actual = $this->yaml->parse(__DIR__ . '/../mocks/pass/config.yml');
         $this->assertEquals('localhost', $actual['host']);
         $this->assertEquals('80', $actual['port']);
     }
 }
 
-#: END OF ./tests/FileParser/JsonTest.php FILE
+#: END OF ./tests/FileParser/YamlTest.php FILE
