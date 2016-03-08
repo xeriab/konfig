@@ -27,7 +27,7 @@ class Ini extends AbstractFileParser
     {
         $data = @parse_ini_file($path, true);
 
-        if (empty($data) || !$data) {
+        if (!$data) {
             $error = error_get_last();
             throw new ParseException($error);
         }

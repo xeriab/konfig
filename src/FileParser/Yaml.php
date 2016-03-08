@@ -27,8 +27,6 @@ class Yaml extends AbstractFileParser
     public function parse($path)
     {
         try {
-            $data = null;
-
             // Check if the PHP native's YAML extension is exist
             if (!extension_loaded('yaml')) {
                 $data = YamlParser::parse(file_get_contents($path));
