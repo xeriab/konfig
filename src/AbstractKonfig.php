@@ -20,7 +20,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     /**
      * Stores the configuration items
      *
-     * @var array|null
+     * @var array
      * @since 0.1
      */
     protected $data = [];
