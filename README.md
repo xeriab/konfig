@@ -24,8 +24,8 @@ $ composer require kodeburner/konfig
 
 ## Usage
 
-Konfig is designed to be very simple, lightweight and straightforward to use. All you can do with
-it is load, get, and set.
+Konfig is designed with simplicity in mind and it is lightweight and straightforward to use. All you can do with
+it is load, get, set and delete.
 
 ### Loading files
 
@@ -36,17 +36,17 @@ by direct instantiation:
 use Exen\Konfig\Konfig;
 
 // Load a single file
-$konf = Konfig::load('konfig.json');
-$konf = new Konfig('konfig.json');
+$cfg = Konfig::load('konfig.json');
+$cfg = new Konfig('konfig.json');
 
 // Load values from multiple files
-$konf = new Konfig(['konfig.json', 'konfig.xml']);
+$cfg = new Konfig(['konfig.json', 'konfig.xml']);
 
 // Load all supported files in a directory
-$konf = new Konfig(__DIR__ . '/konfig');
+$cfg = new Konfig(__DIR__ . '/konfig');
 
 // Load values from optional files
-$konf = new Konfig(['konfig.dist.json', '?konfig.json']);
+$cfg = new Konfig(['konfig.dist.json', '?konfig.json']);
 ```
 
 Files are parsed and loaded depending on the file extension. Note that when
@@ -62,33 +62,33 @@ Getting values can be done in three ways. One, by using the `get()` method:
 
 ```php
 // Get value using key
-$debug = $konf->get('debug');
+$debug = $cfg->get('debug');
 
 // Get value using nested key
-$secret = $konf->get('security.secret');
+$secret = $cfg->get('security.secret');
 
 // Get a value with a fallback
-$ttl = $konf->get('app.timeout', 3000);
+$ttl = $cfg->get('app.timeout', 3000);
 ```
 
 The second method, is by using it like an array:
 
 ```php
 // Get value using a simple key
-$debug = $konf['debug'];
+$debug = $cfg['debug'];
 
 // Get value using a nested key
-$secret = $konf['security.secret'];
+$secret = $cfg['security.secret'];
 
 // Get nested value like you would from a nested array
-$secret = $konf['security']['secret'];
+$secret = $cfg['security']['secret'];
 ```
 
 The third method, is by using the `all()` method:
 
 ```php
 // Get all values
-$data = $konf->all();
+$data = $cfg->all();
 ```
 
 ### Setting values
@@ -99,22 +99,22 @@ source files**. By design, if you need to make changes to your
 configuration files, you have to do it manually.
 
 ```php
-$konf = Konfig::load('konfig.json');
+$cfg = Konfig::load('konfig.json');
 
 // Sample value from our konfig file
-assert($konf['secret'] == '123');
+assert($cfg['secret'] == '123');
 
 // Update konfig value to something else
-$konf['secret'] = '456';
+$cfg['secret'] = '456';
 
 // Reload the file
-$konf = Konfig::load('konfig.json');
+$cfg = Konfig::load('konfig.json');
 
 // Same value as before
-assert($konf['secret'] == '123');
+assert($cfg['secret'] == '123');
 
 // This will fail
-assert($konf['secret'] == '456');
+assert($cfg['secret'] == '456');
 ```
 
 ### Using with default values

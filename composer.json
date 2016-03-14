@@ -1,7 +1,7 @@
 {
-    "name": "kodeburner/konfig",
+    "name": "xeriab/konfig",
     "description": "Yet another simple configuration loader library.",
-    "version": "0.1.0-dev",
+    "version": "0.1.0",
     "license": "MIT",
     "type": "library",
     "keywords": [
