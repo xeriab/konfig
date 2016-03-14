@@ -124,22 +124,24 @@ application settings, without needing file I/O. You can do this by extending
 the `AbstractKonfig` class and populating the `getDefaults()` method:
 
 ```php
+use Exen\Konfig\AbstractKonfig;
+
 class MyKonfig extends AbstractKonfig
 {
     protected function getDefaults()
     {
         return array(
-            'host' => 'localhost',
+            'host'    => 'localhost',
             'port'    => 80,
             'servers' => array(
                 'host1',
                 'host2',
-                'host3'
+                'host3',
             ),
-            'application' => array(
-                'name'   => 'configuration',
-                'secret' => 'secretValue'
-            )
+            'app'     => array(
+                'name'   => 'konfig',
+                'secret' => 'secret',
+            ),
         );
     }
 }
