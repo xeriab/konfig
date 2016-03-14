@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.1 - 14-3-2016
+- Tagged fix release
+
 ## 0.1.0 - 08-3-2016
 
 ### New
