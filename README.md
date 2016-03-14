@@ -19,7 +19,7 @@ Konfig requires PHP 5.4+, and suggests using [Yosymfony Toml Parser](https://git
 The supported way of installing Konfig is via Composer.
 
 ```sh
-$ composer require kodeburner/konfig
+$ composer require xeriab/konfig
 ```
 
 ## Usage
@@ -181,16 +181,16 @@ If you discover any security related issues, please email [kodeburner@gmail.com]
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/kodeburner/konfig.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/xeriab/konfig.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/xeriab/konfig/master.svg?style=flat-square
 [ico-scrutinizer]: https://scrutinizer-ci.com/g/xeriab/konfig/badges/coverage.png?b=master
 [ico-code-quality]: https://scrutinizer-ci.com/g/xeriab/konfig/badges/quality-score.png?b=master
-[ico-downloads]: https://img.shields.io/packagist/dt/kodeburner/konfig.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/xeriab/konfig.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/kodeburner/konfig
+[link-packagist]: https://packagist.org/packages/xeriab/konfig
 [link-license]: http://xeriab.mit-license.org
 [link-travis]: https://travis-ci.org/xeriab/konfig
 [link-scrutinizer]: https://scrutinizer-ci.com/g/xeriab/konfig/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/xeriab/konfig
-[link-downloads]: https://packagist.org/packages/kodeburner/konfig
+[link-downloads]: https://packagist.org/packages/xeriab/konfig
