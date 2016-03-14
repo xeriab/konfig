@@ -1,6 +1,7 @@
 {
     "name": "xeriab/konfig",
     "description": "Yet another simple configuration loader library.",
+    "homepage": "http://xeriab.github.io/konfig/",
     "version": "0.1.1",
     "license": "MIT",
     "type": "library",
@@ -19,7 +20,7 @@
         "name": "Xeriab Nabil",
         "email": "kodeburner@gmail.com",
         "role": "Developer",
-        "homepage": "https://twitter.com/xeriab"
+        "homepage": "http://xeriab.github.io"
     }],
     "support": {
         "issues": "https://github.com/xeriab/konfig/issues",
