@@ -39,7 +39,6 @@
         "mustangostang/spyc": "0.5.1",
         "nette/neon": "2.3.4",
         "phpunit/phpunit": "~4.0",
-        "phpdocumentor/phpdocumentor": "^2.8.5",
         "scrutinizer/ocular": "~1.1",
         "squizlabs/php_codesniffer": "~2.2"
     },

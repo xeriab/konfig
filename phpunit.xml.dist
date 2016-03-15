@@ -21,6 +21,9 @@
             <exclude>
                 <directory suffix=".php">./src/Exception</directory>
             </exclude>
+            <exclude>
+                <file suffix=".php">./src/Utils</file>
+            </exclude>
         </whitelist>
     </filter>
     <logging>
