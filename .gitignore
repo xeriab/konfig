@@ -12,4 +12,6 @@ build
 nbproject
 node_modules
 
+phpcs.log
+
 #
