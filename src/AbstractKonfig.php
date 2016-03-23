@@ -20,7 +20,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     /**
      * Stores the configuration items
      *
-     * @var   array
+     * @var array
      * @since 0.1
      */
     protected $data = [];
@@ -28,13 +28,13 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     /**
      * Caches the configuration data
      *
-     * @var   array
+     * @var array
      * @since 0.1
      */
     protected $cache = [];
 
     /**
-     * @var   string $defaultCheckValue Random value used as a not-found check in get()
+     * @var string $defaultCheckValue Random value used as a not-found check in get()
      * @since 0.1
      */
     static $defaultCheckValue;

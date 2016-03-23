@@ -14,8 +14,20 @@ namespace Exen\Konfig;
 use ArrayAccess;
 use InvalidArgumentException;
 
-final class Utils
+class Utils
 {
+    /**
+     * Includes the given file and returns the results.
+     *
+     * @param string The path to the file
+     * @return mixed The results of the include
+     * @since 0.1
+     */
+    public static function load($file = null)
+    {
+        return require_once $file;
+    }
+
     /**
      * Takes a value and checks if it's a Closure or not, if it's a Closure it
      * will return the result of the closure, if not, it will simply return the
