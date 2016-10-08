@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Konfig
  *
@@ -39,9 +40,7 @@ class Xml extends AbstractFileParser
             }
         }
 
-        $data = json_decode(json_encode($data), true);
-
-        return $data;
+        return \json_decode(\json_encode($data), true);
     }
 
     /**

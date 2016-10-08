@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Konfig
  *
@@ -34,12 +35,10 @@ class Yaml extends AbstractFileParser
                 $data = yaml_parse_file($path);
             }
         } catch (Exception $ex) {
-            throw new ParseException(
-                [
-                    'message'   => 'Error parsing YAML file',
-                    'exception' => $ex,
-                ]
-            );
+            throw new ParseException([
+                'message'   => 'Error parsing YAML file',
+                'exception' => $ex,
+            ]);
         }
 
         return $data;

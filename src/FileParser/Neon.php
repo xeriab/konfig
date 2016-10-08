@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Konfig
  *
@@ -27,15 +28,13 @@ class Neon extends AbstractFileParser
     public function parse($path)
     {
         try {
-            $content = @file_get_contents($path);
+            $content = file_get_contents($path);
             $data    = NeonLib::decode($content);
         } catch (Exception $ex) {
-            throw new ParseException(
-                array(
-                    'message'   => 'Error parsing NEON file',
-                    'exception' => $ex,
-                )
-            );
+            throw new ParseException([
+                'message'   => 'Error parsing NEON file',
+                'exception' => $ex,
+            ]);
         }
 
         return $data;

@@ -54,7 +54,7 @@ class Utils
      */
     public static function arrayGet($array, $key, $default = null)
     {
-        if (!is_array($array) and !$array instanceof ArrayAccess) {
+        if (!is_array($array) && !$array instanceof ArrayAccess) {
             throw new InvalidArgumentException('First parameter must be an array or ArrayAccess object.');
         }
 
@@ -73,7 +73,7 @@ class Utils
         }
 
         foreach (explode('.', $key) as $key_part) {
-            if (($array instanceof ArrayAccess and isset($array[$key_part])) === false) {
+            if (($array instanceof ArrayAccess && isset($array[$key_part])) === false) {
                 if (!is_array($array) or !array_key_exists($key_part, $array)) {
                     return static::checkValue($default);
                 }
@@ -152,7 +152,7 @@ class Utils
                 // Numeric keys are appended
                 if (is_int($k)) {
                     array_key_exists($k, $array) ? array_push($array, $v) : $array[$k] = $v;
-                } elseif (is_array($v) and array_key_exists($k, $array) and is_array($array[$k])) {
+                } elseif (is_array($v) && array_key_exists($k, $array) && is_array($array[$k])) {
                     $array[$k] = static::arrayMerge($array[$k], $v);
                 } else {
                     $array[$k] = $v;

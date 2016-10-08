@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Konfig
  *
@@ -19,7 +20,7 @@ class Php extends AbstractFileParser
 {
     /**
      * {@inheritDoc}
-     * Loads a PHP file and gets its' contents as an array
+     * Loads a PHP file and gets its contents as an array
      *
      * @throws ParseException If the PHP file throws an exception
      * @throws UnsupportedFormatException If the PHP file does not return an array

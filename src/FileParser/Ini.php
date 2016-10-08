@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Konfig
  *
@@ -11,7 +12,6 @@
 
 namespace Exen\Konfig\FileParser;
 
-use Exen\Konfig\Exception;
 use Exen\Konfig\Exception\ParseException;
 
 class Ini extends AbstractFileParser
@@ -28,8 +28,8 @@ class Ini extends AbstractFileParser
         $data = @parse_ini_file($path, true);
 
         if (!$data) {
-            $error = error_get_last();
-            throw new ParseException($error);
+            $error_message = error_get_last();
+            throw new ParseException($error_message);
         }
 
         return $data;
@@ -41,7 +41,7 @@ class Ini extends AbstractFileParser
      */
     public function getSupportedFileExtensions()
     {
-        return ['ini'];
+        return ['ini', 'cfg'];
     }
 }
 
