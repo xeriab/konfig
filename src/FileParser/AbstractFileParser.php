@@ -19,16 +19,16 @@ abstract class AbstractFileParser implements FileParser
     /**
      * Configuration file
      *
-     * @var string
-     * @since 0.1
+     * @var $file string
+     * @since 0.1.0
      */
     protected $file;
 
     /**
      * The configuration variables
      *
-     * @var array
-     * @since 0.1
+     * @var $vars array
+     * @since 0.1.0
      */
     protected $vars = [];
 
@@ -40,9 +40,9 @@ abstract class AbstractFileParser implements FileParser
      *
      * @param string $string String to parse
      * @return string
-     * @since 0.1
+     * @since 0.1.0
      */
-    protected function parseVars($string)
+    protected function parseVars($string = null)
     {
         foreach ($this->vars as $var => $val) {
             $string = str_replace("%$var%", $val, $string);
@@ -56,9 +56,9 @@ abstract class AbstractFileParser implements FileParser
      *
      * @param array $array Array to be prepped
      * @return array Prepped array
-     * @since 0.1
+     * @since 0.1.0
      */
-    protected function prepVars(&$array)
+    protected function prepVars(array &$array)
     {
         static $replace = false;
 
@@ -71,9 +71,7 @@ abstract class AbstractFileParser implements FileParser
         foreach ($array as $x => $value) {
             if (is_string($value)) {
                 $array[$x] = preg_replace(
-                    array_keys($replace),
-                    array_values($replace),
-                    $value
+                        array_keys($replace), array_values($replace), $value
                 );
             } elseif (is_array($value)) {
                 $this->prepVars($array[$x]);
@@ -90,6 +88,16 @@ abstract class AbstractFileParser implements FileParser
      * {@inheritdoc}
      */
     abstract public function getSupportedFileExtensions();
+
+    /**
+     * @return string
+     * @since 0.1.2
+     */
+    public function __toString()
+    {
+        return 'Exen\Konfig\FileParser\AbstractFileParser' . PHP_EOL;
+    }
+
 }
 
 #: END OF ./src/FileParser/AbstractFileParser.php FILE

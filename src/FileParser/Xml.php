@@ -21,7 +21,7 @@ class Xml extends AbstractFileParser
      * Loads a XML file as an array
      *
      * @throws ParseException If there is an error parsing XML file
-     * @since 0.1
+     * @since 0.1.0
      */
     public function parse($path)
     {
@@ -32,10 +32,10 @@ class Xml extends AbstractFileParser
             if ($lastError !== false) {
                 throw new ParseException([
                     'message' => $lastError->message,
-                    'type'    => $lastError->level,
-                    'code'    => $lastError->code,
-                    'file'    => $lastError->file,
-                    'line'    => $lastError->line,
+                    'type' => $lastError->level,
+                    'code' => $lastError->code,
+                    'file' => $lastError->file,
+                    'line' => $lastError->line,
                 ]);
             }
         }

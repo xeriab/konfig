@@ -24,7 +24,7 @@ class Php extends AbstractFileParser
      *
      * @throws ParseException If the PHP file throws an exception
      * @throws UnsupportedFormatException If the PHP file does not return an array
-     * @since 0.1
+     * @since 0.1.0
      */
     public function parse($path)
     {
@@ -32,12 +32,10 @@ class Php extends AbstractFileParser
         try {
             $temp = require $path;
         } catch (Exception $ex) {
-            throw new ParseException(
-                [
-                    'message'   => 'PHP file threw an exception',
-                    'exception' => $ex,
-                ]
-            );
+            throw new ParseException([
+                'message' => 'PHP file threw an exception',
+                'exception' => $ex,
+            ]);
         }
 
         // If we have a callable, run it and expect an array back
@@ -55,7 +53,7 @@ class Php extends AbstractFileParser
 
     /**
      * {@inheritDoc}
-     * @since 0.1
+     * @since 0.1.0
      */
     public function getSupportedFileExtensions()
     {

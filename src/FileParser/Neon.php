@@ -23,16 +23,16 @@ class Neon extends AbstractFileParser
      * Loads a NEON file as an array
      *
      * @throws ParseException If there is an error parsing NEON file
-     * @since 0.1
+     * @since 0.1.0
      */
     public function parse($path)
     {
         try {
             $content = file_get_contents($path);
-            $data    = NeonLib::decode($content);
+            $data = NeonLib::decode($content);
         } catch (Exception $ex) {
             throw new ParseException([
-                'message'   => 'Error parsing NEON file',
+                'message' => 'Error parsing NEON file',
                 'exception' => $ex,
             ]);
         }

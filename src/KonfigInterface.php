@@ -31,7 +31,7 @@ interface KonfigInterface
      * @param string $key
      * @param mixed $default
      * @return mixed
-     * @since 0.1
+     * @since 0.1.0
      */
     public function get($key, $default = null);
 
@@ -39,7 +39,7 @@ interface KonfigInterface
      * Getting all configuration values.
      *
      * @return array|object
-     * @since 0.1
+     * @since 0.1.0
      */
     public function all();
 
@@ -49,7 +49,7 @@ interface KonfigInterface
      *
      * @param string $key The key to check for
      * @return boolean
-     * @since 0.1
+     * @since 0.1.0
      */
     public function has($key);
 

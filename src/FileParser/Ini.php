@@ -16,20 +16,20 @@ use Exen\Konfig\Exception\ParseException;
 
 class Ini extends AbstractFileParser
 {
+    
     /**
      * {@inheritDoc}
      * Parses an INI file as an array
      *
      * @throws ParseException If there is an error parsing INI file
-     * @since 0.1
+     * @since 0.1.0
      */
     public function parse($path)
     {
-        $data = @parse_ini_file($path, true);
+        $data = @parse_ini_file($path);
 
         if (!$data) {
-            $error_message = error_get_last();
-            throw new ParseException($error_message);
+            throw new ParseException(error_get_last());
         }
 
         return $data;
@@ -37,7 +37,7 @@ class Ini extends AbstractFileParser
 
     /**
      * {@inheritDoc}
-     * @since 0.1
+     * @since 0.1.0
      */
     public function getSupportedFileExtensions()
     {

@@ -23,19 +23,17 @@ class Toml extends AbstractFileParser
      * Loads a TOML file as an array
      *
      * @throws ParseException If there is an error parsing TOML file
-     * @since 0.1
+     * @since 0.1.0
      */
     public function parse($path)
     {
         try {
             $data = TomlLib::Parse($path);
         } catch (Exception $ex) {
-            throw new ParseException(
-                [
-                    'message'   => 'Error parsing TOML file',
-                    'exception' => $ex,
-                ]
-            );
+            throw new ParseException([
+                'message' => 'Error parsing TOML file',
+                'exception' => $ex,
+            ]);
         }
 
         return $data;

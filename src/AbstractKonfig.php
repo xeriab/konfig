@@ -13,8 +13,10 @@
 namespace Exen\Konfig;
 
 use ArrayAccess;
-use Exen\Konfig\Utils;
 use Iterator;
+
+use Exen\Konfig\Arr;
+use Exen\Konfig\Utils;
 
 abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
 {
@@ -22,7 +24,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      * Stores the configuration items
      *
      * @var array
-     * @since 0.1
+     * @since 0.1.0
      */
     protected $data = [];
 
@@ -30,26 +32,26 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      * Caches the configuration data
      *
      * @var array
-     * @since 0.1
+     * @since 0.1.0
      */
     protected $cache = [];
 
     /**
      * @var string $defaultCheckValue Random value used as a not-found check in get()
-     * @since 0.1
+     * @since 0.1.0
      */
-    static $defaultCheckValue;
+    static protected $defaultCheckValue;
 
     /**
      * Constructor method and sets default options, if any
      *
      * @param array $input
-     * @since 0.1
+     * @since 0.1.0
      */
     public function __construct($input)
     {
-        $this->data = array_merge($this->getDefaults(), $input);
-        // $this->data = Utils::arrayMerge($this->getDefaults(), $input);
+        $this->data = Arr::mergeAssoc($this->getDefaults(), $input);
+        //$this->data = array_merge($this->getDefaults(), $input);
     }
 
     /**
@@ -58,7 +60,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      *
      * @codeCoverageIgnore
      * @return array
-     * @since 0.1
+     * @since 0.1.0
      */
     protected function getDefaults()
     {
@@ -83,7 +85,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
         }
 
         $chunks = explode('.', $key);
-        $root   = $this->data;
+        $root = $this->data;
 
         // Nested case
         foreach ($chunks as $chunk) {
@@ -118,8 +120,8 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      */
     public function set($key, $value)
     {
-        $chunks   = explode('.', $key);
-        $root     = &$this->data;
+        $chunks = explode('.', $key);
+        $root = &$this->data;
         $cacheKey = '';
 
         // Look for the key, creating nested keys if needed
@@ -161,10 +163,11 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     public function delete($key)
     {
         if (isset($this->cache[$key])) {
-            unset($this->cache[$key]);
+            // unset($this->cache[$key]);
+            Arr::delete($this->cache, $key);
         }
 
-        return Utils::arrayDelete($this->data, $key);
+        return Arr::delete($this->data, $key);
     }
 
     #: ArrayAccess Methods
@@ -174,7 +177,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      *
      * @param  string $offset
      * @return mixed
-     * @since 0.1
+     * @since 0.1.0
      */
     public function offsetGet($offset)
     {
@@ -186,7 +189,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      *
      * @param  string $offset
      * @return bool
-     * @since 0.1
+     * @since 0.1.0
      */
     public function offsetExists($offset)
     {
@@ -199,7 +202,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      * @param string $offset
      * @param mixed $value
      * @return void
-     * @since 0.1
+     * @since 0.1.0
      */
     public function offsetSet($offset, $value)
     {
@@ -211,7 +214,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      *
      * @param  string $offset
      * @return void
-     * @since 0.1
+     * @since 0.1.0
      */
     public function offsetUnset($offset)
     {
@@ -224,7 +227,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      * Tests whether the iterator's current index is valid
      *
      * @return bool True if the current index is valid; false otherwise
-     * @since 0.1
+     * @since 0.1.0
      */
     public function valid()
     {
@@ -237,7 +240,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      * @return mixed The index referenced by the data array's internal cursor.
      * If the array is empty or undefined or there is no element at the cursor,
      * the function returns null
-     * @since 0.1
+     * @since 0.1.0
      */
     public function key()
     {
@@ -251,7 +254,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      * If the array is empty or there is no element at the cursor,
      * the function returns false. If the array is undefined, the function
      * returns null
-     * @since 0.1
+     * @since 0.1.0
      */
     public function current()
     {
@@ -265,7 +268,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      * after the move is completed. If there are no more elements in the
      * array after the move, the function returns false. If the data array
      * is undefined, the function returns null
-     * @since 0.1
+     * @since 0.1.0
      */
     public function next()
     {
@@ -278,11 +281,20 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      * @return mixed The element referenced by the data array's internal cursor
      * after the move is completed. If the data array is empty, the function
      * returns false. If the data array is undefined, the function returns null
-     * @since 0.1
+     * @since 0.1.0
      */
     public function rewind()
     {
         return (is_array($this->data) ? reset($this->data) : null);
+    }
+
+    /**
+     * @return string
+     * @since 0.1.2
+     */
+    public function __toString()
+    {
+        return 'Exen\Konfig\AbstractKonfig' . PHP_EOL;
     }
 }
 

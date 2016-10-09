@@ -20,7 +20,7 @@ interface FileParser
      * @param string $path Path to parse
      *
      * @return array
-     * @since 0.1
+     * @since 0.1.0
      */
     public function parse($path);
 
@@ -28,7 +28,7 @@ interface FileParser
      * Returns an array of allowed file extensions for this parser
      *
      * @return array
-     * @since 0.1
+     * @since 0.1.0
      */
     public function getSupportedFileExtensions();
 }

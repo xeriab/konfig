@@ -23,7 +23,7 @@ class Yaml extends AbstractFileParser
      * Loads a YAML/YML file as an array
      *
      * @throws ParseException If there is an error parsing YAML/YML file
-     * @since 0.1
+     * @since 0.1.0
      */
     public function parse($path)
     {
@@ -36,7 +36,7 @@ class Yaml extends AbstractFileParser
             }
         } catch (Exception $ex) {
             throw new ParseException([
-                'message'   => 'Error parsing YAML file',
+                'message' => 'Error parsing YAML file',
                 'exception' => $ex,
             ]);
         }

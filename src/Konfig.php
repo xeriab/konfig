@@ -12,15 +12,17 @@
 
 namespace Exen\Konfig;
 
+use Exen\Konfig\Exception;
 use Exen\Konfig\Exception\EmptyDirectoryException;
 use Exen\Konfig\Exception\FileNotFoundException;
 use Exen\Konfig\Exception\UnsupportedFileFormatException;
+use Exen\Konfig\Arr;
 
 final class Konfig extends AbstractKonfig
 {
     /**
      * @var FileParser[] $fileParsers Array of file parsers objects
-     * @since 0.1
+     * @since 0.1.0
      */
     protected $fileParsers;
 
@@ -28,9 +30,11 @@ final class Konfig extends AbstractKonfig
      * Stores loaded configuration files
      *
      * @var array $loadedFiles Array of loaded configuration files
-     * @since 0.1
+     * @since 0.1.0
      */
     protected static $loadedFiles = [];
+    
+    static protected $loadedData = null;
 
     /**
      * Loads a supported configuration file format.
@@ -38,7 +42,7 @@ final class Konfig extends AbstractKonfig
      * @param  string|array|mixed $path String file | configuration array | Konfig instance
      * @throws EmptyDirectoryException If `$path` is an empty directory
      */
-    public function __construct($path, array $parsers = [])
+    public function __construct($path = null, array $parsers = [])
     {
         $this->setFileParsers($parsers);
 
@@ -51,7 +55,7 @@ final class Konfig extends AbstractKonfig
             $info = pathinfo($path);
             // $info  = pathinfo($path, PATHINFO_EXTENSION);
             $parts = explode('.', $info['basename']);
-            $ext   = array_pop($parts);
+            $ext = array_pop($parts);
 
             if ($ext === 'dist') {
                 $ext = array_pop($parts);
@@ -64,6 +68,8 @@ final class Konfig extends AbstractKonfig
 
             self::$loadedFiles[$path] = true;
         }
+        
+        self::$loadedData = $this->data;
 
         parent::__construct($this->data);
     }
@@ -72,11 +78,12 @@ final class Konfig extends AbstractKonfig
      * Static method for loading a Konfig instance.
      *
      * @param  string|array|mixed $path string file | configuration array | Konfig instance
+     * @param  array $parsers Parsers to use with Konfig
      * @return Konfig
      */
-    public static function load($path = null)
+    public static function load($path = null, array $parsers = [])
     {
-        return new static($path);
+        return new static($path, $parsers);
     }
 
     /**
@@ -96,12 +103,12 @@ final class Konfig extends AbstractKonfig
      */
     public static function keys()
     {
-        // @TODO: Fix this soon
+        return Arr::recursiveKeys(self::$loadedData);
     }
 
     /**
      * @return FileParser[]
-     * @since 0.1
+     * @since 0.1.0
      */
     public function getFileParsers()
     {
@@ -110,7 +117,7 @@ final class Konfig extends AbstractKonfig
 
     /**
      * @return void
-     * @since 0.1
+     * @since 0.1.0
      */
     protected function addFileParser(FileParser $fileParser)
     {
@@ -119,7 +126,7 @@ final class Konfig extends AbstractKonfig
 
     /**
      * @return void
-     * @since 0.1
+     * @since 0.1.0
      */
     protected function setFileParsers(array $fileParsers = [])
     {
@@ -145,16 +152,17 @@ final class Konfig extends AbstractKonfig
     /**
      * Gets a parser for a given file extension
      *
-     * @param  string $ext
+     * @param  string $ext File extension
      * @return Konfig\FileParser
+     * @throws Exception If `$ext` is empty
      * @throws UnsupportedFileFormatException If `$path` is an unsupported file format
      */
-    private function getParser($ext)
+    private function getParser($ext = null)
     {
         $parser = null;
 
         if (empty($ext)) {
-            // @TODO: Throw an exception.
+            throw new Exception('Files with empty extensions are not allowed');
         }
 
         $fileParsers = $this->getFileParsers();
@@ -177,11 +185,11 @@ final class Konfig extends AbstractKonfig
     /**
      * Gets an array of paths
      *
-     * @param array $path
+     * @param array $path Path to analyze and handle
      * @return array
      * @throws FileNotFoundException If a file is not found in `$path`
      */
-    private function pathFromArray($path)
+    private function pathFromArray($path = null)
     {
         $paths = [];
 
@@ -215,7 +223,7 @@ final class Konfig extends AbstractKonfig
     /**
      * Checks `$path` to see if it is either an array, a directory, or a file
      *
-     * @param  string|array $path
+     * @param  string|array $path Path to analyze and handle
      * @return array
      * @throws EmptyDirectoryException If `$path` is an empty directory
      * @throws FileNotFoundException If a file is not found at `$path`
@@ -248,11 +256,11 @@ final class Konfig extends AbstractKonfig
 
     /**
      * @return string
-     * @since 0.1
+     * @since 0.1.2
      */
     public function __toString()
     {
-        return 'Konfig';
+        return 'Exen\Konfig\Konfig' . PHP_EOL;
     }
 }
 
