@@ -163,12 +163,6 @@ $ phpunit
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
-
-## Security
-
-If you discover any security related issues, please email [kodeburner@gmail.com](mailto:kodeburner@gmail.com?subject=[SECURITY] Konfig Security Issue) instead of using the issue tracker.
-
-
 ## Credits
 
 - [Xeriab Nabil](https://github.com/xeriab)
