@@ -51,7 +51,7 @@ class YamlTest extends \PHPUnit_Framework_TestCase
     public function testGetSupportedFileExtensions()
     {
         $expected = ['yaml', 'yml'];
-        $actual   = $this->yaml->getSupportedFileExtensions();
+        $actual = $this->yaml->getSupportedFileExtensions();
         $this->assertEquals($expected, $actual);
     }
 

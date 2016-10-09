@@ -51,7 +51,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
     public function testGetSupportedFileExtensions()
     {
         $expected = ['php', 'inc'];
-        $actual   = $this->php->getSupportedFileExtensions();
+        $actual = $this->php->getSupportedFileExtensions();
         $this->assertEquals($expected, $actual);
     }
 

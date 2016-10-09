@@ -12,7 +12,7 @@
 
 namespace Exen\Konfig\Test;
 
-use Exen\Konfig\AbstractKonfig;
+//use Exen\Konfig\AbstractKonfig;
 use Exen\Konfig\Test\Fixture\SimpleKonfig;
 
 /**
@@ -35,21 +35,21 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->konfig = new SimpleKonfig(
-            [
-                'host'    => 'localhost',
-                'port'    => 80,
-                'servers' => [
-                    'host1',
-                    'host2',
-                    'host3',
-                ],
-                'app'     => [
-                    'name'    => 'konfig',
-                    'secret'  => 'secret',
-                    'runtime' => null,
-                ],
-                'user'    => null,
-            ]
+                [
+            'host' => 'localhost',
+            'port' => 80,
+            'servers' => [
+                'host1',
+                'host2',
+                'host3',
+            ],
+            'app' => [
+                'name' => 'konfig',
+                'secret' => 'secret',
+                'runtime' => null,
+            ],
+            'user' => null,
+                ]
         );
     }
 
@@ -68,12 +68,10 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultOptionsSetOnInstantiation()
     {
-        $konfig = new SimpleKonfig(
-            array(
-                'host' => 'localhost',
-                'port' => 80,
-            )
-        );
+        $konfig = new SimpleKonfig([
+            'host' => 'localhost',
+            'port' => 80,
+        ]);
 
         $this->assertEquals('localhost', $konfig->get('host'));
         $this->assertEquals(80, $konfig->get('port'));
@@ -160,10 +158,10 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetArray()
     {
-        $this->konfig->set('database', array(
+        $this->konfig->set('database', [
             'host' => 'localhost',
             'name' => 'mydatabase',
-        ));
+        ]);
         $this->assertTrue(is_array($this->konfig->get('database')));
         $this->assertEquals('localhost', $this->konfig->get('database.host'));
     }
@@ -173,40 +171,40 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testCacheWithNestedArray()
     {
-        $this->konfig->set('database', array(
+        $this->konfig->set('database', [
             'host' => 'localhost',
             'name' => 'mydatabase',
-        ));
+        ]);
         $this->assertTrue(is_array($this->konfig->get('database')));
         $this->konfig->set('database.host', '127.0.0.1');
-        $expected = array(
+        $expected = [
             'host' => '127.0.0.1',
             'name' => 'mydatabase',
-        );
+        ];
         $this->assertEquals($expected, $this->konfig->get('database'));
 
-        $this->konfig->set('config', array(
-            'database' => array(
+        $this->konfig->set('config', [
+            'database' => [
                 'host' => 'localhost',
                 'name' => 'mydatabase',
-            ),
-        ));
+            ],
+        ]);
         $this->konfig->get('config'); //Just get to set related cache
         $this->konfig->get('config.database'); //Just get to set related cache
 
         $this->konfig->set('config.database.host', '127.0.0.1');
-        $expected = array(
-            'database' => array(
+        $expected = [
+            'database' => [
                 'host' => '127.0.0.1',
                 'name' => 'mydatabase',
-            ),
-        );
+            ],
+        ];
         $this->assertEquals($expected, $this->konfig->get('config'));
 
-        $expected = array(
+        $expected = [
             'host' => '127.0.0.1',
             'name' => 'mydatabase',
-        );
+        ];
         $this->assertEquals($expected, $this->konfig->get('config.database'));
     }
 
@@ -215,22 +213,22 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testCacheWithNestedMiddleArray()
     {
-        $this->konfig->set('config', array(
-            'database' => array(
+        $this->konfig->set('config', [
+            'database' => [
                 'host' => 'localhost',
                 'name' => 'mydatabase',
-            ),
-        ));
+            ],
+        ]);
 
         $this->konfig->get('config'); // Just get to set related cache
         $this->konfig->get('config.database'); // Just get to set related cache
         $this->konfig->get('config.database.host'); // Just get to set related cache
         $this->konfig->get('config.database.name'); // Just get to set related cache
 
-        $this->konfig->set('config.database', array(
+        $this->konfig->set('config.database', [
             'host' => '127.0.0.1',
             'name' => 'mynewdatabase',
-        ));
+        ]);
         $this->assertEquals('127.0.0.1', $this->konfig->get('config.database.host'));
         $this->assertEquals('mynewdatabase', $this->konfig->get('config.database.name'));
     }
@@ -240,10 +238,10 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetAndUnsetArray()
     {
-        $this->konfig->set('database', array(
+        $this->konfig->set('database', [
             'host' => 'localhost',
             'name' => 'mydatabase',
-        ));
+        ]);
         $this->assertTrue(is_array($this->konfig->get('database')));
         $this->assertEquals('localhost', $this->konfig->get('database.host'));
         $this->konfig->set('database.host', null);
@@ -279,19 +277,19 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
     public function testAll()
     {
         $all = [
-            'host'    => 'localhost',
-            'port'    => 80,
+            'host' => 'localhost',
+            'port' => 80,
             'servers' => [
                 'host1',
                 'host2',
                 'host3',
             ],
-            'app'     => [
-                'name'    => 'konfig',
-                'secret'  => 'secret',
+            'app' => [
+                'name' => 'konfig',
+                'secret' => 'secret',
                 'runtime' => null,
             ],
-            'user'    => null,
+            'user' => null,
         ];
 
         $this->assertEquals($all, $this->konfig->all());
@@ -458,14 +456,14 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
     public function testIterator()
     {
         /* Create numerically indexed copies of the test config */
-        $expectedKeys   = ['host', 'port', 'servers', 'app', 'user'];
+        $expectedKeys = ['host', 'port', 'servers', 'app', 'user'];
         $expectedValues = [
             'localhost',
             80,
             ['host1', 'host2', 'host3'],
             [
-                'name'    => 'konfig',
-                'secret'  => 'secret',
+                'name' => 'konfig',
+                'secret' => 'secret',
                 'runtime' => null,
             ],
             null,

@@ -51,7 +51,7 @@ class IniTest extends \PHPUnit_Framework_TestCase
     public function testGetSupportedFileExtensions()
     {
         $expected = ['ini', 'cfg'];
-        $actual   = $this->ini->getSupportedFileExtensions();
+        $actual = $this->ini->getSupportedFileExtensions();
         $this->assertEquals($expected, $actual);
     }
 

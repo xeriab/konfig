@@ -1,9 +1,8 @@
 #
 
-# %YAML 1.2
-
----
-
 Key1: Value1
+Key2:
+    keyOne: Hello
+    keyTwo: null
 
 #: END OF test.yml FILE

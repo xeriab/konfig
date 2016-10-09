@@ -51,7 +51,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     public function testGetSupportedFileExtensions()
     {
         $expected = ['json'];
-        $actual   = $this->json->getSupportedFileExtensions();
+        $actual = $this->json->getSupportedFileExtensions();
         $this->assertEquals($expected, $actual);
     }
 

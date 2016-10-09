@@ -19,15 +19,15 @@ class SimpleKonfig extends AbstractKonfig
     protected function getDefaults()
     {
         return [
-            'host'    => 'localhost',
-            'port'    => 80,
+            'host' => 'localhost',
+            'port' => 80,
             'servers' => [
                 'host1',
                 'host2',
                 'host3',
             ],
-            'app'     => [
-                'name'   => 'konfig',
+            'app' => [
+                'name' => 'konfig',
                 'secret' => 'secret',
             ],
         ];
