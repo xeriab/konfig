@@ -2,6 +2,7 @@
 
 test.php
 tool.bat
+tool.sh
 composer.lock
 composer.bak.json
 coverage.clover
