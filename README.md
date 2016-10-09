@@ -46,7 +46,7 @@ $config = new Konfig(['konfig.json', 'konfig.xml']);
 $config = new Konfig(__DIR__ . '/konfig');
 
 // Load values from optional files
-$config = new Konfig(['konfig.dist.json', '?konfig.json']);
+$config = new Konfig(['konfig.dist.json', 'konfig.json']);
 ```
 
 Files are parsed and loaded depending on the file extension. Note that when
