@@ -12,7 +12,7 @@ and YML files.
 
 ## Requirements
 
-Konfig requires PHP 5.4+, and suggests using [Yosymfony Toml Parser](https://github.com/yosymfony/Toml), [Nette NEON](https://github.com/nette/neon) and [Symfony YAML](https://github.com/symfony/Yaml).
+Konfig requires PHP 5.6+, and suggests using [Yosymfony Toml Parser](https://github.com/yosymfony/Toml), [Nette NEON](https://github.com/nette/neon) and [Symfony YAML](https://github.com/symfony/Yaml).
 
 ## Installation
 
@@ -36,17 +36,17 @@ by direct instantiation:
 use Exen\Konfig\Konfig;
 
 // Load a single file
-$cfg = Konfig::load('konfig.json');
-$cfg = new Konfig('konfig.json');
+$config = Konfig::load('konfig.json');
+$config = new Konfig('konfig.json');
 
 // Load values from multiple files
-$cfg = new Konfig(['konfig.json', 'konfig.xml']);
+$config = new Konfig(['konfig.json', 'konfig.xml']);
 
 // Load all supported files in a directory
-$cfg = new Konfig(__DIR__ . '/konfig');
+$config = new Konfig(__DIR__ . '/konfig');
 
 // Load values from optional files
-$cfg = new Konfig(['konfig.dist.json', '?konfig.json']);
+$config = new Konfig(['konfig.dist.json', '?konfig.json']);
 ```
 
 Files are parsed and loaded depending on the file extension. Note that when
@@ -62,33 +62,33 @@ Getting values can be done in three ways. One, by using the `get()` method:
 
 ```php
 // Get value using key
-$debug = $cfg->get('debug');
+$debug = $config->get('debug');
 
 // Get value using nested key
-$secret = $cfg->get('security.secret');
+$secret = $config->get('security.secret');
 
 // Get a value with a fallback
-$ttl = $cfg->get('app.timeout', 3000);
+$ttl = $config->get('app.timeout', 3000);
 ```
 
 The second method, is by using it like an array:
 
 ```php
 // Get value using a simple key
-$debug = $cfg['debug'];
+$debug = $config['debug'];
 
 // Get value using a nested key
-$secret = $cfg['security.secret'];
+$secret = $config['security.secret'];
 
 // Get nested value like you would from a nested array
-$secret = $cfg['security']['secret'];
+$secret = $config['security']['secret'];
 ```
 
 The third method, is by using the `all()` method:
 
 ```php
 // Get all values
-$data = $cfg->all();
+$data = $config->all();
 ```
 
 ### Setting values
@@ -99,22 +99,22 @@ source files**. By design, if you need to make changes to your
 configuration files, you have to do it manually.
 
 ```php
-$cfg = Konfig::load('konfig.json');
+$config = Konfig::load('konfig.json');
 
 // Sample value from our konfig file
-assert($cfg['secret'] == '123');
+assert($config['secret'] == '123');
 
 // Update konfig value to something else
-$cfg['secret'] = '456';
+$config['secret'] = '456';
 
 // Reload the file
-$cfg = Konfig::load('konfig.json');
+$config = Konfig::load('konfig.json');
 
 // Same value as before
-assert($cfg['secret'] == '123');
+assert($config['secret'] == '123');
 
 // This will fail
-assert($cfg['secret'] == '456');
+assert($config['secret'] == '456');
 ```
 
 ### Using with default values
@@ -124,27 +124,29 @@ application settings, without needing file I/O. You can do this by extending
 the `AbstractKonfig` class and populating the `getDefaults()` method:
 
 ```php
+
 use Exen\Konfig\AbstractKonfig;
 
 class MyKonfig extends AbstractKonfig
 {
     protected function getDefaults()
     {
-        return array(
-            'host'    => 'localhost',
-            'port'    => 80,
-            'servers' => array(
+        return [
+            'host' => 'localhost',
+            'port' => 80,
+            'servers' => [
                 'host1',
                 'host2',
                 'host3',
-            ),
-            'app'     => array(
-                'name'   => 'konfig',
+            ],
+            'app' => [
+                'name' => 'konfig',
                 'secret' => 'secret',
-            ),
-        );
+            ],
+        ];
     }
 }
+
 ```
 
 ### Examples of supported configuration files
