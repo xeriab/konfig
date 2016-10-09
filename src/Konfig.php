@@ -189,7 +189,7 @@ final class Konfig extends AbstractKonfig
      * @return array
      * @throws FileNotFoundException If a file is not found in `$path`
      */
-    private function pathFromArray($path = null)
+    private function pathFromArray($path)
     {
         $paths = [];
 
@@ -228,7 +228,7 @@ final class Konfig extends AbstractKonfig
      * @throws EmptyDirectoryException If `$path` is an empty directory
      * @throws FileNotFoundException If a file is not found at `$path`
      */
-    private function getValidPath($path = null)
+    private function getValidPath($path)
     {
         // If `$path` is array
         if (is_array($path)) {

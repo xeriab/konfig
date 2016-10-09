@@ -14,6 +14,7 @@ namespace Exen\Konfig;
 
 use ArrayAccess;
 use InvalidArgumentException;
+use Exen\Konfig\Utils;
 
 final class Arr
 {
@@ -51,7 +52,7 @@ final class Arr
         foreach (explode('.', $key) as $key_part) {
             if (($array instanceof ArrayAccess && isset($array[$key_part])) === false) {
                 if (!is_array($array) or ! array_key_exists($key_part, $array)) {
-                    return self::checkValue($default);
+                    return Utils::checkValue($default);
                 }
             }
 
