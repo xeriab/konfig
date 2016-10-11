@@ -34,4 +34,4 @@ class SimpleKonfig extends AbstractKonfig
     }
 }
 
-#: END OF ./tests/Fixture/SimpleKonfig.php FILE
+// END OF ./tests/Fixture/SimpleKonfig.php FILE

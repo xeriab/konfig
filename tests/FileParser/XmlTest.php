@@ -76,4 +76,4 @@ class XmlTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-#: END OF ./tests/FileParser/XmlTest.php FILE
+// END OF ./tests/FileParser/XmlTest.php FILE

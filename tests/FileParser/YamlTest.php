@@ -76,4 +76,4 @@ class YamlTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-#: END OF ./tests/FileParser/YamlTest.php FILE
+// END OF ./tests/FileParser/YamlTest.php FILE

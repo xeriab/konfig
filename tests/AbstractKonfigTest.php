@@ -34,8 +34,7 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->konfig = new SimpleKonfig(
-                [
+        $this->konfig = new SimpleKonfig([
             'host' => 'localhost',
             'port' => 80,
             'servers' => [
@@ -49,8 +48,7 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
                 'runtime' => null,
             ],
             'user' => null,
-                ]
-        );
+        ]);
     }
 
     /**
@@ -486,4 +484,4 @@ class AbstractKonfigTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-#: END OF ./tests/AbstractKonfigTest.php FILE
+// END OF ./tests/AbstractKonfigTest.php FILE

@@ -1,15 +1,15 @@
 <?php
 
-return array(
+return [
     'host' => 'localhost',
     'port' => 80,
-    'servers' => array(
+    'servers' => [
         'host1',
         'host2',
         'host3',
-    ),
-    'app' => array(
+    ],
+    'app' => [
         'name' => 'konfig',
         'secret' => 'secret',
-    ),
-);
+    ],
+];

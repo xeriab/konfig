@@ -36,12 +36,12 @@ if (!defined('PS')) {
     define('PS', '/');
 } // END if
 
-#:---
+//---
 
 if (!function_exists('_fixPath')) {
-    function _fixPath($path = null)
+    function _fixPath(string $path = null)
     {
-        $_path = null;
+        static $_path = null;
 
         if (IS_WIN) {
             $_path = str_replace(DS, '\\', $path);
@@ -54,23 +54,26 @@ if (!function_exists('_fixPath')) {
     } // END OF _fixPath FUNCTION
 } // END if
 
-#:---
+//---
 
 // DEFINES
 if (!defined('ROOT_DIR')) {
-    define('ROOT_DIR', _fixPath(realpath(__DIR__ . '../../') . DS));
+    // define('ROOT_DIR', _fixPath(realpath(__DIR__ . '../../') . DS));
+    define('ROOT_DIR', realpath(__DIR__ . '../../') . DS);
 }
 
 if (!defined('KONFIG_TEST_MOCKS')) {
-    define('KONFIG_TEST_MOCKS', _fixPath(ROOT_DIR . 'tests' . DS . 'mocks' . DS));
+    // define('KONFIG_TEST_MOCKS', _fixPath(ROOT_DIR . 'tests' . DS . 'mocks' . DS));
+    define('KONFIG_TEST_MOCKS', ROOT_DIR . 'tests' . DS . 'mocks' . DS);
 }
 
 if (!defined('KONFIG_TEST_FILES')) {
-    define('KONFIG_TEST_FILES', _fixPath(ROOT_DIR . 'tests' . DS . 'test_configs' . DS));
+    // define('KONFIG_TEST_FILES', _fixPath(ROOT_DIR . 'tests' . DS . 'test_configs' . DS));
+    define('KONFIG_TEST_FILES', ROOT_DIR . 'tests' . DS . 'test_configs' . DS);
 }
 
-#:---
+//---
 
 require_once '../vendor/autoload.php';
 
-#: END OF ./tests/bootstrap.php FILE
+// END OF ./tests/bootstrap.php FILE

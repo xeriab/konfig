@@ -76,4 +76,4 @@ class IniTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-#: END OF ./tests/FileParser/IniTest.php FILE
+// END OF ./tests/FileParser/IniTest.php FILE

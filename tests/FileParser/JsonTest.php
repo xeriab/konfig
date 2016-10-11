@@ -76,4 +76,4 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-#: END OF ./tests/FileParser/JsonTest.php FILE
+// END OF ./tests/FileParser/JsonTest.php FILE

@@ -250,16 +250,14 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                new Konfig(
-                    [
-                        __DIR__ . '/mocks/' . 'pass/config2.json',
-                        __DIR__ . '/mocks/' . 'pass/config.yaml',
-                    ]
-                ),
+                new Konfig([
+                    __DIR__ . '/mocks/' . 'pass/config2.json',
+                    __DIR__ . '/mocks/' . 'pass/config.yaml',
+                ]),
                 new Konfig(__DIR__ . '/mocks/' . 'dir/'),
             ],
         ];
     }
 }
 
-#: END OF ./tests/KonfigTest.php FILE
+// END OF ./tests/KonfigTest.php FILE
