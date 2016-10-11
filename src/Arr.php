@@ -40,8 +40,8 @@ final class Arr
         if (is_array($key)) {
             $return = [];
 
-            foreach ($key as $key) {
-                $return[$key] = self::get($array, $key, $default);
+            foreach ($key as $k) {
+                $return[$k] = self::get($array, $k, $default);
             }
 
             return $return;
@@ -78,8 +78,8 @@ final class Arr
         }
 
         if (is_array($key)) {
-            foreach ($key as $key => $value) {
-                self::set($array, $key, $value);
+            foreach ($key as $k => $v) {
+                self::set($array, $k, $v);
             }
         } else {
             $keys = explode('.', $key);
@@ -196,8 +196,8 @@ final class Arr
         if (is_array($key)) {
             $return = [];
 
-            foreach ($key as $key) {
-                $return[$key] = self::delete($array, $key);
+            foreach ($key as $k) {
+                $return[$k] = self::delete($array, $k);
             }
 
             return $return;
