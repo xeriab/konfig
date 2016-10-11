@@ -12,11 +12,9 @@
 
 namespace Exen\Konfig\Exception;
 
-use Exen\Konfig\Exception;
-
 class UnsupportedFileFormatException extends Exception
 {
     // Nothing to put here
 }
 
-#: END OF ./src/Exception/ParseException.php FILE
+// END OF ./src/Exception/ParseException.php FILE

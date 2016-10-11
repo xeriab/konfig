@@ -12,11 +12,9 @@
 
 namespace Exen\Konfig\Exception;
 
-use Exen\Konfig\Exception;
-
 class FileNotFoundException extends Exception
 {
     // Nothing to put here!
 }
 
-#: END OF ./src/Exception/FileNotFoundException.php FILE
+// END OF ./src/Exception/FileNotFoundException.php FILE

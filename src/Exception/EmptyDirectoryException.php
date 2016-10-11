@@ -12,11 +12,9 @@
 
 namespace Exen\Konfig\Exception;
 
-use Exen\Konfig\Exception;
-
 class EmptyDirectoryException extends Exception
 {
     // Nothing to put here!
 }
 
-#: END OF ./src/Exception/EmptyDirectoryException.php FILE
+// END OF ./src/Exception/EmptyDirectoryException.php FILE
