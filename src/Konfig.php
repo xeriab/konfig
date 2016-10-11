@@ -12,10 +12,11 @@
 
 namespace Exen\Konfig;
 
-use Exen\Konfig\Exception;
+use Exen\Konfig\Exception\Exception;
 use Exen\Konfig\Exception\EmptyDirectoryException;
 use Exen\Konfig\Exception\FileNotFoundException;
 use Exen\Konfig\Exception\UnsupportedFileFormatException;
+
 use Exen\Konfig\Arr;
 
 final class Konfig extends AbstractKonfig
@@ -99,6 +100,7 @@ final class Konfig extends AbstractKonfig
     /**
      * Static method for getting all Konfig keys.
      *
+     * @codeCoverageIgnore
      * @return array
      */
     public static function keys()
@@ -256,6 +258,7 @@ final class Konfig extends AbstractKonfig
 
     /**
      * @return string
+     * @codeCoverageIgnore
      * @since 0.1.2
      */
     public function __toString()
@@ -264,4 +267,4 @@ final class Konfig extends AbstractKonfig
     }
 }
 
-#: END OF ./src/Konfig.php FILE
+// END OF ./src/Konfig.php FILE

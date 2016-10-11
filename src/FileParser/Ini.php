@@ -12,11 +12,11 @@
 
 namespace Exen\Konfig\FileParser;
 
+use Exen\Konfig\Exception\Exception;
 use Exen\Konfig\Exception\ParseException;
 
 class Ini extends AbstractFileParser
 {
-    
     /**
      * {@inheritDoc}
      * Parses an INI file as an array
@@ -26,7 +26,7 @@ class Ini extends AbstractFileParser
      */
     public function parse($path)
     {
-        $data = @parse_ini_file($path);
+        $data = @parse_ini_file(realpath($path));
 
         if (!$data) {
             throw new ParseException(error_get_last());
@@ -45,4 +45,4 @@ class Ini extends AbstractFileParser
     }
 }
 
-#: END OF ./src/FileParser/Ini.php FILE
+// END OF ./src/FileParser/Ini.php FILE

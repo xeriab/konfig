@@ -25,10 +25,15 @@ class Xml extends AbstractFileParser
      */
     public function parse($path)
     {
-        $data = simplexml_load_file($path, 'SimpleXMLElement', LIBXML_NOWARNING | LIBXML_NOERROR);
+        $data = simplexml_load_file(
+            realpath($path),
+            'SimpleXMLElement',
+            LIBXML_NOWARNING | LIBXML_NOERROR
+        );
 
         if ($data === false) {
             $lastError = libxml_get_last_error();
+
             if ($lastError !== false) {
                 throw new ParseException([
                     'message' => $lastError->message,
@@ -40,7 +45,7 @@ class Xml extends AbstractFileParser
             }
         }
 
-        return \json_decode(\json_encode($data), true);
+        return json_decode(json_encode($data), true);
     }
 
     /**
@@ -52,4 +57,4 @@ class Xml extends AbstractFileParser
     }
 }
 
-#: END OF ./src/FileParser/Xml.php FILE
+// END OF ./src/FileParser/Xml.php FILE

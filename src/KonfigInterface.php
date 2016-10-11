@@ -63,4 +63,4 @@ interface KonfigInterface
     public function delete($key);
 }
 
-#: END OF ./src/KonfigInterface.php FILE
+// END OF ./src/KonfigInterface.php FILE

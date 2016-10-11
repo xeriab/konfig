@@ -12,8 +12,8 @@
 
 namespace Exen\Konfig\FileParser;
 
-use Exception;
 use Exen\Konfig\Exception\ParseException;
+
 use Yosymfony\Toml\Toml as TomlLib;
 
 class Toml extends AbstractFileParser
@@ -27,11 +27,14 @@ class Toml extends AbstractFileParser
      */
     public function parse($path)
     {
+        $data = null;
+
         try {
-            $data = TomlLib::Parse($path);
-        } catch (Exception $ex) {
+            $data = TomlLib::Parse(realpath($path));
+        } catch (\Exception $ex) {
             throw new ParseException([
                 'message' => 'Error parsing TOML file',
+                'file' => $path,
                 'exception' => $ex,
             ]);
         }
@@ -48,4 +51,4 @@ class Toml extends AbstractFileParser
     }
 }
 
-#: END OF ./src/FileParser/Toml.php FILE
+// END OF ./src/FileParser/Toml.php FILE

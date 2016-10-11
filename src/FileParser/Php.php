@@ -12,9 +12,10 @@
 
 namespace Exen\Konfig\FileParser;
 
-use Exception;
 use Exen\Konfig\Exception\ParseException;
 use Exen\Konfig\Exception\UnsupportedFileFormatException;
+
+use Exen\Konfig\Utils;
 
 class Php extends AbstractFileParser
 {
@@ -28,27 +29,30 @@ class Php extends AbstractFileParser
      */
     public function parse($path)
     {
+        $data = null;
+
         // Require the file, if it throws an exception, rethrow it
         try {
-            $temp = require $path;
-        } catch (Exception $ex) {
+            $data = Utils::load(realpath($path));
+        } catch (\Exception $ex) {
             throw new ParseException([
                 'message' => 'PHP file threw an exception',
+                'file' => $path,
                 'exception' => $ex,
             ]);
         }
 
         // If we have a callable, run it and expect an array back
-        if (is_callable($temp)) {
-            $temp = call_user_func($temp);
+        if (is_callable($data)) {
+            $data = call_user_func($data);
         }
 
         // Check for array, if its anything else, throw an exception
-        if (empty($temp) || !is_array($temp)) {
+        if (empty($data) || !is_array($data)) {
             throw new UnsupportedFileFormatException('PHP file does not return an array');
         }
 
-        return $temp;
+        return $data;
     }
 
     /**
@@ -61,4 +65,4 @@ class Php extends AbstractFileParser
     }
 }
 
-#: END OF ./src/FileParser/Php.php FILE
+// END OF ./src/FileParser/Php.php FILE

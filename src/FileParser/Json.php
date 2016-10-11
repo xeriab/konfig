@@ -25,7 +25,7 @@ class Json extends AbstractFileParser
      */
     public function parse($path)
     {
-        $data = json_decode(file_get_contents($path), true);
+        $data = json_decode(file_get_contents(realpath($path)), true);
 
         if (function_exists('json_last_error_msg')) {
             $error_message = json_last_error_msg();
@@ -53,4 +53,4 @@ class Json extends AbstractFileParser
     }
 }
 
-#: END OF ./src/FileParser/Json.php FILE
+// END OF ./src/FileParser/Json.php FILE

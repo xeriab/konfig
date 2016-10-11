@@ -19,7 +19,7 @@ abstract class AbstractFileParser implements FileParser
     /**
      * Configuration file
      *
-     * @var $file string
+     * @var string File
      * @since 0.1.0
      */
     protected $file;
@@ -27,12 +27,12 @@ abstract class AbstractFileParser implements FileParser
     /**
      * The configuration variables
      *
-     * @var $vars array
+     * @var array Variables
      * @since 0.1.0
      */
     protected $vars = [];
 
-    #: Protected Methods
+    // PROTECTED METHODS
 
     /**
      * Parses a string using all of the previously set variables.
@@ -42,7 +42,7 @@ abstract class AbstractFileParser implements FileParser
      * @return string
      * @since 0.1.0
      */
-    protected function parseVars($string = null)
+    protected function parseVars(string $string = null)
     {
         foreach ($this->vars as $var => $val) {
             $string = str_replace("%$var%", $val, $string);
@@ -63,18 +63,20 @@ abstract class AbstractFileParser implements FileParser
         static $replace = false;
 
         if ($replace === false) {
-            foreach ($this->vars as $x => $v) {
-                $replace['#^(' . preg_quote($v) . '){1}(.*)?#'] = '%' . $x . '%$2';
+            foreach ($this->vars as $key => $value) {
+                $replace['#^(' . preg_quote($value) . '){1}(.*)?#'] = '%' . $key . '%$2';
             }
         }
 
-        foreach ($array as $x => $value) {
+        foreach ($array as $key => $value) {
             if (is_string($value)) {
-                $array[$x] = preg_replace(
-                        array_keys($replace), array_values($replace), $value
+                $array[$key] = preg_replace(
+                    array_keys($replace),
+                    array_values($replace),
+                    $value
                 );
             } elseif (is_array($value)) {
-                $this->prepVars($array[$x]);
+                $this->prepVars($array[$key]);
             }
         }
     }
@@ -91,13 +93,13 @@ abstract class AbstractFileParser implements FileParser
 
     /**
      * @return string
+     * @codeCoverageIgnore
      * @since 0.1.2
      */
     public function __toString()
     {
         return 'Exen\Konfig\FileParser\AbstractFileParser' . PHP_EOL;
     }
-
 }
 
-#: END OF ./src/FileParser/AbstractFileParser.php FILE
+// END OF ./src/FileParser/AbstractFileParser.php FILE

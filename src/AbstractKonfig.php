@@ -12,18 +12,15 @@
 
 namespace Exen\Konfig;
 
-use ArrayAccess;
-use Iterator;
-
 use Exen\Konfig\Arr;
 use Exen\Konfig\Utils;
 
-abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
+abstract class AbstractKonfig implements \ArrayAccess, \Iterator, KonfigInterface
 {
     /**
      * Stores the configuration items
      *
-     * @var array
+     * @var array Data
      * @since 0.1.0
      */
     protected $data = [];
@@ -31,7 +28,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     /**
      * Caches the configuration data
      *
-     * @var array
+     * @var array Cache
      * @since 0.1.0
      */
     protected $cache = [];
@@ -67,7 +64,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
         return [];
     }
 
-    #: KonfigInterface Methods
+    // KONFIGINTERFACE METHODS
 
     public function all()
     {
@@ -170,7 +167,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
         return Arr::delete($this->data, $key);
     }
 
-    #: ArrayAccess Methods
+    // ARRAYACCESS METHODS
 
     /**
      * Gets a value using the offset as a key
@@ -221,7 +218,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
         $this->set($offset, null);
     }
 
-    #: Iterator Methods
+    // ITERATOR METHODS
 
     /**
      * Tests whether the iterator's current index is valid
@@ -290,6 +287,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
 
     /**
      * @return string
+     * @codeCoverageIgnore
      * @since 0.1.2
      */
     public function __toString()
@@ -298,4 +296,4 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     }
 }
 
-#: END OF ./src/AbstractKonfig.php FILE
+// END OF ./src/AbstractKonfig.php FILE
