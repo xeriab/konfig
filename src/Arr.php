@@ -12,13 +12,10 @@
 
 namespace Exen\Konfig;
 
-use ArrayAccess;
-use InvalidArgumentException;
 use Exen\Konfig\Utils;
 
 final class Arr
 {
-    
     /**
      * Gets a dot-notated key from an array, with a default value if it does
      * not exist.
@@ -27,12 +24,13 @@ final class Arr
      * @param mixed $key The dot-notated key or array of keys
      * @param string $default The default value
      * @return mixed
+     * @codeCoverageIgnore
      * @since 0.1.0
      */
-    public static function get(array $array, $key, $default = null)
+    public static function get(array $array, string $key, string $default = null)
     {
-        if (!is_array($array) && !$array instanceof ArrayAccess) {
-            throw new InvalidArgumentException('First parameter must be an array or ArrayAccess object.');
+        if (!is_array($array) && !$array instanceof \ArrayAccess) {
+            throw new \InvalidArgumentException('First parameter must be an array or ArrayAccess object.');
         }
 
         if (is_null($key)) {
@@ -42,15 +40,15 @@ final class Arr
         if (is_array($key)) {
             $return = [];
 
-            foreach ($key as $k) {
-                $return[$k] = self::get($array, $k, $default);
+            foreach ($key as $key) {
+                $return[$key] = self::get($array, $key, $default);
             }
 
             return $return;
         }
 
         foreach (explode('.', $key) as $key_part) {
-            if (($array instanceof ArrayAccess && isset($array[$key_part])) === false) {
+            if (($array instanceof \ArrayAccess && isset($array[$key_part])) === false) {
                 if (!is_array($array) or ! array_key_exists($key_part, $array)) {
                     return Utils::checkValue($default);
                 }
@@ -69,9 +67,10 @@ final class Arr
      * @param mixed $key The dot-notated key to set or array of keys
      * @param mixed $value The value
      * @return void
+     * @codeCoverageIgnore
      * @since 0.1.0
      */
-    public static function set(&$array, $key, $value = null)
+    public static function set(array &$array, string $key, string $value = null)
     {
         if (is_null($key)) {
             $array = $value;
@@ -79,8 +78,8 @@ final class Arr
         }
 
         if (is_array($key)) {
-            foreach ($key as $k => $v) {
-                self::set($array, $k, $v);
+            foreach ($key as $key => $value) {
+                self::set($array, $key, $value);
             }
         } else {
             $keys = explode('.', $key);
@@ -107,8 +106,9 @@ final class Arr
      *   value added using array_push()
      *
      * @param array multiple variables all of which must be arrays
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @return array
+     * @codeCoverageIgnore
      * @since 0.1.0
      */
     public static function merge()
@@ -117,22 +117,22 @@ final class Arr
         $arrays = array_slice(func_get_args(), 1);
 
         if (!is_array($array)) {
-            throw new InvalidArgumentException('Exen\Konfig\Arr::merge() - all arguments must be arrays.');
+            throw new \InvalidArgumentException('Exen\Konfig\Arr::merge() - all arguments must be arrays.');
         }
 
         foreach ($arrays as $arr) {
             if (!is_array($arr)) {
-                throw new InvalidArgumentException('Exen\Konfig\Arr::merge() - all arguments must be arrays.');
+                throw new \InvalidArgumentException('Exen\Konfig\Arr::merge() - all arguments must be arrays.');
             }
 
-            foreach ($arr as $k => $v) {
+            foreach ($arr as $key => $value) {
                 // Numeric keys are appended
-                if (is_int($k)) {
-                    array_key_exists($k, $array) ? array_push($array, $v) : $array[$k] = $v;
-                } elseif (is_array($v) && array_key_exists($k, $array) && is_array($array[$k])) {
-                    $array[$k] = self::merge($array[$k], $v);
+                if (is_int($key)) {
+                    array_key_exists($key, $array) ? array_push($array, $value) : $array[$key] = $value;
+                } elseif (is_array($value) && array_key_exists($key, $array) && is_array($array[$key])) {
+                    $array[$key] = self::merge($array[$key], $value);
                 } else {
-                    $array[$k] = $v;
+                    $array[$key] = $value;
                 }
             }
         }
@@ -147,8 +147,9 @@ final class Arr
      * - Numeric keys are never changed
      *
      * @param array multiple variables all of which must be arrays
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @return array
+     * @codeCoverageIgnore
      * @since 0.1.0
      */
     public static function mergeAssoc()
@@ -157,19 +158,19 @@ final class Arr
         $arrays = array_slice(func_get_args(), 1);
 
         if (!is_array($array)) {
-            throw new InvalidArgumentException('Exen\Konfig\Arr::mergeAssoc() - all arguments must be arrays.');
+            throw new \InvalidArgumentException('Exen\Konfig\Arr::mergeAssoc() - all arguments must be arrays.');
         }
 
         foreach ($arrays as $arr) {
             if (!is_array($arr)) {
-                throw new InvalidArgumentException('Exen\Konfig\Arr::mergeAssoc() - all arguments must be arrays.');
+                throw new \InvalidArgumentException('Exen\Konfig\Arr::mergeAssoc() - all arguments must be arrays.');
             }
 
-            foreach ($arr as $k => $v) {
-                if (is_array($v) && array_key_exists($k, $array) && is_array($array[$k])) {
-                    $array[$k] = static::mergeAssoc($array[$k], $v);
+            foreach ($arr as $key => $value) {
+                if (is_array($value) && array_key_exists($key, $array) && is_array($array[$key])) {
+                    $array[$key] = static::mergeAssoc($array[$key], $value);
                 } else {
-                    $array[$k] = $v;
+                    $array[$key] = $value;
                 }
             }
         }
@@ -183,9 +184,10 @@ final class Arr
      * @param array $array The search array
      * @param mixed $key The dot-notated key or array of keys
      * @return mixed
+     * @codeCoverageIgnore
      * @since 0.1.0
      */
-    public static function delete(array &$array, $key)
+    public static function delete(array &$array, string $key)
     {
         if (is_null($key)) {
             return false;
@@ -194,8 +196,8 @@ final class Arr
         if (is_array($key)) {
             $return = [];
 
-            foreach ($key as $k) {
-                $return[$k] = self::delete($array, $k);
+            foreach ($key as $key) {
+                $return[$key] = self::delete($array, $key);
             }
 
             return $return;
@@ -227,9 +229,10 @@ final class Arr
      * @param int $depth The search depth
      * @param array $arraykeys The array keys
      * @return array
+     * @codeCoverageIgnore
      * @since 0.1.0
      */
-    public static function keys(array $array, $maxDepth = INF, $depth = 0, array $arraykeys = [])
+    public static function keys(array $array, int $maxDepth = INF, int $depth = 0, array $arraykeys = [])
     {
         if ($depth < $maxDepth) {
             $depth++;
@@ -247,25 +250,26 @@ final class Arr
     
     /**
      * Get array keys recursively
-     * 
+     *
      * @param array $array The search array
      * @param type $search The search value
      * @return array
+     * @codeCoverageIgnore
      * @since 0.1.2
      */
-    public static function recursiveKeys(array $array, $search = null)
+    public static function recursiveKeys(array $array, string $search = null)
     {
         $return = (
-            $search !== null ? 
-            array_keys($array, $search) : 
+            $search !== null ?
+            array_keys($array, $search) :
             array_keys($array)
         );
         
         foreach ($array as $sub) {
             if (is_array($sub)) {
                 $return = (
-                    $search !== null ? 
-                    self::merge($return, self::recursiveKeys($sub, $search)) : 
+                    $search !== null ?
+                    self::merge($return, self::recursiveKeys($sub, $search)) :
                     self::merge($return, self::recursiveKeys($sub))
                 );
             }
@@ -275,6 +279,7 @@ final class Arr
     }
 
     /**
+     * @codeCoverageIgnore
      * @return string
      * @since 0.1.2
      */
@@ -284,4 +289,4 @@ final class Arr
     }
 }
 
-#: END OF ./src/Arr.php FILE
+// END OF ./src/Arr.php FILE

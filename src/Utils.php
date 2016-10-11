@@ -12,20 +12,20 @@
 
 namespace Exen\Konfig;
 
-use Closure;
-
 final class Utils
 {
     /**
      * Includes the given file and returns the results.
      *
-     * @param string The path to the file
+     * @param string $file The path to the file
+     * @param bool $once Require once or not
      * @return mixed The results of the include
+     * @codeCoverageIgnore
      * @since 0.1.0
      */
-    public static function load($file = null)
+    public static function load(string $file = null, bool $once = false)
     {
-        return require_once $file;
+        return ($once ? require_once $file : require $file);
     }
 
     /**
@@ -35,15 +35,17 @@ final class Utils
      *
      * @param mixed $var The value to get
      * @return mixed
+     * @codeCoverageIgnore
      * @since 0.1.0
      */
     public static function checkValue($var = null)
     {
-        return ($var instanceof Closure) ? $var() : $var;
+        return ($var instanceof \Closure) ? $var() : $var;
     }
 
     /**
      * @return string
+     * @codeCoverageIgnore
      * @since 0.1.2
      */
     public function __toString()
@@ -52,4 +54,4 @@ final class Utils
     }
 }
 
-#: END OF ./src/Utils.php FILE
+// END OF ./src/Utils.php FILE
