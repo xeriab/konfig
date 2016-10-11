@@ -1,0 +1,10 @@
+host = 'localhost'
+port = 80
+[app]
+name = 'konfig'
+secret = 'secret'
+servers = [
+	'host1',
+	'host2',
+	'host3'
+]
