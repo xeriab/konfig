@@ -12,8 +12,7 @@
 
 namespace Exen\Konfig\Exception;
 
-// class ParseException extends ErrorException
-class ParseException extends RuntimeException
+class ParseException extends ErrorException
 {
     private $parsedFile;
     private $parsedLine;
@@ -43,20 +42,20 @@ class ParseException extends RuntimeException
 
         $this->updateRepr();
 
-        parent::__construct(
-            $this->message,
-            0,
-            $previous
-        );
-
         // parent::__construct(
-        //     $message,
-        //     $code,
-        //     $severity,
-        //     $fileName,
-        //     $lineNo,
-        //     $exception
+        //     $this->message,
+        //     0,
+        //     $previous
         // );
+
+        parent::__construct(
+            $message,
+            $code,
+            $severity,
+            $fileName,
+            $lineNo,
+            $exception
+        );
     }
 
     /**
