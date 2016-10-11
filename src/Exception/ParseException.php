@@ -14,10 +14,10 @@ namespace Exen\Konfig\Exception;
 
 class ParseException extends ErrorException
 {
-    private $parsedFile;
-    private $parsedLine;
-    private $snippet;
-    private $rawMessage;
+    // private $parsedFile;
+    // private $parsedLine;
+    // private $snippet;
+    // private $rawMessage;
 
     /**
      * Constructor.
@@ -32,7 +32,7 @@ class ParseException extends ErrorException
         $fileName  = isset($error['file']) ? $error['file'] : __FILE__;
         $lineNo    = isset($error['line']) ? $error['line'] : __LINE__;
         $exception = isset($error['exception']) ? $error['exception'] : null;
-        $snippet   = isset($error['snippet']) ? $error['snippet'] : null;
+        // $snippet   = isset($error['snippet']) ? $error['snippet'] : null;
         // $previous  = isset($error['previous']) ? $error['previous'] : null;
 
         $this->parsedFile = $fileName;

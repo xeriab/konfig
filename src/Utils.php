@@ -23,7 +23,7 @@ final class Utils
      * @codeCoverageIgnore
      * @since 0.1.0
      */
-    public static function load(string $file = null, bool $once = false)
+    public static function load($file = null, $once = false)
     {
         return ($once ? require_once $file : require $file);
     }
