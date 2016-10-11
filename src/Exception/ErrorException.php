@@ -10,11 +10,11 @@
  * @link    https://xeriab.github.io/projects/konfig
  */
 
-namespace Exen\Konfig;
+namespace Exen\Konfig\Exception;
 
-class Exception extends \Exception
+class ErrorException extends \ErrorException
 {
     // Nothing to put here!
 }
 
-#: END OF ./src/ErrorException.php FILE
+// END OF ./src/Exception/ErrorException.php FILE
