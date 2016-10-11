@@ -27,7 +27,7 @@ final class Arr
      * @codeCoverageIgnore
      * @since 0.1.0
      */
-    public static function get(array $array, string $key, string $default = null)
+    public static function get(array $array, $key, string $default = null)
     {
         if (!is_array($array) && !$array instanceof \ArrayAccess) {
             throw new \InvalidArgumentException('First parameter must be an array or ArrayAccess object.');
@@ -70,7 +70,7 @@ final class Arr
      * @codeCoverageIgnore
      * @since 0.1.0
      */
-    public static function set(array &$array, string $key, string $value = null)
+    public static function set(array &$array, $key, string $value = null)
     {
         if (is_null($key)) {
             $array = $value;
