@@ -97,7 +97,7 @@ class ParseException extends ErrorException
      *
      * @param string $parsedFile The filename
      */
-    public function setParsedFile(string $parsedFile = null)
+    public function setParsedFile($parsedFile = null)
     {
         $this->parsedFile = $parsedFile;
 
@@ -119,7 +119,7 @@ class ParseException extends ErrorException
      *
      * @param int $parsedLine The file line
      */
-    public function setParsedLine(int $parsedLine = 0)
+    public function setParsedLine($parsedLine = 0)
     {
         $this->parsedLine = $parsedLine;
 
