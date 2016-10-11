@@ -33,7 +33,7 @@ class ParseException extends ErrorException
         $lineNo    = isset($error['line']) ? $error['line'] : __LINE__;
         $exception = isset($error['exception']) ? $error['exception'] : null;
         $snippet   = isset($error['snippet']) ? $error['snippet'] : null;
-        $previous  = isset($error['previous']) ? $error['previous'] : null;
+        // $previous  = isset($error['previous']) ? $error['previous'] : null;
 
         $this->parsedFile = $fileName;
         $this->parsedLine = $lineNo;

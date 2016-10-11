@@ -27,7 +27,7 @@ final class Arr
      * @codeCoverageIgnore
      * @since 0.1.0
      */
-    public static function get(array $array, $key, string $default = null)
+    public static function get(array $array, $key, $default = null)
     {
         if (!is_array($array) && !$array instanceof \ArrayAccess) {
             throw new \InvalidArgumentException('First parameter must be an array or ArrayAccess object.');
@@ -70,7 +70,7 @@ final class Arr
      * @codeCoverageIgnore
      * @since 0.1.0
      */
-    public static function set(array &$array, $key, string $value = null)
+    public static function set(array &$array, $key, $value = null)
     {
         if (is_null($key)) {
             $array = $value;
@@ -187,7 +187,7 @@ final class Arr
      * @codeCoverageIgnore
      * @since 0.1.0
      */
-    public static function delete(array &$array, string $key)
+    public static function delete(array &$array, $key)
     {
         if (is_null($key)) {
             return false;
@@ -232,7 +232,7 @@ final class Arr
      * @codeCoverageIgnore
      * @since 0.1.0
      */
-    public static function keys(array $array, int $maxDepth = INF, int $depth = 0, array $arraykeys = [])
+    public static function keys(array $array, $maxDepth = INF, $depth = 0, array $arraykeys = [])
     {
         if ($depth < $maxDepth) {
             $depth++;
@@ -252,12 +252,12 @@ final class Arr
      * Get array keys recursively
      *
      * @param array $array The search array
-     * @param type $search The search value
+     * @param string $search The search value
      * @return array
      * @codeCoverageIgnore
      * @since 0.1.2
      */
-    public static function recursiveKeys(array $array, string $search = null)
+    public static function recursiveKeys(array $array, $search = null)
     {
         $return = (
             $search !== null ?
