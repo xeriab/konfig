@@ -207,7 +207,7 @@ class Properties extends AbstractFileParser
     /**
      * Loads in the given file and parses it.
      *
-     * @param   string|bool  $file File to load
+     * @param   string|bool|null  $file File to load
      * @return  array
      * @since 0.2.4
      * @codeCoverageIgnore
