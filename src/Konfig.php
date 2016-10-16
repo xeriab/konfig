@@ -145,7 +145,7 @@ final class Konfig extends AbstractKonfig
      * Gets a parser for a given file extension
      *
      * @param  string $ext File extension
-     * @return Konfig\FileParser
+     * @return FileParser
      * @throws Exception If `$ext` is empty
      * @throws UnsupportedFileFormatException If `$path` is an unsupported file format
      */

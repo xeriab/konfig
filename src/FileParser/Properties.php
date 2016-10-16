@@ -165,6 +165,8 @@ class Properties extends AbstractFileParser
     }
 
     /**
+     * @param string $field
+     * @param array $analysis
      * {@inheritDoc}
      * @codeCoverageIgnore
      */

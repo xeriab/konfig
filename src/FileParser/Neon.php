@@ -12,9 +12,9 @@
 
 namespace Exen\Konfig\FileParser;
 
-use Exen\Konfig\Utils;
 use Exen\Konfig\Exception\Exception;
 use Exen\Konfig\Exception\ParseException;
+use Exen\Konfig\Utils;
 
 use Nette\Neon\Neon as NeonParser;
 

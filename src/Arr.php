@@ -24,7 +24,7 @@ final class Arr
      * not exist.
      *
      * @param array $array The search array
-     * @param mixed $key The dot-notated key or array of keys
+     * @param string $key The dot-notated key or array of keys
      * @param string $default The default value
      * @return mixed
      * @codeCoverageIgnore
