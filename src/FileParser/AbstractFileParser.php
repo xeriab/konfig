@@ -42,7 +42,7 @@ abstract class AbstractFileParser implements FileParser
      * @return string
      * @since 0.1.0
      */
-    protected function parseVars(string $string = null)
+    protected function parseVars($string = null)
     {
         foreach ($this->variables as $var => $value) {
             $string = str_replace("%$var%", $value, $string);
