@@ -29,7 +29,7 @@ class Ini extends AbstractFileParser
     {
         $data = $this->loadFile($path);
 
-        if (!$data) {
+        if (!$data || empty($data) || !is_array($data)) {
             throw new ParseException(error_get_last());
         }
 
@@ -63,7 +63,7 @@ class Ini extends AbstractFileParser
     /**
      * Returns the formatted configuration file contents.
      *
-     * @param   array   $content  configuration array
+     * @param   array   $contents  configuration array
      * @return  string  formatted configuration file contents
      * @since 0.2.4
      * @codeCoverageIgnore

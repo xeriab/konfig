@@ -120,7 +120,7 @@ final class Utils
     }
 
     /**
-     * @param array $content
+     * @param array|null $content
      * @return array
      * @since 0.2.4
      * @codeCoverageIgnore

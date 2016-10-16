@@ -76,7 +76,7 @@ class Xml extends AbstractFileParser
     /**
      * Returns the formatted configuration file contents.
      *
-     * @param   array   $content  configuration array
+     * @param   array   $contents  configuration array
      * @return  string  formatted configuration file contents
      * @since 0.2.4
      * @codeCoverageIgnore

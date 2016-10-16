@@ -34,7 +34,7 @@ class Properties extends AbstractFileParser
 
         $data = $this->getProperties();
 
-        if (!$data) {
+        if (!$data || empty($data) || !is_array($data)) {
             throw new ParseException([
                 'message' => 'Error parsing PROPERTIES file',
                 'file' => $path
@@ -63,10 +63,7 @@ class Properties extends AbstractFileParser
         // First pass, we categorize each line
         foreach ($this->parsedFile as $lineNb => $line) {
             if (Utils::stringStart('#', $line)) {
-                $analysis[$lineNb] = [
-                    'comment',
-                    trim(substr($line, 1))
-                ];
+                $analysis[$lineNb] = ['comment', trim(substr($line, 1))];
 
                 continue;
             }
@@ -79,11 +76,7 @@ class Properties extends AbstractFileParser
                 if (count($temp) === 2) {
                     $temp[1] = Utils::removeQuotes($temp[1]);
                     
-                    $analysis[$lineNb] = [
-                        'property',
-                        $temp[0],
-                        $temp[1]
-                    ];
+                    $analysis[$lineNb] = ['property', $temp[0], $temp[1]];
                 }
 
                 unset($temp);
@@ -95,12 +88,7 @@ class Properties extends AbstractFileParser
 
             // Multiline data
             if (substr_count($line, '=') === 0) {
-                $analysis[$lineNb] = [
-                    'multiline',
-                    '',
-                    $line
-                ];
-
+                $analysis[$lineNb] = ['multiline', '', $line];
                 continue;
             }
         }
@@ -217,7 +205,7 @@ class Properties extends AbstractFileParser
     /**
      * Loads in the given file and parses it.
      *
-     * @param   string  $file File to load
+     * @param   string|bool  $file File to load
      * @return  array
      * @since 0.2.4
      * @codeCoverageIgnore
@@ -238,7 +226,7 @@ class Properties extends AbstractFileParser
     /**
      * Returns the formatted configuration file contents.
      *
-     * @param   array   $content  configuration array
+     * @param   array   $contents  configuration array
      * @return  string  formatted configuration file contents
      * @since 0.2.4
      * @codeCoverageIgnore
