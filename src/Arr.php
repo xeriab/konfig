@@ -12,6 +12,9 @@
 
 namespace Exen\Konfig;
 
+use ArrayAccess;
+use InvalidArgumentException;
+
 use Exen\Konfig\Utils;
 
 final class Arr
@@ -29,8 +32,8 @@ final class Arr
      */
     public static function get(array $array, $key, $default = null)
     {
-        if (!is_array($array) && !$array instanceof \ArrayAccess) {
-            throw new \InvalidArgumentException('First parameter must be an array or ArrayAccess object.');
+        if (!is_array($array) && !$array instanceof ArrayAccess) {
+            throw new InvalidArgumentException('First parameter must be an array or ArrayAccess object.');
         }
 
         if (is_null($key)) {
@@ -48,8 +51,8 @@ final class Arr
         }
 
         foreach (explode('.', $key) as $key_part) {
-            if (($array instanceof \ArrayAccess && isset($array[$key_part])) === false) {
-                if (!is_array($array) or ! array_key_exists($key_part, $array)) {
+            if (($array instanceof ArrayAccess && isset($array[$key_part])) === false) {
+                if (!is_array($array) || !array_key_exists($key_part, $array)) {
                     return Utils::checkValue($default);
                 }
             }
@@ -87,8 +90,8 @@ final class Arr
             while (count($keys) > 1) {
                 $key = array_shift($keys);
 
-                if (!isset($array[$key]) or ! is_array($array[$key])) {
-                    $array[$key] = array();
+                if (!isset($array[$key]) || ! is_array($array[$key])) {
+                    $array[$key] = [];
                 }
 
                 $array = &$array[$key];
@@ -106,7 +109,7 @@ final class Arr
      *   value added using array_push()
      *
      * @param array multiple variables all of which must be arrays
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @return array
      * @codeCoverageIgnore
      * @since 0.1.0
@@ -117,12 +120,12 @@ final class Arr
         $arrays = array_slice(func_get_args(), 1);
 
         if (!is_array($array)) {
-            throw new \InvalidArgumentException('Exen\Konfig\Arr::merge() - all arguments must be arrays.');
+            throw new InvalidArgumentException('Exen\Konfig\Arr::merge() - all arguments must be arrays.');
         }
 
         foreach ($arrays as $arr) {
             if (!is_array($arr)) {
-                throw new \InvalidArgumentException('Exen\Konfig\Arr::merge() - all arguments must be arrays.');
+                throw new InvalidArgumentException('Exen\Konfig\Arr::merge() - all arguments must be arrays.');
             }
 
             foreach ($arr as $key => $value) {
@@ -147,7 +150,7 @@ final class Arr
      * - Numeric keys are never changed
      *
      * @param array multiple variables all of which must be arrays
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @return array
      * @codeCoverageIgnore
      * @since 0.1.0
@@ -158,17 +161,17 @@ final class Arr
         $arrays = array_slice(func_get_args(), 1);
 
         if (!is_array($array)) {
-            throw new \InvalidArgumentException('Exen\Konfig\Arr::mergeAssoc() - all arguments must be arrays.');
+            throw new InvalidArgumentException('Exen\Konfig\Arr::mergeAssoc() - all arguments must be arrays.');
         }
 
         foreach ($arrays as $arr) {
             if (!is_array($arr)) {
-                throw new \InvalidArgumentException('Exen\Konfig\Arr::mergeAssoc() - all arguments must be arrays.');
+                throw new InvalidArgumentException('Exen\Konfig\Arr::mergeAssoc() - all arguments must be arrays.');
             }
 
             foreach ($arr as $key => $value) {
                 if (is_array($value) && array_key_exists($key, $array) && is_array($array[$key])) {
-                    $array[$key] = static::mergeAssoc($array[$key], $value);
+                    $array[$key] = self::mergeAssoc($array[$key], $value);
                 } else {
                     $array[$key] = $value;
                 }
@@ -205,7 +208,7 @@ final class Arr
 
         $key_parts = explode('.', $key);
 
-        if (!is_array($array) or ! array_key_exists($key_parts[0], $array)) {
+        if (!is_array($array) || ! array_key_exists($key_parts[0], $array)) {
             return false;
         }
 
@@ -276,6 +279,120 @@ final class Arr
         }
         
         return $return;
+    }
+
+    /**
+     * Pluck an array of values from an array.
+     *
+     * @param  array   $array  collection of arrays to pluck from
+     * @param  string  $key    key of the value to pluck
+     * @param  string  $index  optional return array index key, true for original index
+     * @return array   array of plucked values
+     * @codeCoverageIgnore
+     * @since 0.2.4
+     */
+    public static function pluck($array, $key, $index = null)
+    {
+        $return = [];
+        $get_deep = strpos($key, '.') !== false;
+
+        if (!$index) {
+            foreach ($array as $i => $a) {
+                $return[] = (is_object($a) && ! ($a instanceof ArrayAccess)) ? $a->{$key} :
+                    ($get_deep ? self::get($a, $key) : $a[$key]);
+            }
+        } else {
+            foreach ($array as $i => $a) {
+                $index !== true && $i = (is_object($a) && ! ($a instanceof ArrayAccess)) ? $a->{$index} : $a[$index];
+                $return[$i] = (is_object($a) && ! ($a instanceof ArrayAccess)) ? $a->{$key} :
+                    ($get_deep ? self::get($a, $key) : $a[$key]);
+            }
+        }
+
+        return $return;
+    }
+
+    /**
+     * Sorts a multi-dimensional array by it's values.
+     *
+     * @access  public
+     * @param   array   The array to fetch from
+     * @param   string  The key to sort by
+     * @param   string  The order (asc or desc)
+     * @param   int     The php sort type flag
+     * @return  array
+     * @codeCoverageIgnore
+     * @since 0.2.4
+     */
+    public static function sort(array $array, $key, $order = 'asc', $sort_flags = SORT_REGULAR)
+    {
+        if (!is_array($array)) {
+            throw new InvalidArgumentException('Exen\Konfig\Arr::sort() - $array must be an array.');
+        }
+
+        if (empty($array)) {
+            return $array;
+        }
+
+        $b = [];
+        $c = [];
+
+        foreach ($array as $k => $v) {
+            $b[$k] = self::get($v, $key);
+        }
+
+        switch ($order) {
+            case 'asc':
+                asort($b, $sort_flags);
+                break;
+
+            case 'desc':
+                arsort($b, $sort_flags);
+                break;
+
+            default:
+                throw new InvalidArgumentException('Exen\Konfig\Arr::sort() - $order must be asc or desc.');
+                break;
+        }
+
+        foreach ($b as $key => $val) {
+            $c[] = $array[$key];
+        }
+
+        return $c;
+    }
+
+    /**
+     * Sorts an array on multitiple values, with deep sorting support.
+     *
+     * @param   array  $array        collection of arrays/objects to sort
+     * @param   array  $conditions   sorting conditions
+     * @param   bool   @ignore_case  wether to sort case insensitive
+     */
+    public static function multiSort(array $array, $conditions, $ignore_case = false)
+    {
+        $temp = [];
+        $keys = array_keys($conditions);
+
+        foreach ($keys as $key) {
+            $temp[$key] = self::pluck($array, $key, true);
+            is_array($conditions[$key]) || $conditions[$key] = array($conditions[$key]);
+        }
+
+        $args = [];
+
+        foreach ($keys as $key) {
+            $args[] = $ignore_case ? array_map('strtolower', $temp[$key]) : $temp[$key];
+            foreach ($conditions[$key] as $flag) {
+                $args[] = $flag;
+            }
+        }
+
+        $args[] = &$array;
+
+        Utils::callFuncArray('array_multisort', $args);
+
+        return $array;
     }
 
     /**

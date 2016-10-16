@@ -31,4 +31,9 @@ interface FileParser
      * @since 0.1.0
      */
     public function getSupportedFileExtensions();
+
+    /**
+     * @since 0.2.4
+     */
+    public function group();
 }

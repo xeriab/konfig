@@ -58,9 +58,24 @@ interface KonfigInterface
      *
      * @param string $key The key to delete
      * @return array
-     * @since 0.2
+     * @since 0.2.0
      */
     public function delete($key);
+
+    /**
+     * @since 0.2.4
+     */
+    // public function group();
+
+    /**
+     * @since 0.2.4
+     */
+    // public function load($overwrite = false);
+
+    /**
+     * @since 0.2.4
+     */
+    // public function save($contents = null);
 }
 
 // END OF ./src/KonfigInterface.php FILE

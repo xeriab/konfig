@@ -17,8 +17,6 @@ use Exen\Konfig\Exception\EmptyDirectoryException;
 use Exen\Konfig\Exception\FileNotFoundException;
 use Exen\Konfig\Exception\UnsupportedFileFormatException;
 
-use Exen\Konfig\Arr;
-
 final class Konfig extends AbstractKonfig
 {
     /**
@@ -33,7 +31,7 @@ final class Konfig extends AbstractKonfig
      * @var array $loadedFiles Array of loaded configuration files
      * @since 0.1.0
      */
-    protected static $loadedFiles = [];
+    static protected $loadedFiles = [];
     
     static protected $loadedData = null;
 
@@ -80,9 +78,11 @@ final class Konfig extends AbstractKonfig
      *
      * @param  string|array|mixed $path string file | configuration array | Konfig instance
      * @param  array $parsers Parsers to use with Konfig
+     * @param  bool $overwrite Whether to overwrite existing values
+     * @param  bool $cache Allow caching
      * @return Konfig
      */
-    public static function load($path = null, array $parsers = [])
+    public static function load($path = null, array $parsers = [], $overwrite = false, $cache = true)
     {
         return new static($path, $parsers);
     }
@@ -95,17 +95,6 @@ final class Konfig extends AbstractKonfig
     public static function loaded()
     {
         return self::$loadedFiles;
-    }
-
-    /**
-     * Static method for getting all Konfig keys.
-     *
-     * @codeCoverageIgnore
-     * @return array
-     */
-    public static function keys()
-    {
-        return Arr::recursiveKeys(self::$loadedData);
     }
 
     /**
@@ -141,6 +130,7 @@ final class Konfig extends AbstractKonfig
                 new FileParser\Neon(),
                 new FileParser\Toml(),
                 new FileParser\Php(),
+                new FileParser\Properties(),
             ];
         }
 

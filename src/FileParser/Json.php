@@ -12,6 +12,8 @@
 
 namespace Exen\Konfig\FileParser;
 
+use Exen\Konfig\Utils;
+use Exen\Konfig\Exception\Exception;
 use Exen\Konfig\Exception\ParseException;
 
 class Json extends AbstractFileParser
@@ -25,7 +27,7 @@ class Json extends AbstractFileParser
      */
     public function parse($path)
     {
-        $data = json_decode(file_get_contents(realpath($path)), true);
+        $data = $this->loadFile($path);
 
         if (function_exists('json_last_error_msg')) {
             $error_message = json_last_error_msg();
@@ -50,6 +52,35 @@ class Json extends AbstractFileParser
     public function getSupportedFileExtensions()
     {
         return ['json'];
+    }
+
+    /**
+     * Loads in the given file and parses it.
+     *
+     * @param   string  $file File to load
+     * @return  array
+     * @since 0.2.4
+     * @codeCoverageIgnore
+     */
+    protected function loadFile($file = null)
+    {
+        $this->file = $file;
+        $contents = $this->parseVars(Utils::getContent($file));
+        return json_decode($contents, true);
+    }
+
+    /**
+     * Returns the formatted configuration file contents.
+     *
+     * @param   array   $content  configuration array
+     * @return  string  formatted configuration file contents
+     * @since 0.2.4
+     * @codeCoverageIgnore
+     */
+    protected function exportFormat($contents = null)
+    {
+        $this->prepVars($contents);
+        return json_encode($contents);
     }
 }
 

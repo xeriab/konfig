@@ -12,6 +12,7 @@
 
 namespace Exen\Konfig\FileParser;
 
+use Exen\Konfig\Utils;
 use Exen\Konfig\Exception\Exception;
 use Exen\Konfig\Exception\ParseException;
 
@@ -26,7 +27,7 @@ class Ini extends AbstractFileParser
      */
     public function parse($path)
     {
-        $data = @parse_ini_file(realpath($path));
+        $data = $this->loadFile($path);
 
         if (!$data) {
             throw new ParseException(error_get_last());
@@ -42,6 +43,44 @@ class Ini extends AbstractFileParser
     public function getSupportedFileExtensions()
     {
         return ['ini', 'cfg'];
+    }
+
+    /**
+     * Loads in the given file and parses it.
+     *
+     * @param   string  $file File to load
+     * @return  array
+     * @since 0.2.4
+     * @codeCoverageIgnore
+     */
+    protected function loadFile($file = null)
+    {
+        $this->file = $file;
+        $contents = $this->parseVars(Utils::getContent($file));
+        return @parse_ini_string($contents, true);
+    }
+
+    /**
+     * Returns the formatted configuration file contents.
+     *
+     * @param   array   $content  configuration array
+     * @return  string  formatted configuration file contents
+     * @since 0.2.4
+     * @codeCoverageIgnore
+     */
+    protected function exportFormat($contents = null)
+    {
+        throw new \Exception('Saving configuration to `INI` is not supported at this time');
+    }
+
+    /**
+     * @return string
+     * @since 0.1.2
+     * @codeCoverageIgnore
+     */
+    public function __toString()
+    {
+        return 'Exen\Konfig\FileParser\Ini' . PHP_EOL;
     }
 }
 

@@ -12,10 +12,10 @@
 
 namespace Exen\Konfig\FileParser;
 
+use Exen\Konfig\Utils;
+use Exen\Konfig\Exception\Exception;
 use Exen\Konfig\Exception\ParseException;
 use Exen\Konfig\Exception\UnsupportedFileFormatException;
-
-use Exen\Konfig\Utils;
 
 class Php extends AbstractFileParser
 {
@@ -33,7 +33,7 @@ class Php extends AbstractFileParser
 
         // Require the file, if it throws an exception, rethrow it
         try {
-            $data = Utils::load(realpath($path));
+            $data = $this->loadFile($path);
         } catch (\Exception $ex) {
             throw new ParseException([
                 'message' => 'PHP file threw an exception',
@@ -62,6 +62,33 @@ class Php extends AbstractFileParser
     public function getSupportedFileExtensions()
     {
         return ['php', 'inc'];
+    }
+
+    /**
+     * Loads in the given file and parses it.
+     *
+     * @param   string  $file File to load
+     * @return  array
+     * @since 0.2.4
+     * @codeCoverageIgnore
+     */
+    protected function loadFile($file = null)
+    {
+        $this->file = $file;
+        return Utils::load($file);
+    }
+
+    /**
+     * Returns the formatted configuration file contents.
+     *
+     * @param   array   $content  configuration array
+     * @return  string  formatted configuration file contents
+     * @since 0.2.4
+     * @codeCoverageIgnore
+     */
+    protected function exportFormat($contents = null)
+    {
+        throw new \Exception('Saving configuration to `PHP` is not supported at this time');
     }
 }
 

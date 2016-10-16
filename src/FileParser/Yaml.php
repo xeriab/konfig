@@ -12,6 +12,8 @@
 
 namespace Exen\Konfig\FileParser;
 
+use Exen\Konfig\Utils;
+use Exen\Konfig\Exception\Exception;
 use Exen\Konfig\Exception\ParseException;
 
 use Symfony\Component\Yaml\Yaml as YamlParser;
@@ -30,16 +32,12 @@ class Yaml extends AbstractFileParser
         $data = null;
 
         try {
-            // Check if the PHP native's YAML extension is exist
-            if (!extension_loaded('yaml')) {
-                $data = YamlParser::parse(file_get_contents(realpath($path)));
-            } else {
-                $data = yaml_parse_file($path);
-            }
+            $data = $this->loadFile($path);
         } catch (\Exception $ex) {
             throw new ParseException([
                 'message' => 'Error parsing YAML file',
-                'file' => $path,
+                'file' => realpath($path),
+                'line' => $ex->getParsedLine(),
                 'exception' => $ex,
             ]);
         }
@@ -53,6 +51,35 @@ class Yaml extends AbstractFileParser
     public function getSupportedFileExtensions()
     {
         return ['yaml', 'yml'];
+    }
+
+    /**
+     * Loads in the given file and parses it.
+     *
+     * @param   string  $file File to load
+     * @return  array
+     * @since 0.2.4
+     * @codeCoverageIgnore
+     */
+    protected function loadFile($file = null)
+    {
+        $this->file = $file;
+        $contents = $this->parseVars(Utils::getContent($file));
+        return YamlParser::parse($contents);
+    }
+
+    /**
+     * Returns the formatted configuration file contents.
+     *
+     * @param   array   $content  configuration array
+     * @return  string  formatted configuration file contents
+     * @since 0.2.4
+     * @codeCoverageIgnore
+     */
+    protected function exportFormat($contents = null)
+    {
+        $this->prepVars($contents);
+        return YamlParser::dump($contents);
     }
 }
 

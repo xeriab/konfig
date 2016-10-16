@@ -12,6 +12,8 @@
 
 namespace Exen\Konfig\FileParser;
 
+use Exen\Konfig\Utils;
+use Exen\Konfig\Exception\Exception;
 use Exen\Konfig\Exception\ParseException;
 
 use Nette\Neon\Neon as NeonParser;
@@ -30,7 +32,7 @@ class Neon extends AbstractFileParser
         $data = null;
 
         try {
-            $data = NeonParser::decode(file_get_contents(realpath($path)));
+            $data = $this->loadFile($path);
         } catch (\Exception $ex) {
             throw new ParseException([
                 'message' => 'Error parsing NEON file',
@@ -48,6 +50,35 @@ class Neon extends AbstractFileParser
     public function getSupportedFileExtensions()
     {
         return ['neon'];
+    }
+
+    /**
+     * Loads in the given file and parses it.
+     *
+     * @param   string  $file File to load
+     * @return  array
+     * @since 0.2.4
+     * @codeCoverageIgnore
+     */
+    protected function loadFile($file = null)
+    {
+        $this->file = $file;
+        $contents = $this->parseVars(Utils::getContent($file));
+        return NeonParser::decode($contents);
+    }
+
+    /**
+     * Returns the formatted configuration file contents.
+     *
+     * @param   array   $content  configuration array
+     * @return  string  formatted configuration file contents
+     * @since 0.2.4
+     * @codeCoverageIgnore
+     */
+    protected function exportFormat($contents = null)
+    {
+        $this->prepVars($contents);
+        return NeonParser::encode($contents);
     }
 }
 

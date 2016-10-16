@@ -12,6 +12,8 @@
 
 namespace Exen\Konfig\FileParser;
 
+use Exen\Konfig\Utils;
+use Exen\Konfig\Exception\Exception;
 use Exen\Konfig\Exception\ParseException;
 
 use Yosymfony\Toml\Toml as TomlLib;
@@ -30,7 +32,7 @@ class Toml extends AbstractFileParser
         $data = null;
 
         try {
-            $data = TomlLib::Parse(realpath($path));
+            $data = $this->loadFile($path);
         } catch (\Exception $ex) {
             throw new ParseException([
                 'message' => 'Error parsing TOML file',
@@ -48,6 +50,34 @@ class Toml extends AbstractFileParser
     public function getSupportedFileExtensions()
     {
         return ['toml'];
+    }
+
+    /**
+     * Loads in the given file and parses it.
+     *
+     * @param   string  $file File to load
+     * @return  array
+     * @since 0.2.4
+     * @codeCoverageIgnore
+     */
+    protected function loadFile($file = null)
+    {
+        $this->file = $file;
+        $contents = $this->parseVars(Utils::getContent($file));
+        return TomlLib::Parse($contents);
+    }
+
+    /**
+     * Returns the formatted configuration file contents.
+     *
+     * @param   array   $content  configuration array
+     * @return  string  formatted configuration file contents
+     * @since 0.2.4
+     * @codeCoverageIgnore
+     */
+    protected function exportFormat($contents = null)
+    {
+        throw new \Exception('Saving configuration to `TOML` is not supported at this time');
     }
 }
 

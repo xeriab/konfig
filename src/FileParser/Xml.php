@@ -12,6 +12,8 @@
 
 namespace Exen\Konfig\FileParser;
 
+use Exen\Konfig\Utils;
+use Exen\Konfig\Exception\Exception;
 use Exen\Konfig\Exception\ParseException;
 
 class Xml extends AbstractFileParser
@@ -25,11 +27,7 @@ class Xml extends AbstractFileParser
      */
     public function parse($path)
     {
-        $data = simplexml_load_file(
-            realpath($path),
-            'SimpleXMLElement',
-            LIBXML_NOWARNING | LIBXML_NOERROR
-        );
+        $data = $this->loadFile($path);
 
         if ($data === false) {
             $lastError = libxml_get_last_error();
@@ -54,6 +52,38 @@ class Xml extends AbstractFileParser
     public function getSupportedFileExtensions()
     {
         return ['xml'];
+    }
+
+    /**
+     * Loads in the given file and parses it.
+     *
+     * @param   string  $file File to load
+     * @return  array
+     * @since 0.2.4
+     * @codeCoverageIgnore
+     */
+    protected function loadFile($file = null)
+    {
+        $this->file = $file;
+        $contents = $this->parseVars(Utils::getContent($file));
+        return simplexml_load_string(
+            $contents,
+            'SimpleXMLElement',
+            LIBXML_NOWARNING | LIBXML_NOERROR
+        );
+    }
+
+    /**
+     * Returns the formatted configuration file contents.
+     *
+     * @param   array   $content  configuration array
+     * @return  string  formatted configuration file contents
+     * @since 0.2.4
+     * @codeCoverageIgnore
+     */
+    protected function exportFormat($contents = null)
+    {
+        throw new \Exception('Saving configuration to `XML` is not supported at this time');
     }
 }
 

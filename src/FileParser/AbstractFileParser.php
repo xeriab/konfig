@@ -30,7 +30,7 @@ abstract class AbstractFileParser implements FileParser
      * @var array Variables
      * @since 0.1.0
      */
-    protected $vars = [];
+    protected $variables = [];
 
     // PROTECTED METHODS
 
@@ -44,8 +44,8 @@ abstract class AbstractFileParser implements FileParser
      */
     protected function parseVars(string $string = null)
     {
-        foreach ($this->vars as $var => $val) {
-            $string = str_replace("%$var%", $val, $string);
+        foreach ($this->variables as $var => $value) {
+            $string = str_replace("%$var%", $value, $string);
         }
 
         return $string;
@@ -63,7 +63,7 @@ abstract class AbstractFileParser implements FileParser
         static $replace = false;
 
         if ($replace === false) {
-            foreach ($this->vars as $key => $value) {
+            foreach ($this->variables as $key => $value) {
                 $replace['#^(' . preg_quote($value) . '){1}(.*)?#'] = '%' . $key . '%$2';
             }
         }
@@ -92,9 +92,39 @@ abstract class AbstractFileParser implements FileParser
     abstract public function getSupportedFileExtensions();
 
     /**
-     * @return string
+     * Must be implemented by child class. Gets called for each file to load.
+     *
+     * @since 0.2.4
      * @codeCoverageIgnore
+     */
+    abstract protected function loadFile($file = null);
+
+    /**
+     * Must be impletmented by child class. Gets called when saving a config file.
+     *
+     * @param   array   $contents  config array to save
+     * @return  string  formatted output
+     * @since 0.2.4
+     * @codeCoverageIgnore
+     */
+    abstract protected function exportFormat($contents = null);
+
+    /**
+     * Gets the default group name.
+     *
+     * @return  string
+     * @since 0.2.4
+     * @codeCoverageIgnore
+     */
+    public function group()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @return string
      * @since 0.1.2
+     * @codeCoverageIgnore
      */
     public function __toString()
     {

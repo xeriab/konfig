@@ -12,10 +12,13 @@
 
 namespace Exen\Konfig;
 
+use ArrayAccess;
+use Iterator;
+
 use Exen\Konfig\Arr;
 use Exen\Konfig\Utils;
 
-abstract class AbstractKonfig implements \ArrayAccess, \Iterator, KonfigInterface
+abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
 {
     /**
      * Stores the configuration items
@@ -77,7 +80,11 @@ abstract class AbstractKonfig implements \ArrayAccess, \Iterator, KonfigInterfac
     public function has($key)
     {
         // Check if already cached
-        if (isset($this->cache[$key])) {
+        // if (isset($this->cache[$key])) {
+        //     return true;
+        // }
+
+        if (Arr::get($this->cache, $key)) {
             return true;
         }
 
@@ -106,7 +113,8 @@ abstract class AbstractKonfig implements \ArrayAccess, \Iterator, KonfigInterfac
     public function get($key, $default = null)
     {
         if ($this->has($key)) {
-            return $this->cache[$key];
+            // return $this->cache[$key];
+            return Arr::get($this->data, $key);
         }
 
         return $default;
