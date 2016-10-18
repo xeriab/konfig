@@ -2,7 +2,7 @@
     "name": "xeriab/konfig",
     "description": "Yet another simple configuration loader library.",
     "homepage": "http://xeriab.github.io/projects/konfig/",
-    "version": "0.2.6",
+    "version": "0.2.7",
     "license": "MIT",
     "type": "library",
     "keywords": [

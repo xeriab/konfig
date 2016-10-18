@@ -112,8 +112,6 @@ class Properties extends AbstractFileParser
                 unset($temp);
 
                 continue;
-            } else {
-                break;
             }
 
             // Multiline data
@@ -146,7 +144,7 @@ class Properties extends AbstractFileParser
             }
 
             $counter = Utils::getNumberLinesMatching('comment', $analysis);
-            $analysis = $this->_deleteFields('erase', $analysis);
+            $analysis = $this->deleteFields('erase', $analysis);
         }
 
         // Third pass, we merge multiline strings
@@ -163,21 +161,25 @@ class Properties extends AbstractFileParser
                     && isset($analysis[$lineNb - 1][0])
                     && $analysis[$lineNb - 1][0] === 'property'
                 ) {
-                    $analysis[$lineNb - 1][2] .= ' '.trim($line[2]);
+                    $analysis[$lineNb - 1][2] .= ' ' . trim($line[2]);
                     $analysis[$lineNb][0] = 'erase';
                     break;
                 }
             }
 
             $counter = Utils::getNumberLinesMatching('multiline', $analysis);
-            $analysis = $this->_deleteFields('erase', $analysis);
+            $analysis = $this->deleteFields('erase', $analysis);
         }
 
         // Step 4, we clean up strings from escaped characters in properties
-        $analysis = $this->_unescapeProperties($analysis);
+        $analysis = $this->unescapeProperties($analysis);
 
         // Step 5, we only have properties now, remove redondant field 0
         foreach ($analysis as $key => $value) {
+            if (preg_match('/^[1-9][0-9]*$/', $value[2])) {
+                $value[2] = intval($value[2]);
+            }
+
             array_splice($analysis[$key], 0, 1);
         }
 
@@ -194,7 +196,7 @@ class Properties extends AbstractFileParser
      * @since              0.2.4
      * @codeCoverageIgnore
      */
-    private function _unescapeProperties($analysis)
+    private function unescapeProperties($analysis)
     {
         foreach ($analysis as $key => $value) {
             $analysis[$key][2] = str_replace('\=', '=', $value[2]);
@@ -214,7 +216,7 @@ class Properties extends AbstractFileParser
      * @since              0.2.4
      * @codeCoverageIgnore
      */
-    private function _deleteFields($field, $analysis)
+    private function deleteFields($field, $analysis)
     {
         foreach ($analysis as $key => $value) {
             if ($value[0] === $field) {
