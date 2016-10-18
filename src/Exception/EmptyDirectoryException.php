@@ -1,18 +1,33 @@
 <?php
 
 /**
- * Konfig
+ * Konfig.
  *
  * Yet another simple configuration loader library.
  *
- * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
- * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
- * @link    https://xeriab.github.io/projects/konfig
+ * PHP version 5
+ *
+ * @category Library
+ * @package  Konfig
+ * @author   Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license  https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link     https://xeriab.github.io/projects/konfig
  */
 
 namespace Exen\Konfig\Exception;
 
-class EmptyDirectoryException extends Exception
+/**
+ * EmptyDirectoryException.
+ *
+ * Empty directory exception class
+ *
+ * @category Exception.
+ * @package  Konfig
+ * @author   Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license  https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link     https://xeriab.github.io/projects/konfig
+ */
+class EmptyDirectoryException extends KonfigException
 {
     // Nothing to put here!
 }

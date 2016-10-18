@@ -1,54 +1,44 @@
 <?php
 
 /**
- * Konfig
+ * Konfig.
  *
  * Yet another simple configuration loader library.
  *
- * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
- * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
- * @link    https://xeriab.github.io/projects/konfig
+ * PHP version 5
+ *
+ * @category Library
+ * @package  Konfig
+ * @author   Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license  https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link     https://xeriab.github.io/projects/konfig
  */
 
 namespace Exen\Konfig;
 
 use Closure;
 
-const REQ = 'REQ';
-const INC = 'INC';
-
+/**
+ * Utils.
+ *
+ * Konfig's utilities class
+ *
+ * @category Main
+ * @package  Konfig
+ * @author   Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license  https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link     https://xeriab.github.io/projects/konfig
+ */
 final class Utils
 {
-    /**
-     * Requires/Includes the given file and returns the results.
-     *
-     * @param string $file The path to the file
-     * @param string $type Type of loading, REQ for require, INC for include
-     * @param bool $once Require once or not
-     * @return mixed The results of the include
-     * @codeCoverageIgnore
-     * @since 0.1.0
-     */
-    public static function load($file = null, $type = REQ, $once = false)
-    {
-        $path = realpath($file);
-
-        if ($type === REQ || $type === 'REQ') {
-            return ($once ? require_once $path : require $path);
-        } elseif ($type === INC || $type === 'INC') {
-            return ($once ? include_once $path : include $path);
-        }
-
-        return;
-    }
-
     /**
      * Get the content of given file and returns the results.
      *
      * @param string $file The path to the file
-     * @return mixed The results of the include
+     *
+     * @return             mixed The results of the include
+     * @since              0.2.4
      * @codeCoverageIgnore
-     * @since 0.2.4
      */
     public static function getContent($file = null)
     {
@@ -59,9 +49,10 @@ final class Utils
      * Get the given file and returns the results.
      *
      * @param string $path The path to the file
-     * @return mixed The results of the include
+     *
+     * @return             mixed The results of the include
+     * @since              0.2.4
      * @codeCoverageIgnore
-     * @since 0.2.4
      */
     public static function getFile($path = null)
     {
@@ -74,8 +65,9 @@ final class Utils
      * value.
      *
      * @param mixed $var The value to get
-     * @return mixed
-     * @since 0.1.0
+     *
+     * @return             mixed
+     * @since              0.1.0
      * @codeCoverageIgnore
      */
     public static function checkValue($var = null)
@@ -84,11 +76,12 @@ final class Utils
     }
 
     /**
-     * Trim array elements
+     * Trim array elements.
      *
      * @param array $content The array to trim
-     * @return mixed
-     * @since 0.2.4
+     *
+     * @return             mixed
+     * @since              0.2.4
      * @codeCoverageIgnore
      */
     public static function trimArrayElements($content = null)
@@ -103,11 +96,12 @@ final class Utils
     }
 
     /**
-     * Remove quotes
+     * Remove quotes.
      *
      * @param string $string The string to remove quotes from
-     * @return string
-     * @since 0.2.4
+     *
+     * @return             string
+     * @since              0.2.4
      * @codeCoverageIgnore
      */
     public static function removeQuotes($string = null)
@@ -120,9 +114,12 @@ final class Utils
     }
 
     /**
-     * @param array|null $content
-     * @return array
-     * @since 0.2.4
+     * Strip Backslashes from given string.
+     *
+     * @param array|null $content String
+     *
+     * @return             array
+     * @since              0.2.4
      * @codeCoverageIgnore
      */
     public static function stripBackslashes($content = null)
@@ -137,10 +134,13 @@ final class Utils
     }
 
     /**
-     * @param string $needle
-     * @param string $string
-     * @return bool
-     * @since 0.2.4
+     * Checks if the string starts with the given needle.
+     *
+     * @param string $needle Search string
+     * @param string $string String to search in
+     *
+     * @return             bool
+     * @since              0.2.4
      * @codeCoverageIgnore
      */
     public static function stringStart($needle, $string)
@@ -149,9 +149,12 @@ final class Utils
     }
 
     /**
+     * Opens given file and convert it to an array.
+     *
      * @param string $path The path to the file
-     * @return array
-     * @since 0.2.4
+     *
+     * @return             array
+     * @since              0.2.4
      * @codeCoverageIgnore
      */
     public static function fileToArray($path = null)
@@ -170,9 +173,12 @@ final class Utils
     }
 
     /**
+     * Opens given file and convert it to an array.
+     *
      * @param string $content The file content
-     * @return string
-     * @since 0.2.4
+     *
+     * @return             string
+     * @since              0.2.4
      * @codeCoverageIgnore
      */
     public static function fileContentToArray($content = null)
@@ -182,7 +188,7 @@ final class Utils
         $lines = explode(PHP_EOL, $content);
 
         foreach ($lines as $key) {
-            if ($key !== "" || !is_null($key) || !empty($key)) {
+            if ($key !== '' || !is_null($key) || !empty($key)) {
                 $result[] = $key;
             }
         }
@@ -194,10 +200,13 @@ final class Utils
     }
 
     /**
-     * @param string $type The line type
-     * @param array $analysis Array to analyze
-     * @return int
-     * @since 0.2.4
+     * Get lines matching number.
+     *
+     * @param string $type     The line type
+     * @param array  $analysis Array to analyze
+     *
+     * @return             int
+     * @since              0.2.4
      * @codeCoverageIgnore
      */
     public static function getNumberLinesMatching($type, array $analysis)
@@ -206,7 +215,7 @@ final class Utils
 
         foreach ($analysis as $value) {
             if ($value[0] === $type) {
-                $counter++;
+                ++$counter;
             }
         }
 
@@ -214,96 +223,15 @@ final class Utils
     }
 
     /**
-     * @param $callback
-     * @param array $args
-     * @return void
-     * @since 0.2.4
+     * __toString.
+     *
+     * @return             string
+     * @since              0.1.2
      * @codeCoverageIgnore
-     */
-    public static function callFuncArray($callback, array $args)
-    {
-        // deal with "class::method" syntax
-        if (is_string($callback) && strpos($callback, '::') !== false) {
-            $callback = explode('::', $callback);
-        }
-
-        // if an array is passed, extract the object and method to call
-        if (is_array($callback) && isset($callback[1]) && is_object($callback[0])) {
-            list($instance, $method) = $callback;
-
-            // Calling the method directly is faster then call_user_func_array() !
-            switch (count($args)) {
-                case 0:
-                    return $instance->$method();
-
-                case 1:
-                    return $instance->$method($args[0]);
-
-                case 2:
-                    return $instance->$method($args[0], $args[1]);
-
-                case 3:
-                    return $instance->$method($args[0], $args[1], $args[2]);
-
-                case 4:
-                    return $instance->$method($args[0], $args[1], $args[2], $args[3]);
-            }
-        } elseif (is_array($callback) && isset($callback[1]) && is_string($callback[0])) {
-            list($class, $method) = $callback;
-            $class = '\\'.ltrim($class, '\\');
-
-            // Calling the method directly is faster then call_user_func_array() !
-            switch (count($args)) {
-                case 0:
-                    return $class::$method();
-
-                case 1:
-                    return $class::$method($args[0]);
-
-                case 2:
-                    return $class::$method($args[0], $args[1]);
-
-                case 3:
-                    return $class::$method($args[0], $args[1], $args[2]);
-
-                case 4:
-                    return $class::$method($args[0], $args[1], $args[2], $args[3]);
-            }
-            // if it's a string, it's a native function or a static method call
-        } elseif (is_string($callback) || $callback instanceof Closure) {
-            is_string($callback) && $callback = ltrim($callback, '\\');
-
-            // calling the method directly is faster then call_user_func_array() !
-            switch (count($args)) {
-                case 0:
-                    return $callback();
-
-                case 1:
-                    return $callback($args[0]);
-
-                case 2:
-                    return $callback($args[0], $args[1]);
-
-                case 3:
-                    return $callback($args[0], $args[1], $args[2]);
-
-                case 4:
-                    return $callback($args[0], $args[1], $args[2], $args[3]);
-            }
-        }
-
-        // fallback, handle the old way
-        return call_user_func_array($callback, $args);
-    }
-
-    /**
-     * @return string
-     * @codeCoverageIgnore
-     * @since 0.1.2
      */
     public function __toString()
     {
-        return 'Exen\Konfig\Utils' . PHP_EOL;
+        return 'Exen\Konfig\Utils'.PHP_EOL;
     }
 }
 

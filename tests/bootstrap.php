@@ -74,6 +74,8 @@ if (!defined('KONFIG_TEST_FILES')) {
 
 //---
 
-require_once '../vendor/autoload.php';
+// print_r(ROOT_DIR, 1);
+
+require 'vendor/autoload.php';
 
 // END OF ./tests/bootstrap.php FILE

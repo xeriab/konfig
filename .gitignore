@@ -1,15 +1,13 @@
 #
 
-test_config
-tool.sh
-composer.lock
-composer.bak.json
-coverage.clover
-README.html
-
-vendor
-build
-nbproject
-node_modules
+/test_config
+/testing.sh
+/composer.lock
+/composer.bak.json
+/coverage.clover
+/README.html
+/vendor
+/build
+/nbproject
 
 #

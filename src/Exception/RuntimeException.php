@@ -1,43 +1,92 @@
 <?php
 
 /**
- * Konfig
+ * Konfig.
  *
  * Yet another simple configuration loader library.
  *
- * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
- * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
- * @link    https://xeriab.github.io/projects/konfig
+ * PHP version 5
+ *
+ * @category Library
+ * @package  Konfig
+ * @author   Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license  https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link     https://xeriab.github.io/projects/konfig
  */
 
 namespace Exen\Konfig\Exception;
 
+use Exen\Konfig\Exception\KonfigException as Exception;
+
+/**
+ * RuntimeException.
+ *
+ * Runtime exception class
+ *
+ * @category Exception.
+ * @package  Konfig
+ * @author   Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license  https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link     https://xeriab.github.io/projects/konfig
+ */
 class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
+    /**
+     * Parsed file name.
+     *
+     * @var string|null $parsedFile
+     *
+     * @since 0.2.6
+     */
     private $parsedFile = null;
+
+    /**
+     * Parsed lined number.
+     *
+     * @var int|null $parsedLine
+     *
+     * @since 0.2.6
+     */
     private $parsedLine = 0;
-    private $snippe = null;
+
+    /**
+     * Snippet.
+     *
+     * @var string|null $snippet
+     *
+     * @since 0.2.6
+     */
+    private $snippet = null;
+
+    /**
+     * Raw Message.
+     *
+     * @var string|null $rawMessage
+     *
+     * @since 0.2.6
+     */
     private $rawMessage = null;
 
     /**
      * Constructor.
      *
-     * @param string     $message    The error message
-     * @param int        $parsedLine The line where the error occurred
-     * @param int        $snippet    The snippet of code near the problem
-     * @param string     $parsedFile The file name where the error occurred
-     * @param \Exception $previous   The previous exception
+     * @param string    $message     Error message
+     * @param int       $parsed_line Line where the error occurred
+     * @param int       $snippet     Snippet of code near the problem
+     * @param string    $parsed_file File name where the error occurred
+     * @param Exception $previous    The previous exception
+     *
      * @codeCoverageIgnore
      */
     public function __construct(
         $message,
-        $parsedLine = -1,
+        $parsed_line = -1,
         $snippet = null,
-        $parsedFile = null,
+        $parsed_file = null,
         Exception $previous = null
     ) {
-        $this->parsedFile = $parsedFile;
-        $this->parsedLine = $parsedLine;
+        $this->parsedFile = $parsed_file;
+        $this->parsedLine = $parsed_line;
         $this->snippet = $snippet;
         $this->rawMessage = $message;
 
@@ -49,7 +98,7 @@ class RuntimeException extends \RuntimeException implements ExceptionInterface
     /**
      * Gets the snippet of code near the error.
      *
-     * @return string The snippet of code
+     * @return             string The snippet of code
      * @codeCoverageIgnore
      */
     public function getSnippet()
@@ -61,7 +110,8 @@ class RuntimeException extends \RuntimeException implements ExceptionInterface
      * Sets the snippet of code near the error.
      *
      * @param string $snippet The code snippet
-     * @return void
+     *
+     * @return             void Void
      * @codeCoverageIgnore
      */
     public function setSnippet($snippet)
@@ -76,7 +126,7 @@ class RuntimeException extends \RuntimeException implements ExceptionInterface
      *
      * This method returns null if a string is parsed.
      *
-     * @return string The filename
+     * @return             string The filename
      * @codeCoverageIgnore
      */
     public function getParsedFile()
@@ -87,12 +137,14 @@ class RuntimeException extends \RuntimeException implements ExceptionInterface
     /**
      * Sets the filename where the error occurred.
      *
-     * @param string $parsedFile The filename
+     * @param string $parsed_file The filename
+     *
+     * @return             void Void
      * @codeCoverageIgnore
      */
-    public function setParsedFile($parsedFile = null)
+    public function setParsedFile($parsed_file = null)
     {
-        $this->parsedFile = $parsedFile;
+        $this->parsedFile = $parsed_file;
 
         $this->updateRepr();
     }
@@ -101,6 +153,7 @@ class RuntimeException extends \RuntimeException implements ExceptionInterface
      * Gets the line where the error occurred.
      *
      * @return int The file line
+     *
      * @codeCoverageIgnore
      */
     public function getParsedLine()
@@ -111,18 +164,22 @@ class RuntimeException extends \RuntimeException implements ExceptionInterface
     /**
      * Sets the line where the error occurred.
      *
-     * @param int $parsedLine The file line
-     * @return void
+     * @param int $parsed_line The file line
+     *
+     * @return             void Void
      * @codeCoverageIgnore
      */
-    public function setParsedLine($parsedLine = 0)
+    public function setParsedLine($parsed_line = 0)
     {
-        $this->parsedLine = $parsedLine;
+        $this->parsedLine = $parsed_line;
 
         $this->updateRepr();
     }
 
     /**
+     * Update message.
+     *
+     * @return             void Void
      * @codeCoverageIgnore
      */
     private function updateRepr()
@@ -139,7 +196,10 @@ class RuntimeException extends \RuntimeException implements ExceptionInterface
         if (null !== $this->parsedFile) {
             $this->message .= sprintf(
                 ' in %s',
-                json_encode($this->parsedFile, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
+                json_encode(
+                    $this->parsedFile,
+                    JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+                )
             );
         }
 

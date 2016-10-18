@@ -1,30 +1,49 @@
 <?php
 
 /**
- * Konfig
+ * Konfig.
  *
  * Yet another simple configuration loader library.
  *
- * @author  Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
- * @license https://raw.github.com/xeriab/konfig/master/LICENSE MIT
- * @link    https://xeriab.github.io/projects/konfig
+ * PHP version 5
+ *
+ * @category Library
+ * @package  Konfig
+ * @author   Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license  https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link     https://xeriab.github.io/projects/konfig
  */
 
 namespace Exen\Konfig\FileParser;
 
-use Exen\Konfig\Exception\Exception;
+use Exception;
 use Exen\Konfig\Exception\ParseException;
 use Exen\Konfig\Exception\UnsupportedFileFormatException;
-use Exen\Konfig\Utils;
 
+/**
+ * Php
+ * Konfig's PHP parser class.
+ *
+ * @category FileParser
+ * @package  Konfig
+ * @author   Xeriab Nabil (aka KodeBurner) <kodeburner@gmail.com>
+ * @license  https://raw.github.com/xeriab/konfig/master/LICENSE MIT
+ * @link     https://xeriab.github.io/projects/konfig
+ *
+ * @implements Exen\Konfig\FileParser\AbstractFileParser
+ */
 class Php extends AbstractFileParser
 {
     /**
-     * {@inheritDoc}
-     * Loads a PHP file and gets its contents as an array
+     * Loads a PHP file and gets its contents as an array.
      *
-     * @throws ParseException If the PHP file throws an exception
+     * @param string $path File path
+     *
+     * @throws ParseException             If the PHP file throws an exception
      * @throws UnsupportedFormatException If the PHP file does not return an array
+     *
+     * @return array The parsed data
+     *
      * @since 0.1.0
      */
     public function parse($path)
@@ -34,12 +53,14 @@ class Php extends AbstractFileParser
         // Require the file, if it throws an exception, rethrow it
         try {
             $data = $this->loadFile($path);
-        } catch (\Exception $ex) {
-            throw new ParseException([
+        } catch (Exception $ex) {
+            throw new ParseException(
+                [
                 'message' => 'PHP file threw an exception',
                 'file' => $path,
                 'exception' => $ex,
-            ]);
+                ]
+            );
         }
 
         // If we have a callable, run it and expect an array back
@@ -49,14 +70,19 @@ class Php extends AbstractFileParser
 
         // Check for array, if its anything else, throw an exception
         if (empty($data) || !is_array($data)) {
-            throw new UnsupportedFileFormatException('PHP file does not return an array');
+            throw new UnsupportedFileFormatException(
+                'PHP file does not return an array'
+            );
         }
 
         return $data;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
+     *
+     * @return array Supported extensions
+     *
      * @since 0.1.0
      */
     public function getSupportedFileExtensions()
@@ -67,28 +93,35 @@ class Php extends AbstractFileParser
     /**
      * Loads in the given file and parses it.
      *
-     * @param   string  $file File to load
-     * @return  array
-     * @since 0.2.4
+     * @param string|bool|null $file File to load
+     *
+     * @return array The parsed file data
+     *
+     * @since              0.2.4
      * @codeCoverageIgnore
      */
     protected function loadFile($file = null)
     {
-        $this->file = $file;
-        return Utils::load($file);
+        $this->file = is_file($file) ? $file : false;
+
+        return include $this->file;
     }
 
     /**
      * Returns the formatted configuration file contents.
      *
-     * @param   array   $contents  configuration array
-     * @return  string  formatted configuration file contents
-     * @since 0.2.4
+     * @param array $contents configuration array
+     *
+     * @return string formatted configuration file contents
+     *
+     * @since              0.2.4
      * @codeCoverageIgnore
      */
     protected function exportFormat($contents = null)
     {
-        throw new \Exception('Saving configuration to `PHP` is not supported at this time');
+        throw new Exception(
+            'Saving configuration to `PHP` is not supported at this time'
+        );
     }
 }
 
