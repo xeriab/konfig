@@ -94,7 +94,6 @@ class Properties extends AbstractFileParser
         foreach ($this->parsedFile as $lineNb => $line) {
             if (Utils::stringStart('#', $line)) {
                 $analysis[$lineNb] = ['comment', trim(substr($line, 1))];
-
                 continue;
             }
 
@@ -105,19 +104,22 @@ class Properties extends AbstractFileParser
 
                 if (count($temp) === 2) {
                     $temp[1] = Utils::removeQuotes($temp[1]);
-
                     $analysis[$lineNb] = ['property', $temp[0], $temp[1]];
                 }
 
                 unset($temp);
 
                 continue;
+            } else {
+                break;
             }
 
             // Multiline data
             if (substr_count($line, '=') === 0) {
                 $analysis[$lineNb] = ['multiline', '', $line];
                 continue;
+            } else {
+                break;
             }
         }
 
@@ -189,7 +191,7 @@ class Properties extends AbstractFileParser
     /**
      * {@inheritdoc}
      *
-     * @param array $analysis Configuration items
+     * @param array|null $analysis Configuration items
      *
      * @return array The configuration items
      *
@@ -209,7 +211,7 @@ class Properties extends AbstractFileParser
      * {@inheritdoc}
      *
      * @param string $field    Field name
-     * @param array  $analysis Configuration items
+     * @param array|null  $analysis Configuration items
      *
      * @return array Configuration items after deletion
      *
@@ -230,7 +232,7 @@ class Properties extends AbstractFileParser
     /**
      * {@inheritdoc}
      *
-     * @param string|null $file File path
+     * @param string|bool|null $file File path
      *
      * @return array Configuration items
      *

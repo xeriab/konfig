@@ -85,7 +85,7 @@ class Xml extends AbstractFileParser
      *
      * @param string $file File to load
      *
-     * @return array The parsed file data
+     * @return array|SimpleXMLElement The parsed file data
      *
      * @since              0.2.4
      * @codeCoverageIgnore

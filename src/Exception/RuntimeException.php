@@ -31,40 +31,9 @@ use Exen\Konfig\Exception\KonfigException as Exception;
  */
 class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
-    /**
-     * Parsed file name.
-     *
-     * @var string|null $parsedFile
-     *
-     * @since 0.2.6
-     */
     private $parsedFile = null;
-
-    /**
-     * Parsed lined number.
-     *
-     * @var int|null $parsedLine
-     *
-     * @since 0.2.6
-     */
     private $parsedLine = 0;
-
-    /**
-     * Snippet.
-     *
-     * @var string|null $snippet
-     *
-     * @since 0.2.6
-     */
     private $snippet = null;
-
-    /**
-     * Raw Message.
-     *
-     * @var string|null $rawMessage
-     *
-     * @since 0.2.6
-     */
     private $rawMessage = null;
 
     /**

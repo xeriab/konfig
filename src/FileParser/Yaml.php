@@ -83,7 +83,7 @@ class Yaml extends AbstractFileParser
      *
      * @param string $file File to load
      *
-     * @return array The parsed file data
+     * @return string|array|stdClass The parsed file data
      *
      * @since              0.2.4
      * @codeCoverageIgnore
