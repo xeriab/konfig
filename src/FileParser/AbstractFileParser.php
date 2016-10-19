@@ -42,15 +42,6 @@ abstract class AbstractFileParser implements FileParser
     protected $file;
 
     /**
-     * Parsed configuration file.
-     *
-     * @var string $parsedFile
-     *
-     * @since 0.2.5
-     */
-    protected $parsedFile;
-
-    /**
      * The configuration variables.
      *
      * @var array $variables

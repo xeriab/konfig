@@ -36,6 +36,15 @@ use Exen\Konfig\Exception\ParseException;
 class Properties extends AbstractFileParser
 {
     /**
+     * Parsed configuration file.
+     *
+     * @var array $parsedFile
+     *
+     * @since 0.2.5
+     */
+    protected $parsedFile;
+
+    /**
      * Loads a PROPERTIES file as an array.
      *
      * @param string $path File path

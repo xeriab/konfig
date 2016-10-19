@@ -121,13 +121,13 @@ final class Utils
     /**
      * Strip Backslashes from given string.
      *
-     * @param array|null $content String
+     * @param array $content String
      *
      * @return             array
      * @since              0.2.4
      * @codeCoverageIgnore
      */
-    public static function stripBackslashes($content = null)
+    public static function stripBackslashes($content)
     {
         foreach ($content as $lineNb => $line) {
             if (substr($line[2], -1) === '\\') {
