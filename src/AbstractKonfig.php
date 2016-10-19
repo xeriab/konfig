@@ -107,7 +107,8 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      *
      * @return bool Returns true if the configuration item key exists
      *
-     * @since 0.1.0
+     * @since              0.1.0
+     * @codeCoverageIgnore
      */
     public function has($key)
     {
@@ -205,7 +206,8 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      *
      * @param string $key Configuration item key name
      *
-     * @return bool
+     * @return             bool
+     * @codeCoverageIgnore
      */
     public function delete($key)
     {

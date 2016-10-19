@@ -330,11 +330,11 @@ final class Konfig extends AbstractKonfig
     public function __call($name, $arguments)
     {
         switch ($name) {
-            case 'get':
-                return call_user_func_array(
-                    [get_called_class(), 'get'],
-                    $arguments
-                );
+        case 'get':
+            return call_user_func_array(
+                [get_called_class(), 'get'],
+                $arguments
+            );
         }
     }
 
@@ -351,11 +351,11 @@ final class Konfig extends AbstractKonfig
     public static function __callStatic($name, $arguments)
     {
         switch ($name) {
-            case 'get':
-                return call_user_func_array(
-                    [get_called_class(), 'get'],
-                    $arguments
-                );
+        case 'get':
+            return call_user_func_array(
+                [get_called_class(), 'get'],
+                $arguments
+            );
         }
     }
 

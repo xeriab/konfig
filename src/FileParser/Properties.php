@@ -435,9 +435,6 @@ class Properties extends AbstractFileParser
 
         if ($this->file && !is_null($file)) {
             $this->parsedFile = Utils::fileContentToArray($contents);
-            // $this->parsedFile = Utils::fileToArray($this->file);
-        } else {
-            $this->parsedFile = false;
         }
     }
 

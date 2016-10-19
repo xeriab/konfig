@@ -179,9 +179,9 @@ final class Utils
     /**
      * Opens given file and convert it to an array.
      *
-     * @param string $content The file content
+     * @param string|null $content The file content
      *
-     * @return             string
+     * @return             array
      * @since              0.2.4
      * @codeCoverageIgnore
      */
