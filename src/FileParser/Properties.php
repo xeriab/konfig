@@ -52,15 +52,6 @@ class Properties extends AbstractFileParser
 
         $this->loadFile($path);
 
-        // if (!$data || empty($data) || !is_array($data)) {
-        //     throw new ParseException(
-        //         [
-        //         'message' => 'Error parsing PROPERTIES file',
-        //         'file' => $path,
-        //         ]
-        //     );
-        // }
-
         try {
             $data = $this->getProperties();
         } catch (Exception $ex) {
@@ -243,113 +234,6 @@ class Properties extends AbstractFileParser
     /**
      * {@inheritdoc}
      *
-     * @return array The exteacted data
-     *
-     * @since              0.2.4
-     * @codeCoverageIgnore
-     */
-    public function extractData()
-    {
-        $analysis = [];
-
-        // First pass, we categorize each line
-        foreach ($this->parsedFile as $lineNb => $line) {
-            // Property name, check for escaped equal sign
-            if (Utils::stringStart('#', $line)) {
-                $analysis[$lineNb] = ['comment', trim(substr($line, 0))];
-                continue;
-            }
-
-            // Property name, check for escaped equal sign
-            if (substr_count($line, '=') > substr_count($line, '\=')) {
-                $temp = explode('=', $line, 2);
-                $temp = Utils::trimArrayElements($temp);
-
-                if (count($temp) === 2) {
-                    $temp[1] = Utils::removeQuotes($temp[1]);
-                    $analysis[$lineNb] = ['property', $temp[0], $temp[1]];
-                }
-
-                unset($temp);
-
-                continue;
-            }
-
-            // Multiline data
-            if (substr_count($line, '=') === 0) {
-                $analysis[$lineNb] = ['multiline', '', $line];
-                continue;
-            }
-        }
-
-        // Second pass, we associate comments to entities
-        $counter = Utils::getNumberLinesMatching('comment', $analysis);
-
-        while ($counter > 0) {
-            foreach ($analysis as $lineNb => $line) {
-                if ($line[0] === 'comment'
-                    && isset($analysis[$lineNb + 1][0])
-                    && $analysis[$lineNb + 1][0] === 'comment'
-                ) {
-                    $analysis[$lineNb][1] .= ' '.$analysis[$lineNb + 1][1];
-                    $analysis[$lineNb + 1][0] = 'erase';
-
-                    break;
-                } elseif ($line[0] === 'comment'
-                    && isset($analysis[$lineNb + 1][0])
-                    && $analysis[$lineNb + 1][0] === 'property'
-                ) {
-                    $analysis[$lineNb + 1][3] = $line[1];
-                    $analysis[$lineNb][0] = 'erase';
-                }
-            }
-
-            $counter = Utils::getNumberLinesMatching('comment', $analysis);
-            $analysis = $this->deleteFields('erase', $analysis);
-        }
-
-        // Third pass, we merge multiline strings
-
-        // We remove the backslashes at end of strings if they exist
-        $analysis = Utils::stripBackslashes($analysis);
-
-        // Count # of multilines
-        $counter = Utils::getNumberLinesMatching('multiline', $analysis);
-
-        while ($counter > 0) {
-            foreach ($analysis as $lineNb => $line) {
-                if ($line[0] === 'multiline'
-                    && isset($analysis[$lineNb - 1][0])
-                    && $analysis[$lineNb - 1][0] === 'property'
-                ) {
-                    $analysis[$lineNb - 1][2] .= ' ' . trim($line[2]);
-                    $analysis[$lineNb][0] = 'erase';
-                    break;
-                }
-            }
-
-            $counter = Utils::getNumberLinesMatching('multiline', $analysis);
-            $analysis = $this->deleteFields('erase', $analysis);
-        }
-
-        // Step 4, we clean up strings from escaped characters in properties
-        $analysis = $this->unescapeProperties($analysis);
-
-        // Step 5, we only have properties now, remove redondant field 0
-        foreach ($analysis as $key => $value) {
-            if (preg_match('/^[1-9][0-9]*$/', $value[2])) {
-                $value[2] = intval($value[2]);
-            }
-
-            array_splice($analysis[$key], 0, 1);
-        }
-
-        return $analysis;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
      * @param array|null $analysis Configuration items
      *
      * @return array The configuration items
@@ -404,7 +288,6 @@ class Properties extends AbstractFileParser
             $this->loadFile($file);
         }
 
-        // $source = $this->extractData();
         $source = $this->parseProperties();
         $data = [];
 
