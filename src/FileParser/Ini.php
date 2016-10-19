@@ -16,7 +16,7 @@
 
 namespace Exen\Konfig\FileParser;
 
-use Exen\Konfig\Exception\KonfigException as Exception;
+use Exception;
 use Exen\Konfig\Exception\ParseException;
 use Exen\Konfig\Utils;
 
@@ -106,14 +106,13 @@ class Ini extends AbstractFileParser
     /**
      * __toString.
      *
-     * @return string
-     *
+     * @return             string
      * @since              0.1.2
      * @codeCoverageIgnore
      */
     public function __toString()
     {
-        return 'Exen\Konfig\FileParser\Ini'.PHP_EOL;
+        return 'Exen\Konfig\FileParser\Ini' . PHP_EOL;
     }
 }
 

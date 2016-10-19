@@ -111,6 +111,18 @@ class Neon extends AbstractFileParser
 
         return NeonParser::encode($contents);
     }
+
+    /**
+     * __toString.
+     *
+     * @return             string
+     * @since              0.1.2
+     * @codeCoverageIgnore
+     */
+    public function __toString()
+    {
+        return 'Exen\Konfig\FileParser\Neon' . PHP_EOL;
+    }
 }
 
 // END OF ./src/FileParser/Neon.php FILE

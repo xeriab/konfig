@@ -112,6 +112,18 @@ class Yaml extends AbstractFileParser
 
         return YamlParser::dump($contents);
     }
+
+    /**
+     * __toString.
+     *
+     * @return             string
+     * @since              0.1.2
+     * @codeCoverageIgnore
+     */
+    public function __toString()
+    {
+        return 'Exen\Konfig\FileParser\Yaml' . PHP_EOL;
+    }
 }
 
 // END OF ./src/FileParser/Yaml.php FILE

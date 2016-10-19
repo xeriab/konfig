@@ -16,7 +16,7 @@
 
 namespace Exen\Konfig\FileParser;
 
-use Exen\Konfig\Exception\KonfigException as Exception;
+use Exception;
 use Exen\Konfig\Exception\ParseException;
 use Exen\Konfig\Utils;
 
@@ -117,6 +117,18 @@ class Xml extends AbstractFileParser
         throw new Exception(
             'Saving configuration to `XML` is not supported at this time'
         );
+    }
+
+    /**
+     * __toString.
+     *
+     * @return             string
+     * @since              0.1.2
+     * @codeCoverageIgnore
+     */
+    public function __toString()
+    {
+        return 'Exen\Konfig\FileParser\Xml' . PHP_EOL;
     }
 }
 

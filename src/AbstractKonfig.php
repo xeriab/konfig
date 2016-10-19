@@ -349,14 +349,13 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     /**
      * __toString.
      *
-     * @return string
-     *
+     * @return             string
      * @since              0.1.2
      * @codeCoverageIgnore
      */
     public function __toString()
     {
-        return 'Exen\Konfig\AbstractKonfig'.PHP_EOL;
+        return 'Exen\Konfig\AbstractKonfig' . PHP_EOL;
     }
 }
 

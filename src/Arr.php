@@ -342,14 +342,13 @@ final class Arr
     /**
      * __toString.
      *
-     * @return string
-     *
+     * @return             string
      * @since              0.1.2
      * @codeCoverageIgnore
      */
     public function __toString()
     {
-        return 'Exen\Konfig\Arr'.PHP_EOL;
+        return 'Exen\Konfig\Arr' . PHP_EOL;
     }
 }
 

@@ -111,6 +111,18 @@ class Toml extends AbstractFileParser
             'Saving configuration to `TOML` is not supported at this time'
         );
     }
+
+    /**
+     * __toString.
+     *
+     * @return             string
+     * @since              0.1.2
+     * @codeCoverageIgnore
+     */
+    public function __toString()
+    {
+        return 'Exen\Konfig\FileParser\Toml' . PHP_EOL;
+    }
 }
 
 // END OF ./src/FileParser/Toml.php FILE

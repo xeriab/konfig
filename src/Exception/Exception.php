@@ -17,7 +17,7 @@
 namespace Exen\Konfig\Exception;
 
 /**
- * KonfigException.
+ * Exception.
  *
  * Konfig exception class
  *
@@ -27,9 +27,9 @@ namespace Exen\Konfig\Exception;
  * @license  https://raw.github.com/xeriab/konfig/master/LICENSE MIT
  * @link     https://xeriab.github.io/projects/konfig
  */
-class KonfigException extends \Exception
+class Exception extends \Exception
 {
     // Nothing to put here!
 }
 
-// END OF ./src/Exception/KonfigException.php FILE
+// END OF ./src/Exception/Exception.php FILE

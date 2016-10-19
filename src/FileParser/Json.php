@@ -113,6 +113,18 @@ class Json extends AbstractFileParser
 
         return json_encode($contents);
     }
+
+    /**
+     * __toString.
+     *
+     * @return             string
+     * @since              0.1.2
+     * @codeCoverageIgnore
+     */
+    public function __toString()
+    {
+        return 'Exen\Konfig\FileParser\Json' . PHP_EOL;
+    }
 }
 
 // END OF ./src/FileParser/Json.php FILE

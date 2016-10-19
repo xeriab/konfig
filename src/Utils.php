@@ -56,7 +56,10 @@ final class Utils
      */
     public static function getFile($path = null)
     {
-        return file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        return file(
+            realpath($path),
+            FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES
+        );
     }
 
     /**
@@ -107,6 +110,8 @@ final class Utils
     public static function removeQuotes($string = null)
     {
         if (substr($string, -1) === '"' && substr($string, 0, 1) === '"') {
+            $string = substr($string, 1, -1);
+        } elseif (substr($string, -1) === '\'' && substr($string, 0, 1) === '\'') {
             $string = substr($string, 1, -1);
         }
 
@@ -159,12 +164,11 @@ final class Utils
      */
     public static function fileToArray($path = null)
     {
-        // $result = self::getFile($path);
-        $result = self::getContent($path);
+        $result = self::getFile($path);
+        // $result = self::getContent($path);
 
-        $lines = explode(PHP_EOL, $result);
-
-        print_r($lines);
+        // $lines = explode(PHP_EOL, $result);
+        // $lines = explode("\n\t|\n", $result);
 
         $result = self::trimArrayElements($result);
         $result = array_filter($result);
@@ -183,18 +187,10 @@ final class Utils
      */
     public static function fileContentToArray($content = null)
     {
-        $result = [];
-
-        $lines = explode(PHP_EOL, $content);
-
-        foreach ($lines as $key) {
-            if ($key !== '' || !is_null($key) || !empty($key)) {
-                $result[] = $key;
-            }
-        }
-
+        // $result = explode(PHP_EOL, $content);
+        $result = preg_split('/\n\t|\n/', $content);
         $result = self::trimArrayElements($result);
-        $result = array_filter($result);
+        // $result = array_filter($result);
 
         return $result;
     }
@@ -231,7 +227,7 @@ final class Utils
      */
     public function __toString()
     {
-        return 'Exen\Konfig\Utils'.PHP_EOL;
+        return 'Exen\Konfig\Utils' . PHP_EOL;
     }
 }
 

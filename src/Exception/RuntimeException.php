@@ -16,8 +16,6 @@
 
 namespace Exen\Konfig\Exception;
 
-use Exen\Konfig\Exception\KonfigException as Exception;
-
 /**
  * RuntimeException.
  *

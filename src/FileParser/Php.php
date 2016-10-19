@@ -123,6 +123,18 @@ class Php extends AbstractFileParser
             'Saving configuration to `PHP` is not supported at this time'
         );
     }
+
+    /**
+     * __toString.
+     *
+     * @return             string
+     * @since              0.1.2
+     * @codeCoverageIgnore
+     */
+    public function __toString()
+    {
+        return 'Exen\Konfig\FileParser\Php' . PHP_EOL;
+    }
 }
 
 // END OF ./src/FileParser/Php.php FILE

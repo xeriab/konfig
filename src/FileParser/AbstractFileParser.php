@@ -35,16 +35,25 @@ abstract class AbstractFileParser implements FileParser
     /**
      * Configuration file.
      *
-     * @var string File
+     * @var string $file
      *
      * @since 0.1.0
      */
     protected $file;
 
     /**
+     * Parsed configuration file.
+     *
+     * @var string $parsedFile
+     *
+     * @since 0.2.5
+     */
+    protected $parsedFile;
+
+    /**
      * The configuration variables.
      *
-     * @var array Variables
+     * @var array $variables
      *
      * @since 0.1.0
      */
@@ -166,14 +175,13 @@ abstract class AbstractFileParser implements FileParser
     /**
      * __toString.
      *
-     * @return string
-     *
+     * @return             string
      * @since              0.1.2
      * @codeCoverageIgnore
      */
     public function __toString()
     {
-        return 'Exen\Konfig\FileParser\AbstractFileParser'.PHP_EOL;
+        return 'Exen\Konfig\FileParser\AbstractFileParser' . PHP_EOL;
     }
 }
 

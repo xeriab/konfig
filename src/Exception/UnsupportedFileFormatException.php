@@ -27,7 +27,7 @@ namespace Exen\Konfig\Exception;
  * @license  https://raw.github.com/xeriab/konfig/master/LICENSE MIT
  * @link     https://xeriab.github.io/projects/konfig
  */
-class UnsupportedFileFormatException extends KonfigException
+class UnsupportedFileFormatException extends Exception
 {
     // Nothing to put here
 }

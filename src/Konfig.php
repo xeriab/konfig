@@ -318,16 +318,57 @@ final class Konfig extends AbstractKonfig
     }
 
     /**
+     * __call.
+     *
+     * @param string       $name      Method name
+     * @param string|array $arguments Arguments to pass
+     *
+     * @return             mixed
+     * @since              0.2.5
+     * @codeCoverageIgnore
+     */
+    public function __call($name, $arguments)
+    {
+        switch ($name) {
+            case 'get':
+                return call_user_func_array(
+                    [get_called_class(), 'get'],
+                    $arguments
+                );
+        }
+    }
+
+    /**
+     * __callStatic.
+     *
+     * @param string       $name      Method name
+     * @param string|array $arguments Arguments to pass
+     *
+     * @return             mixed
+     * @since              0.2.5
+     * @codeCoverageIgnore
+     */
+    public static function __callStatic($name, $arguments)
+    {
+        switch ($name) {
+            case 'get':
+                return call_user_func_array(
+                    [get_called_class(), 'get'],
+                    $arguments
+                );
+        }
+    }
+
+    /**
      * __toString.
      *
-     * @return string
-     *
+     * @return             string
      * @since              0.1.2
      * @codeCoverageIgnore
      */
     public function __toString()
     {
-        return 'Exen\Konfig\Konfig'.PHP_EOL;
+        return 'Exen\Konfig\Konfig' . PHP_EOL;
     }
 }
 
