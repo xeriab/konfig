@@ -55,15 +55,6 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     protected $cache = [];
 
     /**
-     * Random value used as a not-found check in get().
-     *
-     * @var string
-     *
-     * @since 0.1.0
-     */
-    protected static $defaultCheckValue;
-
-    /**
      * Constructor method and sets default options, if any.
      *
      * @param array $input Input
@@ -80,8 +71,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
      *
      * @return array
      *
-     * @since              0.1.0
-     * @codeCoverageIgnore
+     * @since 0.1.0
      */
     protected function getDefaults()
     {
@@ -346,18 +336,6 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     public function rewind()
     {
         return is_array($this->data) ? reset($this->data) : null;
-    }
-
-    /**
-     * __toString.
-     *
-     * @return             string
-     * @since              0.1.2
-     * @codeCoverageIgnore
-     */
-    public function __toString()
-    {
-        return 'Exen\Konfig\AbstractKonfig' . PHP_EOL;
     }
 }
 

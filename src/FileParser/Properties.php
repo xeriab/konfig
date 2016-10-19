@@ -262,8 +262,8 @@ class Properties extends AbstractFileParser
     /**
      * {@inheritdoc}
      *
-     * @param string     $field    Field name
-     * @param array $analysis Configuration items
+     * @param string $field    Field name
+     * @param array  $analysis Configuration items
      *
      * @return array Configuration items after deletion
      *
