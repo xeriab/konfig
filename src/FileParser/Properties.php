@@ -243,7 +243,7 @@ class Properties extends AbstractFileParser
     /**
      * {@inheritdoc}
      *
-     * @param array|null $analysis Configuration items
+     * @param array $analysis Configuration items
      *
      * @return array The configuration items
      *
@@ -263,7 +263,7 @@ class Properties extends AbstractFileParser
      * {@inheritdoc}
      *
      * @param string     $field    Field name
-     * @param array|null $analysis Configuration items
+     * @param array $analysis Configuration items
      *
      * @return array Configuration items after deletion
      *
