@@ -65,14 +65,20 @@ final class Konfig extends AbstractKonfig
     /**
      * Loads a supported configuration file format.
      *
-     * @param string|array|mixed $path    String file
-     *                                    | configuration array | Konfig instance
-     * @param array              $parsers Parsers
+     * @param string|array|mixed $path      String file | configuration array
+     * | Konfig instance | configuration array | Konfig instance
+     * @param array              $parsers   Parsers
+     * @param bool               $overwrite Whether to overwrite existing values
+     * @param bool               $cache     Allow caching
      *
      * @throws EmptyDirectoryException If `$path` is an empty directory
      */
-    public function __construct($path = null, array $parsers = [])
-    {
+    public function __construct(
+        $path = null,
+        array $parsers = [],
+        $overwrite = false,
+        $cache = true
+    ) {
         $this->setFileParsers($parsers);
 
         $paths = $this->getValidPath($path);
@@ -315,48 +321,6 @@ final class Konfig extends AbstractKonfig
         }
 
         return [$path];
-    }
-
-    /**
-     * __call.
-     *
-     * @param string       $name      Method name
-     * @param string|array $arguments Arguments to pass
-     *
-     * @return             mixed
-     * @since              0.2.5
-     * @codeCoverageIgnore
-     */
-    public function __call($name, $arguments)
-    {
-        switch ($name) {
-        case 'get':
-            return call_user_func_array(
-                [get_called_class(), 'get'],
-                $arguments
-            );
-        }
-    }
-
-    /**
-     * __callStatic.
-     *
-     * @param string       $name      Method name
-     * @param string|array $arguments Arguments to pass
-     *
-     * @return             mixed
-     * @since              0.2.5
-     * @codeCoverageIgnore
-     */
-    public static function __callStatic($name, $arguments)
-    {
-        switch ($name) {
-        case 'get':
-            return call_user_func_array(
-                [get_called_class(), 'get'],
-                $arguments
-            );
-        }
     }
 
     /**
