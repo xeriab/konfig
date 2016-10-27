@@ -22,7 +22,6 @@ use Exen\Konfig\Exception\FileNotFoundException;
 use Exen\Konfig\Exception\UnsupportedFileFormatException;
 
 /**
- * Konfig
  * Main Konfig class.
  *
  * @category Main
@@ -182,13 +181,15 @@ final class Konfig extends AbstractKonfig
     {
         if (empty($fileParsers)) {
             $fileParsers = [
+                // Default parsers
                 new FileParser\Xml(),
                 new FileParser\Ini(),
                 new FileParser\Json(),
+                new FileParser\Php(),
+
                 new FileParser\Yaml(),
                 new FileParser\Neon(),
                 new FileParser\Toml(),
-                new FileParser\Php(),
                 new FileParser\Properties(),
             ];
         }
@@ -203,7 +204,7 @@ final class Konfig extends AbstractKonfig
     /**
      * Gets a parser for a given file extension.
      *
-     * @param string $ext File extension
+     * @param string|null $ext File extension
      *
      * @return FileParser
      *

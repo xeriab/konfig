@@ -17,8 +17,6 @@
 namespace Exen\Konfig;
 
 /**
- * KonfigInterface.
- *
  * Main Konfig interface
  *
  * @category Main

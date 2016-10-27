@@ -20,8 +20,6 @@ use ArrayAccess;
 use Iterator;
 
 /**
- * AbstractKonfig.
- *
  * Main Konfig abstract class.
  *
  * @category Main

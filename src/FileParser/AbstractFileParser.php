@@ -19,7 +19,6 @@ namespace Exen\Konfig\FileParser;
 use Exen\Konfig\FileParser;
 
 /**
- * AbstractFileParser
  * Konfig's abstract file parser class.
  *
  * @category FileParser
