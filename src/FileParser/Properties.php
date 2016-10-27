@@ -111,7 +111,6 @@ class Properties extends AbstractFileParser
             }
 
             if (!strpos($line, '=') && !$isWaitingForOtherLine) {
-                break;
                 return [];
             }
 
