@@ -181,7 +181,7 @@
 </span><span id="62" class="l"><a href="#62"> 62: </a>
 </span><span id="63" class="l"><a href="#63"> 63: </a>        <span class="php-keyword1">unset</span>(<span class="php-var">$this</span>-&gt;parsedFile);
 </span><span id="64" class="l"><a href="#64"> 64: </a>
-</span><span id="65" class="l"><a href="#65"> 65: </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$data</span> || !<span class="php-keyword2">is_array</span>(<span class="php-var">$data</span>) || <span class="php-keyword2">is_null</span>(<span class="php-var">$data</span>)) {
+</span><span id="65" class="l"><a href="#65"> 65: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">is_array</span>(<span class="php-var">$data</span>) || <span class="php-keyword2">is_null</span>(<span class="php-var">$data</span>) || <span class="php-keyword1">empty</span>(<span class="php-var">$data</span>)) {
 </span><span id="66" class="l"><a href="#66"> 66: </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> ParseException(
 </span><span id="67" class="l"><a href="#67"> 67: </a>                [
 </span><span id="68" class="l"><a href="#68"> 68: </a>                    <span class="php-quote">'message'</span> =&gt; <span class="php-quote">'Error parsing PROPERTIES file'</span>,
@@ -231,7 +231,7 @@
 </span><span id="112" class="l"><a href="#112">112: </a>
 </span><span id="113" class="l"><a href="#113">113: </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword2">strpos</span>(<span class="php-var">$line</span>, <span class="php-quote">'='</span>) &amp;&amp; !<span class="php-var">$isWaitingForOtherLine</span>) {
 </span><span id="114" class="l"><a href="#114">114: </a>                <span class="php-keyword1">break</span>;
-</span><span id="115" class="l"><a href="#115">115: </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+</span><span id="115" class="l"><a href="#115">115: </a>                <span class="php-keyword1">return</span> [];
 </span><span id="116" class="l"><a href="#116">116: </a>            }
 </span><span id="117" class="l"><a href="#117">117: </a>
 </span><span id="118" class="l"><a href="#118">118: </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$isWaitingForOtherLine</span>) {
@@ -242,11 +242,11 @@
 </span><span id="123" class="l"><a href="#123">123: </a>                <span class="php-var">$value</span> .= <span class="php-var">$line</span>;
 </span><span id="124" class="l"><a href="#124">124: </a>            }
 </span><span id="125" class="l"><a href="#125">125: </a>
-</span><span id="126" class="l"><a href="#126">126: </a>            <span class="php-comment">// Trim unnecessary white spaces from $value</span>
+</span><span id="126" class="l"><a href="#126">126: </a>            <span class="php-comment">// Trim unnecessary white spaces</span>
 </span><span id="127" class="l"><a href="#127">127: </a>            <span class="php-var">$value</span> = <span class="php-keyword2">trim</span>(<span class="php-var">$value</span>);
 </span><span id="128" class="l"><a href="#128">128: </a>            <span class="php-var">$value</span> = Utils::trimWhitespace(<span class="php-var">$value</span>);
 </span><span id="129" class="l"><a href="#129">129: </a>
-</span><span id="130" class="l"><a href="#130">130: </a>            <span class="php-comment">// Remove unnecessary double/single qoutes from $value</span>
+</span><span id="130" class="l"><a href="#130">130: </a>            <span class="php-comment">// Remove unnecessary double/single qoutes</span>
 </span><span id="131" class="l"><a href="#131">131: </a>            <span class="php-var">$value</span> = Utils::removeQuotes(<span class="php-var">$value</span>);
 </span><span id="132" class="l"><a href="#132">132: </a>
 </span><span id="133" class="l"><a href="#133">133: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">strpos</span>(<span class="php-var">$value</span>, <span class="php-quote">'\\'</span>) === <span class="php-keyword2">strlen</span>(<span class="php-var">$value</span>) - <span class="php-keyword2">strlen</span>(<span class="php-quote">'\\'</span>)) {
