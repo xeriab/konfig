@@ -17,8 +17,6 @@
 namespace Exen\Konfig;
 
 /**
- * FileParser.
- *
  * Main Konfig's file parser interface
  *
  * @category Main
