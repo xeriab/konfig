@@ -41,7 +41,7 @@ class Yaml extends AbstractFileParser
      *
      * @throws ParseException If there is an error parsing YAML/YML file
      *
-     * @return array The parsed data
+     * @return array|object|stdClass The parsed data
      *
      * @since 0.1.0
      */
@@ -93,7 +93,7 @@ class Yaml extends AbstractFileParser
         $contents = $this->parseVars(Utils::getContent($file));
 
         if (extension_loaded('yaml')) {
-            return yaml_parse($content);
+            return yaml_parse($contents);
         }
 
         return YamlParser::parse($contents);
@@ -114,7 +114,7 @@ class Yaml extends AbstractFileParser
         $this->prepVars($contents);
 
         if (extension_loaded('yaml')) {
-            return yaml_emit($content);
+            return yaml_emit($contents);
         }
 
         return YamlParser::dump($contents);

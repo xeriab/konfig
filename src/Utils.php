@@ -34,7 +34,7 @@ final class Utils
      *
      * @param string $file The path to the file
      *
-     * @return             mixed The results of the include
+     * @return             string The results of the include
      * @since              0.2.4
      * @codeCoverageIgnore
      */
@@ -48,7 +48,7 @@ final class Utils
      * will return the result of the closure, if not, it will simply return the
      * value.
      *
-     * @param mixed $var The value to get
+     * @param string|null $var The value to get
      *
      * @return             mixed
      * @since              0.1.0
@@ -62,14 +62,14 @@ final class Utils
     /**
      * {@inheritdoc}
      *
-     * @param array|null $array Configuration items
+     * @param array $array Configuration items
      *
      * @return array
      *
      * @since              0.2.4
      * @codeCoverageIgnore
      */
-    public static function unescapeProperties(array &$array = null)
+    public static function unescapeProperties(array &$array)
     {
         foreach ($array as $key => $value) {
             $array[$key] = str_replace('\=', '=', $value);
@@ -81,13 +81,13 @@ final class Utils
     /**
      * Fix value types of the given array.
      *
-     * @param array|null $array The Array to fix
+     * @param array $array The Array to fix
      *
      * @return             array
      * @since              0.2.4
      * @codeCoverageIgnore
      */
-    public static function fixArrayValues(array &$array = null)
+    public static function fixArrayValues(array &$array)
     {
         foreach ($array as $key => $value) {
             // Numerical fix
@@ -137,13 +137,13 @@ final class Utils
     /**
      * Trim array elements.
      *
-     * @param array|null $array Configuration items
+     * @param array $array Configuration items
      *
      * @return             mixed
      * @since              0.2.4
      * @codeCoverageIgnore
      */
-    public static function trimArrayElements(array &$array = null)
+    public static function trimArrayElements(array &$array)
     {
         $cb = function ($el) {
             return trim($el);
@@ -163,7 +163,7 @@ final class Utils
      * @since              0.2.4
      * @codeCoverageIgnore
      */
-    public static function stripBackslashes(array &$array = null)
+    public static function stripBackslashes(array &$array)
     {
         foreach ($array as $key => $value) {
             $array[$key] = str_replace('\=', '=', $value);
@@ -271,8 +271,15 @@ final class Utils
 
             // Not using '\R' because it's too slow, so we must do it by hand
             // and replace CRLF before touching any LF.
-            $patterns[] = ['/(\r\n){' . ($l + 2) . ',}/m', str_repeat("\r\n", $l + 1)];
-            $patterns[] = ['/\n{' . ($l + 2) . ',}/m', str_repeat("\n", $l + 1)];
+            $patterns[] = [
+                '/(\r\n){' . ($l + 2) . ',}/m',
+                str_repeat("\r\n", $l + 1)
+            ];
+
+            $patterns[] = [
+                '/\n{' . ($l + 2) . ',}/m',
+                str_repeat("\n", $l + 1)
+            ];
         }
 
         // Doing the replacement in one go without storing intermediary

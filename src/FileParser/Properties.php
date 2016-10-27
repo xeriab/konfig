@@ -62,7 +62,7 @@ class Properties extends AbstractFileParser
 
         unset($this->parsedFile);
 
-        if (!$data || !is_array($data) || is_null($data)) {
+        if (!is_array($data) || is_null($data) || empty($data)) {
             throw new ParseException(
                 [
                     'message' => 'Error parsing PROPERTIES file',
@@ -112,7 +112,7 @@ class Properties extends AbstractFileParser
 
             if (!strpos($line, '=') && !$isWaitingForOtherLine) {
                 break;
-                return false;
+                return [];
             }
 
             if (!$isWaitingForOtherLine) {
@@ -123,11 +123,11 @@ class Properties extends AbstractFileParser
                 $value .= $line;
             }
 
-            // Trim unnecessary white spaces from $value
+            // Trim unnecessary white spaces
             $value = trim($value);
             $value = Utils::trimWhitespace($value);
 
-            // Remove unnecessary double/single qoutes from $value
+            // Remove unnecessary double/single qoutes
             $value = Utils::removeQuotes($value);
 
             if (strpos($value, '\\') === strlen($value) - strlen('\\')) {
