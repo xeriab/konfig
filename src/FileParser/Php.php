@@ -21,7 +21,6 @@ use Exen\Konfig\Exception\ParseException;
 use Exen\Konfig\Exception\UnsupportedFileFormatException;
 
 /**
- * Php
  * Konfig's PHP parser class.
  *
  * @category FileParser

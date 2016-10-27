@@ -20,7 +20,6 @@ use Exen\Konfig\Exception\ParseException;
 use Exen\Konfig\Utils;
 
 /**
- * Json
  * Konfig's JSON parser class.
  *
  * @category FileParser
@@ -110,7 +109,6 @@ class Json extends AbstractFileParser
     protected function exportFormat($contents = null)
     {
         $this->prepVars($contents);
-
         return json_encode($contents);
     }
 

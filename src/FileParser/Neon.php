@@ -22,7 +22,6 @@ use Exen\Konfig\Utils;
 use Nette\Neon\Neon as NeonParser;
 
 /**
- * Neon
  * Konfig's NEON parser class.
  *
  * @category FileParser
@@ -108,7 +107,6 @@ class Neon extends AbstractFileParser
     protected function exportFormat($contents = null)
     {
         $this->prepVars($contents);
-
         return NeonParser::encode($contents);
     }
 

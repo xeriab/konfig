@@ -21,7 +21,6 @@ use Exen\Konfig\Exception\ParseException;
 use Exen\Konfig\Utils;
 
 /**
- * Xml
  * Konfig's XML parser class.
  *
  * @category FileParser
@@ -55,11 +54,11 @@ class Xml extends AbstractFileParser
             if ($lastError !== false) {
                 throw new ParseException(
                     [
-                    'message' => $lastError->message,
-                    'type' => $lastError->level,
-                    'code' => $lastError->code,
-                    'file' => $lastError->file,
-                    'line' => $lastError->line,
+                        'message' => $lastError->message,
+                        'type' => $lastError->level,
+                        'code' => $lastError->code,
+                        'file' => $lastError->file,
+                        'line' => $lastError->line,
                     ]
                 );
             }

@@ -20,8 +20,6 @@ use ArrayAccess;
 use InvalidArgumentException;
 
 /**
- * Arr.
- *
  * Konfig's array utilities class
  *
  * @category Main

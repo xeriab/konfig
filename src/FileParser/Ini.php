@@ -21,7 +21,6 @@ use Exen\Konfig\Exception\ParseException;
 use Exen\Konfig\Utils;
 
 /**
- * Ini
  * Konfig's INI parser class.
  *
  * @category FileParser
