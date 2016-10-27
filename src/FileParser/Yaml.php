@@ -22,7 +22,6 @@ use Exen\Konfig\Utils;
 use Symfony\Component\Yaml\Yaml as YamlParser;
 
 /**
- * Yaml
  * Konfig's YAML parser class.
  *
  * @category FileParser
@@ -55,10 +54,10 @@ class Yaml extends AbstractFileParser
         } catch (Exception $ex) {
             throw new ParseException(
                 [
-                'message' => 'Error parsing YAML file',
-                'file' => realpath($path),
-                'line' => $ex->getParsedLine(),
-                'exception' => $ex,
+                    'message' => 'Error parsing YAML file',
+                    'file' => realpath($path),
+                    'line' => $ex->getParsedLine(),
+                    'exception' => $ex,
                 ]
             );
         }
@@ -93,6 +92,10 @@ class Yaml extends AbstractFileParser
         $this->file = $file;
         $contents = $this->parseVars(Utils::getContent($file));
 
+        if (extension_loaded('yaml')) {
+            return yaml_parse($content);
+        }
+
         return YamlParser::parse($contents);
     }
 
@@ -109,6 +112,10 @@ class Yaml extends AbstractFileParser
     protected function exportFormat($contents = null)
     {
         $this->prepVars($contents);
+
+        if (extension_loaded('yaml')) {
+            return yaml_emit($content);
+        }
 
         return YamlParser::dump($contents);
     }
