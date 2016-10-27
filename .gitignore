@@ -1,7 +1,7 @@
 #
 
-/test_config
-/testing.sh
+/test-config
+/run-tests.sh
 /composer.lock
 /composer.bak.json
 /coverage.clover
