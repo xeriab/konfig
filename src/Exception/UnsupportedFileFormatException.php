@@ -17,8 +17,6 @@
 namespace Exen\Konfig\Exception;
 
 /**
- * RuntimeException.
- *
  * Unsupported file format exception class
  *
  * @category Exception.

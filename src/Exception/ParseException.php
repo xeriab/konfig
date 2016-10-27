@@ -17,8 +17,6 @@
 namespace Exen\Konfig\Exception;
 
 /**
- * ParseException.
- *
  * Parse exception class
  *
  * @category Exception.

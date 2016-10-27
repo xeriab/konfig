@@ -17,8 +17,6 @@
 namespace Exen\Konfig\Exception;
 
 /**
- * Exception.
- *
  * Konfig exception class
  *
  * @category Exception.

@@ -17,8 +17,6 @@
 namespace Exen\Konfig\Exception;
 
 /**
- * DumpException.
- *
  * Dump exception class
  *
  * @category Exception.

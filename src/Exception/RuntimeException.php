@@ -17,8 +17,6 @@
 namespace Exen\Konfig\Exception;
 
 /**
- * RuntimeException.
- *
  * Runtime exception class
  *
  * @category Exception.

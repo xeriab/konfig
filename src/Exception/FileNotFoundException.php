@@ -17,8 +17,6 @@
 namespace Exen\Konfig\Exception;
 
 /**
- * FileNotFoundException.
- *
  * File not found exception class
  *
  * @category Exception.

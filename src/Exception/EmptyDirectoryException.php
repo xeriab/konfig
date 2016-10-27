@@ -17,8 +17,6 @@
 namespace Exen\Konfig\Exception;
 
 /**
- * EmptyDirectoryException.
- *
  * Empty directory exception class
  *
  * @category Exception.
