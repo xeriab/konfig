@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Exen\Konfig\Konfig</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-Exen.html">
+						Exen<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-Exen.Konfig.html">
+						Konfig<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Exen.Konfig.Exception.html">
+						Exception					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Exen.Konfig.FileParser.html">
+						FileParser					</a>
+
+						</li>
+							</ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Exen.Konfig.AbstractKonfig.html">AbstractKonfig</a></li>
+				<li><a href="class-Exen.Konfig.Arr.html">Arr</a></li>
+				<li class="active"><a href="class-Exen.Konfig.Konfig.html">Konfig</a></li>
+				<li><a href="class-Exen.Konfig.Utils.html">Utils</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-Exen.Konfig.FileParser.html">FileParser</a></li>
+				<li><a href="class-Exen.Konfig.KonfigInterface.html">KonfigInterface</a></li>
+			</ul>
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Exen.Konfig.html" title="Summary of Exen\Konfig"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Konfig</h1>
+
+
+	<div class="description">
+	<p>Main Konfig class.</p>
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Exen.Konfig.AbstractKonfig.html"><span>Exen\Konfig\AbstractKonfig</span></a>
+			
+			 implements 
+<span>ArrayAccess</span>, 
+			
+<span>Iterator</span>, 
+			
+				<a href="class-Exen.Konfig.KonfigInterface.html"><span>Exen\Konfig\KonfigInterface</span></a>
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+<b><span>Exen\Konfig\Konfig</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		<b>Final</b><br>
+		
+		<b>Namespace:</b> <a href="namespace-Exen.html">Exen</a>\<a href="namespace-Exen.Konfig.html">Konfig</a><br>
+		<b>Package:</b> Konfig<br>
+
+				<b>Category:</b>
+				Main<br>
+				<b>License:</b>
+				<a href="https://raw.github.com/xeriab/konfig/master/LICENSE">MIT</a><br>
+				<b>Author:</b>
+				Xeriab Nabil (aka KodeBurner) <a href="&#x6d;&#97;&#105;l&#x74;&#x6f;&#58;k&#x6f;&#x64;&#101;&#98;&#x75;&#x72;&#110;&#101;&#x72;&#x40;&#103;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#109;">k&#x6f;&#x64;&#101;&#98;&#x75;&#x72;&#110;&#101;&#x72;&#x40;&#103;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#109;</a><br>
+				<b>Link:</b>
+				<a href="https://xeriab.github.io/projects/konfig">https://xeriab.github.io/projects/konfig</a><br>
+				<b>Extends:</b>
+				AbstractKonfig<br>
+			<b>Located at</b> <a href="source-class-Exen.Konfig.Konfig.html#24-338" title="Go to source code">Konfig.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Exen.Konfig.Konfig.html#64-112" title="Go to source code">__construct</a>( <span>string|array|mixed <var>$path</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$parsers</var> = []</span>, <span>boolean <var>$overwrite</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$cache</var> = <span class="php-keyword1">true</span> </span> )</code>
+
+		<div class="description short">
+			<p>Loads a supported configuration file format.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Loads a supported configuration file format.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd><p>String file | configuration array
+| Konfig instance | configuration array | Konfig instance</p></dd>
+					<dt><var>$parsers</var></dt>
+					<dd>Parsers</dd>
+					<dt><var>$overwrite</var></dt>
+					<dd>Whether to overwrite existing values</dd>
+					<dt><var>$cache</var></dt>
+					<dd>Allow caching</dd>
+				</dl></div>
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><a href="class-Exen.Konfig.Exception.EmptyDirectoryException.html">Exen\Konfig\Exception\EmptyDirectoryException</a></code><br>If <code>$path</code> is an empty directory
+				</div>
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Exen.Konfig.AbstractKonfig.html#___construct">Exen\Konfig\AbstractKonfig::__construct()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="load" id="_load">
+
+		<td class="attributes"><code>
+			 public static
+
+			<code><a href="class-Exen.Konfig.Konfig.html">Exen\Konfig\Konfig</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_load">#</a>
+		<code><a href="source-class-Exen.Konfig.Konfig.html#114-132" title="Go to source code">load</a>( <span>string|array|mixed <var>$path</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$parsers</var> = []</span>, <span>boolean <var>$overwrite</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$cache</var> = <span class="php-keyword1">true</span> </span> )</code>
+
+		<div class="description short">
+			<p>Static method for loading a Konfig instance.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Static method for loading a Konfig instance.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd><p>string file | configuration array
+                                     | Konfig instance</p></dd>
+					<dt><var>$parsers</var></dt>
+					<dd>Parsers to use with Konfig</dd>
+					<dt><var>$overwrite</var></dt>
+					<dd>Whether to overwrite existing values</dd>
+					<dt><var>$cache</var></dt>
+					<dd>Allow caching</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Exen.Konfig.Konfig.html">Exen\Konfig\Konfig</a></code>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="loaded" id="_loaded">
+
+		<td class="attributes"><code>
+			 public static
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_loaded">#</a>
+		<code><a href="source-class-Exen.Konfig.Konfig.html#134-142" title="Go to source code">loaded</a>( )</code>
+
+		<div class="description short">
+			<p>Static method for getting loaded Konfig files.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Static method for getting loaded Konfig files.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					array
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getFileParsers" id="_getFileParsers">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-Exen.Konfig.FileParser.html">Exen\Konfig\FileParser</a>[]</code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getFileParsers">#</a>
+		<code><a href="source-class-Exen.Konfig.Konfig.html#144-155" title="Go to source code">getFileParsers</a>( )</code>
+
+		<div class="description short">
+			<p>Get file parsers.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Get file parsers.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Exen.Konfig.FileParser.html">Exen\Konfig\FileParser</a>[]</code>
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						0.1.0<br>
+				</div>
+				<h4>Codecoverageignore</h4>
+				<div class="list">
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addFileParser" id="_addFileParser">
+
+		<td class="attributes"><code>
+			 protected 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addFileParser">#</a>
+		<code><a href="source-class-Exen.Konfig.Konfig.html#157-169" title="Go to source code">addFileParser</a>( <span><code><a href="class-Exen.Konfig.FileParser.html">Exen\Konfig\FileParser</a></code> <var>$fileParser</var></span> )</code>
+
+		<div class="description short">
+			<p>Add file parsers.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Add file parsers.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$fileParser</var></dt>
+					<dd>Parser</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<br>Void
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						0.1.0<br>
+				</div>
+				<h4>Codecoverageignore</h4>
+				<div class="list">
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setFileParsers" id="_setFileParsers">
+
+		<td class="attributes"><code>
+			 protected 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setFileParsers">#</a>
+		<code><a href="source-class-Exen.Konfig.Konfig.html#171-202" title="Go to source code">setFileParsers</a>( <span>array <var>$fileParsers</var> = []</span> )</code>
+
+		<div class="description short">
+			<p>Set file parsers.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Set file parsers.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$fileParsers</var></dt>
+					<dd>Parsers array</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<br>Void
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						0.1.0<br>
+				</div>
+				<h4>Codecoverageignore</h4>
+				<div class="list">
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__toString" id="___toString">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___toString">#</a>
+		<code><a href="source-class-Exen.Konfig.Konfig.html#327-337" title="Go to source code">__toString</a>( )</code>
+
+		<div class="description short">
+			<p>__toString.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>__toString.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						0.1.2<br>
+				</div>
+				<h4>Codecoverageignore</h4>
+				<div class="list">
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Exen.Konfig.AbstractKonfig.html#methods">Exen\Konfig\AbstractKonfig</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Exen.Konfig.AbstractKonfig.html#_all">all()</a>, 
+			<a href="class-Exen.Konfig.AbstractKonfig.html#_current">current()</a>, 
+			<a href="class-Exen.Konfig.AbstractKonfig.html#_delete">delete()</a>, 
+			<a href="class-Exen.Konfig.AbstractKonfig.html#_get">get()</a>, 
+			<a href="class-Exen.Konfig.AbstractKonfig.html#_getDefaults">getDefaults()</a>, 
+			<a href="class-Exen.Konfig.AbstractKonfig.html#_has">has()</a>, 
+			<a href="class-Exen.Konfig.AbstractKonfig.html#_key">key()</a>, 
+			<a href="class-Exen.Konfig.AbstractKonfig.html#_next">next()</a>, 
+			<a href="class-Exen.Konfig.AbstractKonfig.html#_offsetExists">offsetExists()</a>, 
+			<a href="class-Exen.Konfig.AbstractKonfig.html#_offsetGet">offsetGet()</a>, 
+			<a href="class-Exen.Konfig.AbstractKonfig.html#_offsetSet">offsetSet()</a>, 
+			<a href="class-Exen.Konfig.AbstractKonfig.html#_offsetUnset">offsetUnset()</a>, 
+			<a href="class-Exen.Konfig.AbstractKonfig.html#_rewind">rewind()</a>, 
+			<a href="class-Exen.Konfig.AbstractKonfig.html#_set">set()</a>, 
+			<a href="class-Exen.Konfig.AbstractKonfig.html#_valid">valid()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary properties" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="fileParsers" id="$fileParsers">
+		<td class="attributes"><code>
+			protected  
+			array|null
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Exen.Konfig.Konfig.html#37-44" title="Go to source code"><var>$fileParsers</var></a>
+
+			<div class="description short">
+				<p>Array of file parsers objects.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Array of file parsers objects.</p>
+
+					<h4>Since</h4>
+					<div class="list">
+							0.1.0<br>
+					</div>
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$fileParsers" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="loadedFiles" id="$loadedFiles">
+		<td class="attributes"><code>
+			protected static 
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Exen.Konfig.Konfig.html#46-53" title="Go to source code"><var>$loadedFiles</var></a>
+
+			<div class="description short">
+				<p>Stores loaded configuration files.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Stores loaded configuration files.</p>
+
+					<h4>Since</h4>
+					<div class="list">
+							0.1.0<br>
+					</div>
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$loadedFiles" class="anchor">#</a>
+				<code>[]</code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="loadedData" id="$loadedData">
+		<td class="attributes"><code>
+			protected static 
+			array|null
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Exen.Konfig.Konfig.html#55-62" title="Go to source code"><var>$loadedData</var></a>
+
+			<div class="description short">
+				<p>Array of loaded data.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Array of loaded data.</p>
+
+					<h4>Since</h4>
+					<div class="list">
+							0.1.0<br>
+					</div>
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$loadedData" class="anchor">#</a>
+				<code><span class="php-keyword1">null</span></code>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Exen.Konfig.AbstractKonfig.html#properties">Exen\Konfig\AbstractKonfig</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Exen.Konfig.AbstractKonfig.html#$cache"><var>$cache</var></a>, 
+			<a href="class-Exen.Konfig.AbstractKonfig.html#$data"><var>$data</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

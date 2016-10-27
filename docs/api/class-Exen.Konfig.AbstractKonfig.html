@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Exen\Konfig\AbstractKonfig</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-Exen.html">
+						Exen<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-Exen.Konfig.html">
+						Konfig<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Exen.Konfig.Exception.html">
+						Exception					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Exen.Konfig.FileParser.html">
+						FileParser					</a>
+
+						</li>
+							</ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-Exen.Konfig.AbstractKonfig.html">AbstractKonfig</a></li>
+				<li><a href="class-Exen.Konfig.Arr.html">Arr</a></li>
+				<li><a href="class-Exen.Konfig.Konfig.html">Konfig</a></li>
+				<li><a href="class-Exen.Konfig.Utils.html">Utils</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-Exen.Konfig.FileParser.html">FileParser</a></li>
+				<li><a href="class-Exen.Konfig.KonfigInterface.html">KonfigInterface</a></li>
+			</ul>
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Exen.Konfig.html" title="Summary of Exen\Konfig"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class AbstractKonfig</h1>
+
+
+	<div class="description">
+	<p>Main Konfig abstract class.</p>
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+<b><span>Exen\Konfig\AbstractKonfig</span></b>			
+			 implements 
+<span>ArrayAccess</span>, 
+			
+<span>Iterator</span>, 
+			
+				<a href="class-Exen.Konfig.KonfigInterface.html"><span>Exen\Konfig\KonfigInterface</span></a>
+			
+			
+		</dd>
+	</dl>
+
+
+	<div>
+		<h4>Direct known subclasses</h4>
+			<a href="class-Exen.Konfig.Konfig.html">Exen\Konfig\Konfig</a>
+	</div>
+
+
+
+
+
+
+	<div class="info">
+		<b>Abstract</b><br>
+		
+		<b>Namespace:</b> <a href="namespace-Exen.html">Exen</a>\<a href="namespace-Exen.Konfig.html">Konfig</a><br>
+		<b>Package:</b> Konfig<br>
+
+				<b>Category:</b>
+				Main<br>
+				<b>License:</b>
+				<a href="https://raw.github.com/xeriab/konfig/master/LICENSE">MIT</a><br>
+				<b>Author:</b>
+				Xeriab Nabil (aka KodeBurner) <a href="&#x6d;&#97;&#105;l&#x74;&#x6f;&#58;k&#x6f;&#x64;&#101;&#98;&#x75;&#x72;&#110;&#101;&#x72;&#x40;&#103;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#109;">k&#x6f;&#x64;&#101;&#98;&#x75;&#x72;&#110;&#101;&#x72;&#x40;&#103;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#109;</a><br>
+				<b>Link:</b>
+				<a href="https://xeriab.github.io/projects/konfig">https://xeriab.github.io/projects/konfig</a><br>
+				<b>Implements:</b>
+				ArrayAccess<br>
+				<b>Implements:</b>
+				Iterator<br>
+				<b>Implements:</b>
+				KonfigInterface<br>
+			<b>Located at</b> <a href="source-class-Exen.Konfig.AbstractKonfig.html#22-338" title="Go to source code">AbstractKonfig.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Exen.Konfig.AbstractKonfig.html#55-64" title="Go to source code">__construct</a>( <span>array <var>$input</var></span> )</code>
+
+		<div class="description short">
+			<p>Constructor method and sets default options, if any.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Constructor method and sets default options, if any.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$input</var></dt>
+					<dd>Input</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDefaults" id="_getDefaults">
+
+		<td class="attributes"><code>
+			 protected 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDefaults">#</a>
+		<code><a href="source-class-Exen.Konfig.AbstractKonfig.html#66-77" title="Go to source code">getDefaults</a>( )</code>
+
+		<div class="description short">
+			<p>Override this method in your own subclass to provide an array of default
+options and values.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Override this method in your own subclass to provide an array of default
+options and values.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					array
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						0.1.0<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="all" id="_all">
+
+		<td class="attributes"><code>
+			 public 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_all">#</a>
+		<code><a href="source-class-Exen.Konfig.AbstractKonfig.html#81-89" title="Go to source code">all</a>( )</code>
+
+		<div class="description short">
+			<p>Getting all configuration values.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Getting all configuration values.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					array<br>Gets configuration items array
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Exen.Konfig.KonfigInterface.html#_all">Exen\Konfig\KonfigInterface::all()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="has" id="_has">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_has">#</a>
+		<code><a href="source-class-Exen.Konfig.AbstractKonfig.html#91-125" title="Go to source code">has</a>( <span>string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			<p>Checking if configuration values exist, using
+either simple or nested keys.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Checking if configuration values exist, using
+either simple or nested keys.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd>Configuration item key name item</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean<br>Returns true if the configuration item key exists
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						0.1.0<br>
+				</div>
+				<h4>Codecoverageignore</h4>
+				<div class="list">
+				</div>
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Exen.Konfig.KonfigInterface.html#_has">Exen\Konfig\KonfigInterface::has()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="get" id="_get">
+
+		<td class="attributes"><code>
+			 public 
+
+			string|array|null
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_get">#</a>
+		<code><a href="source-class-Exen.Konfig.AbstractKonfig.html#127-143" title="Go to source code">get</a>( <span>string <var>$key</var></span>, <span>string|array|null <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			<p>Gets configuration setting using a simple or nested key.
+Nested keys are similar to JSON paths that use the dot
+dot notation.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Gets configuration setting using a simple or nested key.
+Nested keys are similar to JSON paths that use the dot
+dot notation.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd>Configuration item key name item</dd>
+					<dt><var>$default</var></dt>
+					<dd>Default configuration</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					string|array|null<br>Default configuration
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Exen.Konfig.KonfigInterface.html#_get">Exen\Konfig\KonfigInterface::get()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="set" id="_set">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_set">#</a>
+		<code><a href="source-class-Exen.Konfig.AbstractKonfig.html#145-190" title="Go to source code">set</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			<p>Function for setting configuration values.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Function for setting configuration values.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd>Configuration item key name</dd>
+					<dt><var>$value</var></dt>
+					<dd>Configuration item value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<br>Void
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Exen.Konfig.KonfigInterface.html#_set">Exen\Konfig\KonfigInterface::set()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="delete" id="_delete">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_delete">#</a>
+		<code><a href="source-class-Exen.Konfig.AbstractKonfig.html#192-208" title="Go to source code">delete</a>( <span>string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			<p>Deletes configuration item (key &amp; value).</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Deletes configuration item (key &amp; value).</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd>Configuration item key name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean
+				</div>
+
+
+				<h4>Codecoverageignore</h4>
+				<div class="list">
+				</div>
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Exen.Konfig.KonfigInterface.html#_delete">Exen\Konfig\KonfigInterface::delete()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetGet" id="_offsetGet">
+
+		<td class="attributes"><code>
+			 public 
+
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetGet">#</a>
+		<code><a href="source-class-Exen.Konfig.AbstractKonfig.html#212-224" title="Go to source code">offsetGet</a>( <span>string <var>$offset</var></span> )</code>
+
+		<div class="description short">
+			<p>Gets a value using the offset as a key.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Gets a value using the offset as a key.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd>Configuration item key name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					mixed<br>Configuration item
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						0.1.0<br>
+				</div>
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code>ArrayAccess::offsetGet()</code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetExists" id="_offsetExists">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetExists">#</a>
+		<code><a href="source-class-Exen.Konfig.AbstractKonfig.html#226-238" title="Go to source code">offsetExists</a>( <span>string <var>$offset</var></span> )</code>
+
+		<div class="description short">
+			<p>Checks if a key exists.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Checks if a key exists.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd>Configuration item key name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						0.1.0<br>
+				</div>
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code>ArrayAccess::offsetExists()</code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetSet" id="_offsetSet">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetSet">#</a>
+		<code><a href="source-class-Exen.Konfig.AbstractKonfig.html#240-252" title="Go to source code">offsetSet</a>( <span>string <var>$offset</var></span>, <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			<p>Sets a value using the offset as a key.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Sets a value using the offset as a key.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd>Configuration item key name</dd>
+					<dt><var>$value</var></dt>
+					<dd>Configuration item value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<br>Void
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						0.1.0<br>
+				</div>
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code>ArrayAccess::offsetSet()</code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetUnset" id="_offsetUnset">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetUnset">#</a>
+		<code><a href="source-class-Exen.Konfig.AbstractKonfig.html#254-265" title="Go to source code">offsetUnset</a>( <span>string <var>$offset</var></span> )</code>
+
+		<div class="description short">
+			<p>Deletes a key and its value.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Deletes a key and its value.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$offset</var></dt>
+					<dd>Configuration item key name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<br>Void
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						0.1.0<br>
+				</div>
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code>ArrayAccess::offsetUnset()</code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="valid" id="_valid">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_valid">#</a>
+		<code><a href="source-class-Exen.Konfig.AbstractKonfig.html#269-279" title="Go to source code">valid</a>( )</code>
+
+		<div class="description short">
+			<p>Tests whether the iterator's current index is valid.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Tests whether the iterator's current index is valid.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean<br>True if the current index is valid; false otherwise
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						0.1.0<br>
+				</div>
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code>Iterator::valid()</code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="key" id="_key">
+
+		<td class="attributes"><code>
+			 public 
+
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_key">#</a>
+		<code><a href="source-class-Exen.Konfig.AbstractKonfig.html#281-293" title="Go to source code">key</a>( )</code>
+
+		<div class="description short">
+			<p>Returns the data array index referenced by its internal cursor.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Returns the data array index referenced by its internal cursor.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					mixed<br><p>The index referenced by the data array's internal cursor.
+If the array is empty or undefined or there is no element at the cursor,
+the function returns null.</p>
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						0.1.0<br>
+				</div>
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code>Iterator::key()</code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="current" id="_current">
+
+		<td class="attributes"><code>
+			 public 
+
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_current">#</a>
+		<code><a href="source-class-Exen.Konfig.AbstractKonfig.html#295-308" title="Go to source code">current</a>( )</code>
+
+		<div class="description short">
+			<p>Returns the data array element referenced by its internal cursor.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Returns the data array element referenced by its internal cursor.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					mixed<br><p>The element referenced by the data array's internal cursor.
+If the array is empty or there is no element at the cursor,
+the function returns false. If the array is undefined, the function
+returns null</p>
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						0.1.0<br>
+				</div>
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code>Iterator::current()</code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="next" id="_next">
+
+		<td class="attributes"><code>
+			 public 
+
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_next">#</a>
+		<code><a href="source-class-Exen.Konfig.AbstractKonfig.html#310-323" title="Go to source code">next</a>( )</code>
+
+		<div class="description short">
+			<p>Moves the data array's internal cursor forward one element.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Moves the data array's internal cursor forward one element.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					mixed<br><p>The element referenced by the data array's internal cursor
+after the move is completed. If there are no more elements in the
+array after the move, the function returns false. If the data array
+is undefined, the function returns null.</p>
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						0.1.0<br>
+				</div>
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code>Iterator::next()</code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="rewind" id="_rewind">
+
+		<td class="attributes"><code>
+			 public 
+
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_rewind">#</a>
+		<code><a href="source-class-Exen.Konfig.AbstractKonfig.html#325-337" title="Go to source code">rewind</a>( )</code>
+
+		<div class="description short">
+			<p>Moves the data array's internal cursor to the first element.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Moves the data array's internal cursor to the first element.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					mixed<br><p>The element referenced by the data array's internal cursor
+after the move is completed. If the data array is empty, the function
+returns false. If the data array is undefined, the function returns null.</p>
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						0.1.0<br>
+				</div>
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code>Iterator::rewind()</code></div>
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary properties" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="data" id="$data">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Exen.Konfig.AbstractKonfig.html#37-44" title="Go to source code"><var>$data</var></a>
+
+			<div class="description short">
+				<p>Stores the configuration items.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Stores the configuration items.</p>
+
+					<h4>Since</h4>
+					<div class="list">
+							0.1.0<br>
+					</div>
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$data" class="anchor">#</a>
+				<code>[]</code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="cache" id="$cache">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Exen.Konfig.AbstractKonfig.html#46-53" title="Go to source code"><var>$cache</var></a>
+
+			<div class="description short">
+				<p>Caches the configuration data.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Caches the configuration data.</p>
+
+					<h4>Since</h4>
+					<div class="list">
+							0.1.0<br>
+					</div>
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$cache" class="anchor">#</a>
+				<code>[]</code>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>
