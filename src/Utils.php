@@ -19,8 +19,6 @@ namespace Exen\Konfig;
 use Closure;
 
 /**
- * Utils.
- *
  * Konfig's utilities class
  *
  * @category Main
@@ -46,23 +44,6 @@ final class Utils
     }
 
     /**
-     * Get the given file and returns the results.
-     *
-     * @param string $path The path to the file
-     *
-     * @return             mixed The results of the include
-     * @since              0.2.4
-     * @codeCoverageIgnore
-     */
-    public static function getFile($path = null)
-    {
-        return file(
-            realpath($path),
-            FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES
-        );
-    }
-
-    /**
      * Takes a value and checks if it's a Closure or not, if it's a Closure it
      * will return the result of the closure, if not, it will simply return the
      * value.
@@ -79,23 +60,58 @@ final class Utils
     }
 
     /**
-     * Trim array elements.
+     * {@inheritdoc}
      *
-     * @param array $content The array to trim
+     * @param array|null $array Configuration items
      *
-     * @return             mixed
+     * @return array
+     *
      * @since              0.2.4
      * @codeCoverageIgnore
      */
-    public static function trimArrayElements($content = null)
+    public static function unescapeProperties(array &$array = null)
     {
-        $cb = function ($el) {
-            return trim($el);
-        };
+        foreach ($array as $key => $value) {
+            $array[$key] = str_replace('\=', '=', $value);
+        }
 
-        $content = array_map($cb, $content);
+        // return $array;
+    }
 
-        return $content;
+    /**
+     * Fix value types of the given array.
+     *
+     * @param array|null $array The Array to fix
+     *
+     * @return             array
+     * @since              0.2.4
+     * @codeCoverageIgnore
+     */
+    public static function fixArrayValues(array &$array = null)
+    {
+        foreach ($array as $key => $value) {
+            // Numerical fix
+            if (preg_match('/^[1-9][0-9]*$/', $value)) {
+                $array[$key] = intval($value);
+            }
+
+            // Boolean and semi boolean fix
+            if (preg_match('/^true|false|TRUE|FALSE|on|off|ON|OFF*$/', $value)) {
+                $array[$key] = boolval($value);
+            }
+
+            // Double fix
+            if (preg_match('/^[0-9]*[\.]{1}[0-9]*$/', $value)) {
+                $array[$key] = doubleval($value);
+            }
+
+            // Float fix
+            if (preg_match('/^[0-9]*[\.]{1}[0-9-]*$/', $value)) {
+                $array[$key] = floatval($value);
+            }
+        }
+
+        // return $array;
     }
 
     /**
@@ -119,103 +135,163 @@ final class Utils
     }
 
     /**
-     * Strip Backslashes from given string.
+     * Trim array elements.
      *
-     * @param array $content String
+     * @param array|null $array Configuration items
+     *
+     * @return             mixed
+     * @since              0.2.4
+     * @codeCoverageIgnore
+     */
+    public static function trimArrayElements(array &$array = null)
+    {
+        $cb = function ($el) {
+            return trim($el);
+        };
+
+        $array = array_map($cb, $array);
+
+        // return $content;
+    }
+
+    /**
+     * Strip Backslashes from given array's elements.
+     *
+     * @param array $array Array to work with
      *
      * @return             array
      * @since              0.2.4
      * @codeCoverageIgnore
      */
-    public static function stripBackslashes($content)
+    public static function stripBackslashes(array &$array = null)
     {
-        foreach ($content as $lineNb => $line) {
-            if (substr($line[2], -1) === '\\') {
-                $content[$lineNb][2] = trim(substr($line[2], 0, -1));
-            }
+        foreach ($array as $key => $value) {
+            $array[$key] = str_replace('\=', '=', $value);
         }
 
-        return $content;
+        // return $array;
     }
 
-    /**
-     * Checks if the string starts with the given needle.
-     *
-     * @param string $needle Search string
-     * @param string $string String to search in
-     *
-     * @return             bool
-     * @since              0.2.4
-     * @codeCoverageIgnore
-     */
-    public static function stringStart($needle, $string)
-    {
-        return (substr($string, 0, 1) === $needle) ? true : false;
-    }
+    // Barrowed from: https://github.com/fvsch/php-trim-whitespace
 
     /**
-     * Opens given file and convert it to an array.
+     * Trim whitespace in multiline text
      *
-     * @param string $path The path to the file
+     * By default, removes leading and trailing whitespace, collapses all other
+     * space sequences, and removes blank lines. Most of this can be controlled
+     * by passing an options array with the following keys:
      *
-     * @return             array
-     * @since              0.2.4
+     *   - leading (bool, true): should we trim leading whitespace?
+     *   - inside (bool, true): should we collapse spaces within a line
+     *     (not leading whitespace)?
+     *   - blankLines (int, 0): max number of consecutive blank lines;
+     *     use false to disable.
+     *   - tabWidth (int, 4): number of spaces to use when replacing tabs.
+     *
+     * The default settings can be used as basic minification for HTML text
+     * (except for preformatted text!). This function can  be used remove extra
+     * whitespace generated by a mix of PHP and HTML or by a template engine.
+     *
+     * This function forces two behaviors:
+     *   - Trailing whitespace will be removed, always.
+     *   - Tab characters will be replaced by space characters, always
+     *     (for performance reasons).
+     *
+     * This was summarily tested on PHP 5.6 and PHP 7 to be as fast as possible,
+     * and tested against different approches (e.g. splitting as an array and using
+     * PHP’s trim function). The fastest solution found was using str_replace when
+     * possible and preg_replace otherwise with very simple regexps to avoid big
+     * perf costs. The current implementation should be, if not the fastest
+     * possible, probably close enough.
+     *
+     * @param string $string  String to trim
+     * @param array  $options Options
+     *
+     * @return             string
+     * @since              0.2.5
      * @codeCoverageIgnore
      */
-    public static function fileToArray($path = null)
+    public static function trimWhitespace($string, array $options = [])
     {
-        $result = self::getFile($path);
-        // $result = self::getContent($path);
-
-        // $lines = explode(PHP_EOL, $result);
-        // $lines = explode("\n\t|\n", $result);
-
-        $result = self::trimArrayElements($result);
-        $result = array_filter($result);
-
-        return $result;
-    }
-
-    /**
-     * Opens given file and convert it to an array.
-     *
-     * @param string|null $content The file content
-     *
-     * @return             array
-     * @since              0.2.4
-     * @codeCoverageIgnore
-     */
-    public static function fileContentToArray($content = null)
-    {
-        // $result = explode(PHP_EOL, $content);
-        $result = preg_split('/\n\t|\n/', $content);
-        $result = self::trimArrayElements($result);
-        // $result = array_filter($result);
-
-        return $result;
-    }
-
-    /**
-     * Get lines matching number.
-     *
-     * @param string $type     The line type
-     * @param array  $analysis Array to analyze
-     *
-     * @return             int
-     * @since              0.2.4
-     * @codeCoverageIgnore
-     */
-    public static function getNumberLinesMatching($type, array $analysis)
-    {
-        $counter = 0;
-
-        foreach ($analysis as $value) {
-            if ($value[0] === $type) {
-                ++$counter;
-            }
+        if (!is_string($string)) {
+            return '';
         }
 
-        return $counter;
+        $o = array_merge(
+            [
+                'leading' => true,
+                'inside' => true,
+                'blankLines' => 0,
+                'tabWidth' => 4,
+            ],
+            $options
+        );
+
+        // Looking for spaces *and* tab characters is way too costly
+        // (running times go x4 or x10) so we forcefully replace tab characters
+        // with spaces, but make it configurable.
+        $tabw = $o['tabWidth'];
+
+        if (!is_int($tabw) || $tabw < 1 || $tabw > 8) {
+            $tabw = 4;
+        }
+
+        // Replacement patterns should be applied in a specific order
+        $patterns = [];
+
+        // Trim leading whitespace first (if active). In typical scenarios,
+        // especially for indented HTML, this will remove of the target whitespace
+        // and it turns out to be really quick.
+        if ($o['leading']) {
+            $patterns[] = ['/^ {2,}/m', ''];
+        }
+
+        // Always trim at the end. Warning: this seems to be the costlier
+        // operation, perhaps because looking ahead is harder?
+        $patterns[] = ['/ +$/m', ''];
+
+        // Collapse space sequences inside lines (excluding leading/trailing)
+        if ($o['inside']) {
+            // No leading spaces? We can avoid a very costly condition!
+            // Using a look-behind (or similar solutions) seems to make the whole
+            // function go 2x-4x slower (PHP7) or up to 10x slower (PHP 5.6),
+            // except on very big strings where whatever perf penalty was incurred
+            // seems to be more limited (or at least not exponential).
+            $spaces = ($o['leading'] ? ' ' : '(?<=\b) ') . '{2,}';
+            $patterns[] = ['/' . $spaces . '/', ' '];
+        }
+
+        // Remove empty lines
+        if (is_int($l = $o['blankLines']) && $l >= 0) {
+            // We need blank lines to be truly empty; if trimStart is disabled
+            // we have to fall back to this slightly more costly regex.
+            if (!$o['leading']) {
+                $patterns[] = ['/^ +$/m', ''];
+            }
+
+            // Not using '\R' because it's too slow, so we must do it by hand
+            // and replace CRLF before touching any LF.
+            $patterns[] = ['/(\r\n){' . ($l + 2) . ',}/m', str_repeat("\r\n", $l + 1)];
+            $patterns[] = ['/\n{' . ($l + 2) . ',}/m', str_repeat("\n", $l + 1)];
+        }
+
+        // Doing the replacement in one go without storing intermediary
+        // values helps a bit for big strings (around 20 percent quicker).
+        return preg_replace(
+            array_map(
+                function ($x) {
+                    return $x[0];
+                },
+                $patterns
+            ),
+            array_map(
+                function ($x) {
+                    return $x[1];
+                },
+                $patterns
+            ),
+            str_replace("\t", str_repeat(' ', $tabw), $string)
+        );
     }
 
     /**
