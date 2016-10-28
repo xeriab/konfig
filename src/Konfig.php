@@ -209,10 +209,9 @@ final class Konfig extends AbstractKonfig
      *
      * @return FileParser
      *
-     * @throws             Exception                      If `$ext` is empty
-     * @throws             UnsupportedFileFormatException If `$path`
+     * @throws Exception                      If `$ext` is empty
+     * @throws UnsupportedFileFormatException If `$path`
      * is an unsupported file format
-     * @codeCoverageIgnore
      */
     private function getParser($ext = null)
     {
@@ -248,7 +247,8 @@ final class Konfig extends AbstractKonfig
      *
      * @return array
      *
-     * @throws FileNotFoundException If a file is not found in `$path`
+     * @throws             FileNotFoundException If a file is not found in `$path`
+     * @codeCoverageIgnore
      */
     private function pathFromArray($path)
     {
