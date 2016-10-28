@@ -62,7 +62,7 @@ class PropertiesTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadInvalidProperties()
     {
-        $this->properties->parse(__DIR__ . '/../mocks/fail/error.properties');
+        $this->properties->parse(KONFIG_TEST_MOCKS . 'fail/error.properties');
     }
 
     /**
@@ -70,7 +70,7 @@ class PropertiesTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadProperties()
     {
-        $actual = $this->properties->parse(__DIR__ . '/../mocks/pass/config.properties');
+        $actual = $this->properties->parse(KONFIG_TEST_MOCKS . 'pass/config.properties');
         $this->assertEquals('localhost', $actual['host']);
         $this->assertEquals('80', $actual['port']);
     }

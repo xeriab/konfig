@@ -10,66 +10,19 @@
  * @link    https://xeriab.github.io/projects/konfig
  */
 
-$OS = strtoupper(substr(PHP_OS, 0, 3));
-
-if (!defined('IS_WIN')) {
-    define('IS_WIN', ($OS === 'WIN') ? true : false);
-} // END if
-
-if (!defined('IS_UNIX')) {
-    define('IS_UNIX', (IS_WIN === false) ? true : false);
-} // END if
-
-unset($OS);
-
-if (IS_WIN) {
-    if (!defined('DS')) {
-        define('DS', '\\');
-    } // END if
-} else {
-    if (!defined('DS')) {
-        define('DS', DIRECTORY_SEPARATOR);
-    } // END if
-} // END if
-
-if (!defined('PS')) {
-    define('PS', '/');
-} // END if
-
-//---
-
-if (!function_exists('_fixPath')) {
-    function _fixPath(string $path = null)
-    {
-        static $_path = null;
-
-        if (IS_WIN) {
-            $_path = str_replace(DS, '\\', $path);
-            $_path = str_replace('/', '\\', $path);
-        } else {
-            $_path = str_replace('\\', DS, $path);
-        } // END if
-
-        return $_path;
-    } // END OF _fixPath FUNCTION
-} // END if
-
-//---
-
 // DEFINES
 if (!defined('ROOT_DIR')) {
-    // define('ROOT_DIR', _fixPath(realpath(__DIR__ . '../../') . DS));
-    define('ROOT_DIR', realpath(__DIR__ . '../../') . DS);
+    define('ROOT_DIR', realpath(dirname(__FILE__) . '/../') . DIRECTORY_SEPARATOR);
 }
 
+print_r(ROOT_DIR);
+
 if (!defined('KONFIG_TEST_MOCKS')) {
-    // define('KONFIG_TEST_MOCKS', _fixPath(ROOT_DIR . 'tests' . DS . 'mocks' . DS));
-    define('KONFIG_TEST_MOCKS', ROOT_DIR . 'tests' . DS . 'mocks' . DS);
+    define('KONFIG_TEST_MOCKS', ROOT_DIR . 'tests' . DIRECTORY_SEPARATOR . 'mocks' . DIRECTORY_SEPARATOR);
 }
 
 if (!defined('KONFIG_TEST_FILES')) {
-    // define('KONFIG_TEST_FILES', _fixPath(ROOT_DIR . 'tests' . DS . 'test_configs' . DS));
-    define('KONFIG_TEST_FILES', ROOT_DIR . 'tests' . DS . 'test_configs' . DS);
+    define('KONFIG_TEST_FILES', ROOT_DIR . 'tests' . DIRECTORY_SEPARATOR . 'test_configs' . DIRECTORY_SEPARATOR);
 }
 
 //---

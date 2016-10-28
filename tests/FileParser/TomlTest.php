@@ -62,7 +62,7 @@ class TomlTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadInvalidToml()
     {
-        $this->toml->parse(__DIR__ . '/../mocks/fail/error.toml');
+        $this->toml->parse(KONFIG_TEST_MOCKS . 'fail/error.toml');
     }
 
     /**
@@ -70,7 +70,7 @@ class TomlTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadToml()
     {
-        $actual = $this->toml->parse(__DIR__ . '/../mocks/pass/config.toml');
+        $actual = $this->toml->parse(KONFIG_TEST_MOCKS . 'pass/config.toml');
         $this->assertEquals('localhost', $actual['host']);
         $this->assertEquals('80', $actual['port']);
     }

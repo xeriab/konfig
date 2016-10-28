@@ -62,7 +62,7 @@ class IniTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadInvalidIni()
     {
-        $this->ini->parse(__DIR__ . '/../mocks/fail/error.ini');
+        $this->ini->parse(KONFIG_TEST_MOCKS . 'fail/error.ini');
     }
 
     /**
@@ -70,7 +70,7 @@ class IniTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadIni()
     {
-        $actual = $this->ini->parse(__DIR__ . '/../mocks/pass/config.ini');
+        $actual = $this->ini->parse(KONFIG_TEST_MOCKS . 'pass/config.ini');
         $this->assertEquals('localhost', $actual['host']);
         $this->assertEquals('80', $actual['port']);
     }

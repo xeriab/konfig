@@ -53,7 +53,7 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadWithUnsupportedFormat()
     {
-        $konfig = Konfig::load(__DIR__ . '/mocks/' . 'fail/error.lib');
+        $konfig = Konfig::load(KONFIG_TEST_MOCKS . 'fail/error.lib');
         // $this->markTestIncomplete('Not yet implemented');
     }
 
@@ -65,7 +65,7 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithUnsupportedFormat()
     {
-        $konfig = new Konfig(__DIR__ . '/mocks/' . 'fail/error.lib');
+        $konfig = new Konfig(KONFIG_TEST_MOCKS . 'fail/error.lib');
     }
 
     /**
@@ -88,7 +88,7 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithEmptyDirectory()
     {
-        $konfig = new Konfig(__DIR__ . '/mocks/' . 'empty');
+        $konfig = new Konfig(KONFIG_TEST_MOCKS . 'empty');
     }
 
     /**
@@ -98,7 +98,7 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithArray()
     {
-        $paths = [__DIR__ . '/mocks/' . 'pass/config.xml', __DIR__ . '/mocks/' . 'pass/config2.json'];
+        $paths = [KONFIG_TEST_MOCKS . 'pass/config.xml', KONFIG_TEST_MOCKS . 'pass/config2.json'];
         $konfig = new Konfig($paths);
 
         $expected = 'localhost';
@@ -115,7 +115,7 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithArrayWithNonexistentFile()
     {
-        $paths = [__DIR__ . '/mocks/' . 'pass/config.xml', __DIR__ . '/mocks/' . 'pass/config3.json'];
+        $paths = [KONFIG_TEST_MOCKS . 'pass/config.xml', KONFIG_TEST_MOCKS . 'pass/config3.json'];
         $konfig = new Konfig($paths);
 
         $expected = 'localhost';
@@ -131,7 +131,7 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithArrayWithOptionalFile()
     {
-        $paths = [__DIR__ . '/mocks/' . 'pass/config.xml', '?' . __DIR__ . '/mocks/' . 'pass/config2.json'];
+        $paths = [KONFIG_TEST_MOCKS . 'pass/config.xml', '?' . KONFIG_TEST_MOCKS . 'pass/config2.json'];
         $konfig = new Konfig($paths);
 
         $expected = 'localhost';
@@ -147,7 +147,7 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithArrayWithOptionalNonexistentFile()
     {
-        $paths = [__DIR__ . '/mocks/' . 'pass/config.xml', '?' . __DIR__ . '/mocks/' . 'pass/config3.json'];
+        $paths = [KONFIG_TEST_MOCKS . 'pass/config.xml', '?' . KONFIG_TEST_MOCKS . 'pass/config3.json'];
         $konfig = new Konfig($paths);
 
         $expected = 'localhost';
@@ -163,7 +163,7 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithDirectory()
     {
-        $konfig = new Konfig(__DIR__ . '/mocks/' . 'dir');
+        $konfig = new Konfig(KONFIG_TEST_MOCKS . 'dir');
 
         $expected = 'localhost';
         $actual = $konfig->get('host');
@@ -178,7 +178,7 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithYml()
     {
-        $konfig = new Konfig(__DIR__ . '/mocks/' . 'pass/config.yml');
+        $konfig = new Konfig(KONFIG_TEST_MOCKS . 'pass/config.yml');
 
         $expected = 'localhost';
         $actual = $konfig->get('host');
@@ -193,7 +193,7 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithYmlDist()
     {
-        $konfig = new Konfig(__DIR__ . '/mocks/' . 'pass/config.yml.dist');
+        $konfig = new Konfig(KONFIG_TEST_MOCKS . 'pass/config.yml.dist');
 
         $expected = 'localhost';
         $actual = $konfig->get('host');
@@ -208,7 +208,7 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWithEmptyYml()
     {
-        $konfig = new Konfig(__DIR__ . '/mocks/' . 'pass/empty.yaml');
+        $konfig = new Konfig(KONFIG_TEST_MOCKS . 'pass/empty.yaml');
 
         $expected = [];
         $actual = $konfig->all();
@@ -233,12 +233,12 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
     {
         return array_merge(
             [
-                [new Konfig(__DIR__ . '/mocks/' . 'pass/config-exec.php')],
-                [new Konfig(__DIR__ . '/mocks/' . 'pass/config.ini')],
-                [new Konfig(__DIR__ . '/mocks/' . 'pass/config.json')],
-                [new Konfig(__DIR__ . '/mocks/' . 'pass/config.php')],
-                [new Konfig(__DIR__ . '/mocks/' . 'pass/config.xml')],
-                [new Konfig(__DIR__ . '/mocks/' . 'pass/config.yaml')],
+                [new Konfig(KONFIG_TEST_MOCKS . 'pass/config-exec.php')],
+                [new Konfig(KONFIG_TEST_MOCKS . 'pass/config.ini')],
+                [new Konfig(KONFIG_TEST_MOCKS . 'pass/config.json')],
+                [new Konfig(KONFIG_TEST_MOCKS . 'pass/config.php')],
+                [new Konfig(KONFIG_TEST_MOCKS . 'pass/config.xml')],
+                [new Konfig(KONFIG_TEST_MOCKS . 'pass/config.yaml')],
             ]
         );
     }
@@ -251,10 +251,10 @@ class KonfigTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 new Konfig([
-                    __DIR__ . '/mocks/' . 'pass/config2.json',
-                    __DIR__ . '/mocks/' . 'pass/config.yaml',
+                    KONFIG_TEST_MOCKS . 'pass/config2.json',
+                    KONFIG_TEST_MOCKS . 'pass/config.yaml',
                 ]),
-                new Konfig(__DIR__ . '/mocks/' . 'dir/'),
+                new Konfig(KONFIG_TEST_MOCKS . 'dir/'),
             ],
         ];
     }

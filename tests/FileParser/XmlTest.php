@@ -62,7 +62,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadInvalidXml()
     {
-        $this->xml->parse(__DIR__ . '/../mocks/fail/error.xml');
+        $this->xml->parse(KONFIG_TEST_MOCKS . 'fail/error.xml');
     }
 
     /**
@@ -70,7 +70,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadXml()
     {
-        $actual = $this->xml->parse(__DIR__ . '/../mocks/pass/config.xml');
+        $actual = $this->xml->parse(KONFIG_TEST_MOCKS . 'pass/config.xml');
         $this->assertEquals('localhost', $actual['host']);
         $this->assertEquals('80', $actual['port']);
     }

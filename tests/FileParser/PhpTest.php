@@ -62,7 +62,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadInvalidPhp()
     {
-        $this->php->parse(__DIR__ . '/../mocks/fail/error.php');
+        $this->php->parse(KONFIG_TEST_MOCKS . 'fail/error.php');
     }
 
     /**
@@ -72,7 +72,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadExceptionalPhp()
     {
-        $this->php->parse(__DIR__ . '/../mocks/fail/error-exception.php');
+        $this->php->parse(KONFIG_TEST_MOCKS . 'fail/error-exception.php');
     }
 
     /**
@@ -80,7 +80,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadPhpArray()
     {
-        $actual = $this->php->parse(__DIR__ . '/../mocks/pass/config.php');
+        $actual = $this->php->parse(KONFIG_TEST_MOCKS . 'pass/config.php');
         $this->assertEquals('localhost', $actual['host']);
         $this->assertEquals('80', $actual['port']);
     }
@@ -90,7 +90,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadPhpCallable()
     {
-        $actual = $this->php->parse(__DIR__ . '/../mocks/pass/config-exec.php');
+        $actual = $this->php->parse(KONFIG_TEST_MOCKS . 'pass/config-exec.php');
         $this->assertEquals('localhost', $actual['host']);
         $this->assertEquals('80', $actual['port']);
     }

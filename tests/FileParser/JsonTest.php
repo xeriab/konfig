@@ -62,7 +62,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadInvalidJson()
     {
-        $this->json->parse(__DIR__ . '/../mocks/fail/error.json');
+        $this->json->parse(KONFIG_TEST_MOCKS . 'fail/error.json');
     }
 
     /**
@@ -70,7 +70,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadIni()
     {
-        $actual = $this->json->parse(__DIR__ . '/../mocks/pass/config.json');
+        $actual = $this->json->parse(KONFIG_TEST_MOCKS . 'pass/config.json');
         $this->assertEquals('localhost', $actual['host']);
         $this->assertEquals('80', $actual['port']);
     }

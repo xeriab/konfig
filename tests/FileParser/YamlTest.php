@@ -62,7 +62,7 @@ class YamlTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadInvalidYaml()
     {
-        $this->yaml->parse(__DIR__ . '/../mocks/fail/error.yaml');
+        $this->yaml->parse(KONFIG_TEST_MOCKS . 'fail/error.yaml');
     }
 
     /**
@@ -70,7 +70,7 @@ class YamlTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadYaml()
     {
-        $actual = $this->yaml->parse(__DIR__ . '/../mocks/pass/config.yml');
+        $actual = $this->yaml->parse(KONFIG_TEST_MOCKS . 'pass/config.yml');
         $this->assertEquals('localhost', $actual['host']);
         $this->assertEquals('80', $actual['port']);
     }

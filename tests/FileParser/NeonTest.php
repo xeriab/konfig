@@ -62,7 +62,7 @@ class NeonTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadInvalidNeon()
     {
-        $this->neon->parse(__DIR__ . '/../mocks/fail/error.neon');
+        $this->neon->parse(KONFIG_TEST_MOCKS . 'fail/error.neon');
     }
 
     /**
@@ -70,7 +70,7 @@ class NeonTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadNeon()
     {
-        $actual = $this->neon->parse(__DIR__ . '/../mocks/pass/config.neon');
+        $actual = $this->neon->parse(KONFIG_TEST_MOCKS . 'pass/config.neon');
         $this->assertEquals('localhost', $actual['host']);
         $this->assertEquals('80', $actual['port']);
     }
