@@ -18,7 +18,7 @@ Konfig requires PHP 5.6+, and suggests using [Yosymfony Toml Parser](https://git
 
 The supported way of installing Konfig is via Composer.
 
-```sh
+```shell
 $ composer require xeriab/konfig
 ```
 
@@ -156,7 +156,7 @@ Examples of simple, valid configuration files can be found [here](tests/mocks/pa
 
 ## Testing
 
-``` bash
+```shell
 $ phpunit
 ```
 
