@@ -8,11 +8,11 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 
 Konfig is a simple configuration loader library that supports INI, JSON, NEON, PHP, TOML, XML, Java-Properties
-and YML files.
+and YML/YAML files.
 
 ## Requirements
 
-Konfig requires PHP 5.6+, and suggests using [Yosymfony Toml Parser](https://github.com/yosymfony/Toml), [Nette NEON](https://github.com/nette/neon) and [Symfony YAML](https://github.com/symfony/Yaml).
+Konfig requires PHP 5.6+, and suggests using [Yosymfony Toml Parser](https://github.com/yosymfony/Toml), [Nette NEON](https://github.com/nette/neon) and [PHP YAML](https://secure.php.net/manual/en/book.yaml.php) or [Symfony YAML](https://github.com/symfony/Yaml).
 
 ## Installation
 
