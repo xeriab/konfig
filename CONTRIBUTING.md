@@ -1,11 +1,11 @@
-# Contributing
+# CONTRIBUTING
 
 Contributions are **welcome** and will be fully **credited**.
 
 We accept contributions via Pull Requests on [GitHub](https://github.com/xeriab/Konfig).
 
 
-## Pull Requests
+### PULL REQUESTS
 
 - **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - The easiest way to apply the conventions is to install [PHP Code Sniffer](http://pear.php.net/package/PHP_CodeSniffer).
 
@@ -22,9 +22,9 @@ We accept contributions via Pull Requests on [GitHub](https://github.com/xeriab/
 - **Send coherent history** - Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please squash them before submitting.
 
 
-## Running Tests
+### RUNNING TESTS
 
-``` bash
+```shell
 $ phpunit
 ```
 

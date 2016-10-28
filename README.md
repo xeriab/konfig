@@ -1,33 +1,33 @@
-# Konfig
+## Konfig
+###### Yet another simple configuration loader library.
 
-[![Latest version][ico-version]][link-packagist]
+[![Latest Version][ico-version]][link-packagist]
 [![Software License][ico-license]][link-license]
 [![Build Status][ico-travis]][link-travis]
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Konfig is a simple configuration loader library that supports INI, JSON, NEON, PHP, TOML, XML, Java-Properties
-and YML/YAML files.
+**Konfig** is a simple configuration loader library that supports `INI`, `JSON`, `NEON`, `PHP`, `TOML`, `XML`, `Java-Properties` and `YML/YAML` files.
 
-## Requirements
+### REQUIREMENTS
 
-Konfig requires PHP 5.6+, and suggests using [Yosymfony Toml Parser](https://github.com/yosymfony/Toml), [Nette NEON](https://github.com/nette/neon) and [PHP YAML](https://secure.php.net/manual/en/book.yaml.php) or [Symfony YAML](https://github.com/symfony/Yaml).
+Konfig requires `PHP 5.6+` and suggests using [Yosymfony Toml Parser](https://github.com/yosymfony/Toml), [Nette NEON](https://github.com/nette/neon) and [PHP YAML](https://secure.php.net/manual/en/book.yaml.php) or [Symfony YAML](https://github.com/symfony/Yaml).
 
-## Installation
+### INSTALLATION
 
-The supported way of installing Konfig is via Composer.
+The supported way of installing **Konfig** is via Composer.
 
 ```shell
 $ composer require xeriab/konfig
 ```
 
-## Usage
+### USAGE
 
-Konfig is designed with simplicity in mind and it is lightweight and straightforward to use. All you can do with
+**Konfig** is designed with simplicity in mind and it is lightweight and straightforward to use. All you can do with
 it is load, get, set and delete.
 
-### Loading files
+### LOADING FILES
 
 The `Konfig` object can be created via the factory method `load()`, or
 by direct instantiation:
@@ -49,14 +49,15 @@ $config = new Konfig(__DIR__ . '/konfig');
 $config = new Konfig(['konfig.dist.json', 'konfig.json']);
 ```
 
-Files are parsed and loaded depending on the file extension. Note that when
-loading multiple files, entries with **duplicate keys will take on the value
-from the last loaded file**.
+Files are parsed and loaded depending on the file extension.
 
-When loading a directory, the path is `glob`ed and files are loaded in by
+**NOTE**: When loading multiple files, entries with ***duplicate keys*** will take on the value
+from the last loaded file.
+
+**NOTE**: When loading a directory, the path is `glob`ed and files are loaded in by
 name alphabetically.
 
-### Getting values
+### GETTING VALUES
 
 Getting values can be done in three ways. One, by using the `get()` method:
 
@@ -91,7 +92,7 @@ The third method, is by using the `all()` method:
 $data = $config->all();
 ```
 
-### Setting values
+### SETTING VALUES
 
 Although Konfig supports setting values via `set()` or, via the
 array syntax, **any changes made this way are NOT reflected back to the
@@ -117,7 +118,7 @@ assert($config['secret'] == '123');
 assert($config['secret'] == '456');
 ```
 
-### Using with default values
+### USING WITH DEFAULT VALUES
 
 Sometimes in your own projects you may want to use Konfig for storing
 application settings, without needing file I/O. You can do this by extending
@@ -146,39 +147,44 @@ class MyKonfig extends AbstractKonfig
         ];
     }
 }
-
 ```
 
-### Examples of supported configuration files
+### EXAMPLES OF SUPPORTED CONFIGURATION FILES
 
 Examples of simple, valid configuration files can be found [here](tests/mocks/pass).
 
 
-## Testing
+### CHANGELOG
+
+Please see [CHANGELOG](CHANGELOG.md) for details.
+
+### TESTING
 
 ```shell
 $ phpunit
 ```
 
 
-## Contributing
+### CONTRIBUTING
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 
-## Credits
+### CREDITS
 
-- [Xeriab Nabil](https://github.com/xeriab)
-
-
-## Contributors
-
-- [Nashwan Doaqan](https://github.com/nash-ye)
+-   [Xeriab Nabil](https://github.com/xeriab)
 
 
-## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+### CONTRIBUTORS
+
+-   [Nashwan Doaqan](https://github.com/nash-ye)
+
+
+
+### LICENSE
+
+The MIT License (MIT). Please see [License](LICENSE.md) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/xeriab/konfig.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
