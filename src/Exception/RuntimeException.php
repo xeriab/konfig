@@ -27,9 +27,40 @@ namespace Exen\Konfig\Exception;
  */
 class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
+    /**
+     * Path to the parsed file.
+     *
+     * @var string $parsedFile
+     *
+     * @since 0.2.8
+     */
     private $parsedFile = null;
+
+    /**
+     * Parsed line number.
+     *
+     * @var int $parsedLine
+     *
+     * @since 0.2.8
+     */
     private $parsedLine = 0;
+
+    /**
+     * Snippet.
+     *
+     * @var string $snippet
+     *
+     * @since 0.2.8
+     */
     private $snippet = null;
+
+    /**
+     * Raw error message.
+     *
+     * @var string $rawMessage
+     *
+     * @since 0.2.8
+     */
     private $rawMessage = null;
 
     /**
