@@ -187,6 +187,7 @@ final class Konfig extends AbstractKonfig
                 new FileParser\Json(),
                 new FileParser\Php(),
 
+                // Additional parsers
                 new FileParser\Yaml(),
                 new FileParser\Neon(),
                 new FileParser\Toml(),
