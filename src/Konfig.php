@@ -181,13 +181,10 @@ final class Konfig extends AbstractKonfig
     {
         if (empty($fileParsers)) {
             $fileParsers = [
-                // Default parsers
                 new FileParser\Xml(),
                 new FileParser\Ini(),
                 new FileParser\Json(),
                 new FileParser\Php(),
-
-                // Additional parsers
                 new FileParser\Yaml(),
                 new FileParser\Neon(),
                 new FileParser\Toml(),
