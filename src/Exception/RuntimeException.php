@@ -48,7 +48,7 @@ class RuntimeException extends \RuntimeException implements ExceptionInterface
     /**
      * Snippet.
      *
-     * @var string $snippet
+     * @var string|null $snippet
      *
      * @since 0.2.8
      */
@@ -66,11 +66,11 @@ class RuntimeException extends \RuntimeException implements ExceptionInterface
     /**
      * Constructor.
      *
-     * @param string    $message     Error message
-     * @param int       $parsed_line Line where the error occurred
-     * @param int       $snippet     Snippet of code near the problem
-     * @param string    $parsed_file File name where the error occurred
-     * @param Exception $previous    The previous exception
+     * @param string          $message     Error message
+     * @param int             $parsed_line Line where the error occurred
+     * @param string|int|null $snippet     Snippet of code near the problem
+     * @param string          $parsed_file File name where the error occurred
+     * @param Exception       $previous    The previous exception
      *
      * @codeCoverageIgnore
      */
