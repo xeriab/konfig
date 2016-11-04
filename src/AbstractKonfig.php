@@ -91,7 +91,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     /**
      * {@inheritdoc}
      *
-     * @param string $key Configuration item key name item
+     * @param string $key Configuration item key name
      *
      * @return bool Returns true if the configuration item key exists
      *
@@ -127,7 +127,7 @@ abstract class AbstractKonfig implements ArrayAccess, Iterator, KonfigInterface
     /**
      * {@inheritdoc}
      *
-     * @param string            $key     Configuration item key name item
+     * @param string            $key     Configuration item key name
      * @param string|array|null $default Default configuration
      *
      * @return string|array|null Default configuration

@@ -254,7 +254,6 @@ final class Arr
 
         if (!empty($key_parts)) {
             $key = implode('.', $key_parts);
-
             return self::delete($array[$this_key], $key);
         } else {
             unset($array[$this_key]);
